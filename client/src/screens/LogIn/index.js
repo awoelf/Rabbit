@@ -11,7 +11,7 @@ import Signup from '../Signup';
 
 
 
-export default function Login(props) {
+export default function Login({ navigation }) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
