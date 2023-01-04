@@ -17,6 +17,11 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
     
+    getUsers: async (parent, args) => {
+      const users = await User.find();
+      console.log(users);
+      return users;
+    }
     
       
     },
@@ -53,7 +58,7 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    }
+    },
   }
 };
 
