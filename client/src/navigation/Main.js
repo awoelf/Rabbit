@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 //Stacks
-import HomeNavigator from './HomeNavigator';
+import UserNavigator from './UserNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +20,7 @@ const Main = () => {
         >
             <Tab.Screen
                 name="Friends"
-                component={HomeNavigator}
+                component={UserNavigator}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <Icon
@@ -33,7 +33,7 @@ const Main = () => {
             />
             <Tab.Screen
                 name="Direct Messages"
-                component={HomeNavigator}
+                component={UserNavigator}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <Icon
@@ -48,7 +48,7 @@ const Main = () => {
             
             <Tab.Screen
                 name="Search"
-                component={HomeNavigator}
+                component={UserNavigator}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <Icon
@@ -61,7 +61,7 @@ const Main = () => {
             />
              <Tab.Screen
                 name="Feed"
-                component={HomeNavigator}
+                component={UserNavigator}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <Icon
@@ -74,7 +74,7 @@ const Main = () => {
             />
              <Tab.Screen
                 name="User Settings"
-                component={HomeNavigator}
+                component={UserNavigator}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <Icon
