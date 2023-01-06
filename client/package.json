@@ -13,7 +13,9 @@
     "@apollo/react-hooks": "^4.0.0",
     "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-navigation/native-stack": "^6.9.7",
+    "airgram": "^5.0.0",
     "apollo-client": "^2.6.10",
+    "dotenv": "^16.0.3",
     "expo": "~47.0.9",
     "expo-status-bar": "~1.4.2",
     "graphql": "^15.8.0",
@@ -27,9 +29,7 @@
     "react-native-screens": "^3.18.2",
     "react-redux": "^8.0.5",
     "react-router-native": "^6.6.1",
-    "redux": "^4.2.0",
-    "tdl": "^7.2.0",
-    "tdl-tdlib-addon": "^1.2.1"
+    "redux": "^4.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
