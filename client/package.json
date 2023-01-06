@@ -18,6 +18,8 @@
     "expo-status-bar": "~1.4.2",
     "graphql": "^15.8.0",
     "jwt-decode": "^3.1.2",
+    "node-gyp": "^9.3.1",
+    "prebuilt-tdlib": "^0.1008000.0",
     "react": "18.1.0",
     "react-native": "0.70.5",
     "react-native-paper": "^5.1.2",
@@ -25,7 +27,9 @@
     "react-native-screens": "^3.18.2",
     "react-redux": "^8.0.5",
     "react-router-native": "^6.6.1",
-    "redux": "^4.2.0"
+    "redux": "^4.2.0",
+    "tdl": "^7.2.0",
+    "tdl-tdlib-addon": "^1.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
