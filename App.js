@@ -18,6 +18,7 @@ import { Provider } from 'react-redux';
 import store from './src/utils/store';
 import Home from './src/screens/Home';
 import Login from './src/screens/LogIn';
+import Foo from './src/screens/foo';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -49,9 +50,10 @@ export default function App() {
     <ApolloProvider client={client}>
       <Provider store={store}>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Login">
+          <Stack.Navigator initialRouteName="Foo">
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name='Foo' component={Foo} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
