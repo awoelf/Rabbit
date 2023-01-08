@@ -1,8 +1,8 @@
 
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity,Button } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react'
-import { Button } from 'react-native-paper'
+// import { Button } from "native-base";
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../utils/mutations';
 import Auth from '../../utils/auth';
@@ -71,13 +71,13 @@ export default function Login(props) {
                 />
             </View>
 
-            <Button
+            {/* <Button
                 disabled={!email || !password}
                 style={Styles.btn}
                 onPress={loginHandler}
             >
                 <Text style={{ color: "#fff" }}>Login</Text>
-            </Button>
+            </Button> */}
 
             <Text
                 style={{

@@ -22,6 +22,20 @@ import Header from "./Shared/Header";
 import { Provider } from 'react-redux';
 import store from './src/utils/store';
 
+//native-base
+import { NativeBaseProvider, extendTheme } from 'native-base';
+const newColorTheme = {
+  brand: {
+    900: '#5B8DF6',
+    800: '#ffffff',
+    700: '#cccccc',
+  },
+};
+
+const theme = extendTheme({
+  colors: newColorTheme,
+});
+
 
 const httpLink = createHttpLink({
   uri: 'https://rabbit-app.herokuapp.com/graphql',
@@ -29,7 +43,7 @@ const httpLink = createHttpLink({
 
 
 const authLink = setContext((_, { headers }) => {
-  const token =  AsyncStorage.getItem('id_token');
+  const token = AsyncStorage.getItem('id_token');
   return {
     headers: {
       ...headers,
@@ -39,6 +53,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 
+
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
@@ -46,13 +61,17 @@ const client = new ApolloClient({
 
 export default function App() {
   return (
-    <ApolloProvider client={client}>
-      <Provider store={store}>
-        <NavigationContainer>
-          <Header/>
-          <Main/>
-        </NavigationContainer>
-      </Provider>
-    </ApolloProvider>
+    <NativeBaseProvider>
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <NavigationContainer>
+            <Header />
+            <Main />
+          </NavigationContainer>
+        </Provider>
+      </ApolloProvider>
+    </NativeBaseProvider>
+
+
   );
 }

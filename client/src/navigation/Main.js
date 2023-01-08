@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 //Stacks
 import UserNavigator from './UserNavigator';
+import ContactNavigator from './ContactNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -48,7 +49,7 @@ const Main = () => {
             
             <Tab.Screen
                 name="Search"
-                component={UserNavigator}
+                component={ContactNavigator}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <Icon
