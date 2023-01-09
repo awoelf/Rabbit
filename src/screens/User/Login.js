@@ -2,33 +2,37 @@
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react'
-import { Button } from 'react-native-paper'
+import { Button } from "native-base";
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../utils/mutations';
 import Auth from '../../utils/auth';
-import Signup from '../Signup';
+
+import Home from "../Home";
+import UserProfile from './UserProfile';
 
 
 
 
-export default function Login({ navigation }) {
+export default function Login(props) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [login, { error }] = useMutation(LOGIN);
+    const [login, { error, data }] = useMutation(LOGIN);
+
 
 
     const loginHandler = async (event) => {
         event.preventDefault();
+
         try {
             const mutationResponse = await login({
                 variables: { email: email, password: password },
             });
-            console.log(mutationResponse);
             const token = mutationResponse.data.login.token;
             Auth.login(token);
+            props.navigation.navigate("UserProfile");
         } catch (e) {
-            console.log(e);
+            console.log(e, "error here");
         }
     };
 
@@ -68,7 +72,8 @@ export default function Login({ navigation }) {
             </View>
 
             <Button
-                disabled={!email || !password}
+                size="md"
+                isDisabled={!email || !password}
                 style={Styles.btn}
                 onPress={loginHandler}
             >
@@ -82,7 +87,7 @@ export default function Login({ navigation }) {
             >
                 Or
             </Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+            <TouchableOpacity onPress={() => props.navigation.navigate("Register")}>
                 <Text
                     style={{
                         color: "#900",
@@ -94,9 +99,9 @@ export default function Login({ navigation }) {
                 </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate("forgetpassword")}>
+            {/* <TouchableOpacity onPress={() => props.navigation.navigate("forgetpassword")}>
                 <Text  >  Forget Password   </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
         </View>
     );
 }
@@ -117,6 +122,5 @@ const Styles = StyleSheet.create({
     btn: {
         backgroundColor: "#900",
         padding: 5,
-        width: "100%",
     },
 })
