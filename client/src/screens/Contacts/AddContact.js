@@ -7,11 +7,12 @@ const AddContact = (props) => {
     return (
         <Container>
 
-                    <Icon name="ios-search" />
-                    <Input
-                        placeholder="Search"
-                    />
-
+            <Icon name="ios-search" />
+            <Input
+                placeholder="Search"
+            // onFocus={openList}
+            // onChangeText={(text) => searchProduct(text)}
+            />
         </Container>
 
     );

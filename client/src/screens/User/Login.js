@@ -1,8 +1,8 @@
 
-import { View, Text, TextInput, StyleSheet, TouchableOpacity,Button } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react'
-// import { Button } from "native-base";
+import { Button } from "native-base";
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../utils/mutations';
 import Auth from '../../utils/auth';
@@ -18,12 +18,12 @@ export default function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [login, { error, data }] = useMutation(LOGIN);
- 
+
 
 
     const loginHandler = async (event) => {
         event.preventDefault();
-        
+
         try {
             const mutationResponse = await login({
                 variables: { email: email, password: password },
@@ -32,7 +32,7 @@ export default function Login(props) {
             Auth.login(token);
             props.navigation.navigate("UserProfile");
         } catch (e) {
-            console.log(e,"error here");
+            console.log(e, "error here");
         }
     };
 
@@ -71,13 +71,14 @@ export default function Login(props) {
                 />
             </View>
 
-            {/* <Button
-                disabled={!email || !password}
+            <Button
+                size="md"
+                isDisabled={!email || !password}
                 style={Styles.btn}
                 onPress={loginHandler}
             >
                 <Text style={{ color: "#fff" }}>Login</Text>
-            </Button> */}
+            </Button>
 
             <Text
                 style={{
@@ -121,6 +122,5 @@ const Styles = StyleSheet.create({
     btn: {
         backgroundColor: "#900",
         padding: 5,
-        width: "100%",
     },
 })
