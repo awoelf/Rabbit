@@ -1,24 +1,19 @@
-import React from "react";
-import { Container, Header, Icon, Item, Input, Text } from "native-base";
-
-
+import React from 'react';
+import { View, TextField } from 'react-native-ui-lib';
+import Octicons from '@expo/vector-icons/Octicons';
 
 const AddContact = (props) => {
-    return (
-        <Container>
-
-            <Icon name="ios-search" />
-            <Input
-                placeholder="Search"
-            // onFocus={openList}
-            // onChangeText={(text) => searchProduct(text)}
-            />
-        </Container>
-
-    );
-}
-
-
+  return (
+    <View>
+      <Octicons name='searcg' />
+      <TextField
+        migrate
+        placeholder={'Search'}
+        // onFocus={openList}
+        // onChangeText={(text) => searchProduct(text)}
+      />
+    </View>
+  );
+};
 
 export default AddContact;
-

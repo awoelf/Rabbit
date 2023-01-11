@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 import * as ExpoClipboard from 'expo-clipboard';
@@ -11,11 +11,11 @@ import * as ExpoNotifications from 'expo-notifications';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
-    createExpoClipboardService,
-    createExpoFileService,
-    createExpoNotificationService,
-    SendbirdUIKitContainer,
-    useSendbirdChat,
+  createExpoClipboardService,
+  createExpoFileService,
+  createExpoNotificationService,
+  SendbirdUIKitContainer,
+  useSendbirdChat,
 } from '@sendbird/uikit-react-native';
 import SendbirdChat from '@sendbird/chat';
 
@@ -30,17 +30,14 @@ const FileService = createExpoFileService({
   documentPickerModule: ExpoDocumentPicker,
 });
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 function messageStack() {
-    const { currentUser } = useSendbirdChat();
+  const { currentUser } = useSendbirdChat();
 
-    return (
-        <NavigationContainer>
-            <Stack.Navigator>
-
-                
-            </Stack.Navigator>
-        </NavigationContainer>
-    )
+  return (
+    <NavigationContainer>
+      <Stack.Navigator></Stack.Navigator>
+    </NavigationContainer>
+  );
 }

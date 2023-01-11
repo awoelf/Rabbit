@@ -1,17 +1,15 @@
-
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { View, Text } from 'react-native-ui-lib';
 
-
-const UserProfile=(props)=> {
+const UserProfile = (props) => {
   return (
-      <View style={styles.container}>
-        <Text>Hello! User</Text>
-        <StatusBar style="auto" />
-      </View>
-   
+    <View>
+      <Text>Hello! User</Text>
+      <StatusBar style='auto' />
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -19,7 +17,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  
   },
 });
 
