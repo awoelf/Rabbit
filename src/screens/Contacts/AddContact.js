@@ -5,7 +5,7 @@ import Octicons from '@expo/vector-icons/Octicons';
 const AddContact = (props) => {
   return (
     <View>
-      <Octicons name='searcg' />
+      <Octicons name='search' />
       <TextField
         migrate
         placeholder={'Search'}

@@ -5,6 +5,7 @@ import Octicons from '@expo/vector-icons/Octicons';
 //Stacks
 import UserNavigator from './UserNavigator';
 import ContactNavigator from './ContactNavigator';
+import MessageNavigator from './MessageNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,8 +27,8 @@ const Main = () => {
         }}
       />
       <Tab.Screen
-        name='Direct Messages'
-        component={UserNavigator}
+        name='Messages'
+        component={MessageNavigator}
         options={{
           tabBarIcon: ({ color, size }) => <Octicons name='comment' color={color} size={30} />,
         }}
