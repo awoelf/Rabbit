@@ -1,26 +1,24 @@
-import React from "react"
-import { createStackNavigator } from '@react-navigation/stack'
+import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import AddContact from '../screens/Contacts/AddContact'
+import AddContact from '../screens/Contacts/AddContact';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 function MyStack() {
-    return (
-        <Stack.Navigator>
-            <Stack.Screen 
-                name="AddContact"
-                component={AddContact}
-                options={{
-                    headerShown: false
-                }}
-            />
-
-        </Stack.Navigator>
-    )
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name='AddContact'
+        component={AddContact}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
 }
 
 export default function ContactNavigator() {
-    return <MyStack />
+  return <MyStack />;
 }
-
