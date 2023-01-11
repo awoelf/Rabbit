@@ -1,6 +1,5 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import * as ExpoClipboard from 'expo-clipboard';
 import * as ExpoDocumentPicker from 'expo-document-picker';
@@ -11,15 +10,19 @@ import * as ExpoNotifications from 'expo-notifications';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
-    createExpoClipboardService,
-    createExpoFileService,
-    createExpoNotificationService,
-    SendbirdUIKitContainer,
-    useSendbirdChat,
+  createExpoClipboardService,
+  createExpoFileService,
+  createExpoNotificationService,
+  SendbirdUIKitContainer,
+  useSendbirdChat,
+  onCreateChannel
 } from '@sendbird/uikit-react-native';
-import SendbirdChat from '@sendbird/chat';
 
 // import screens here
+import Channel from '../screens/Message/Channel';
+import ChannelList from '../screens/Message/ChannelList';
+import CreateChannel from '../screens/Message/CreateChannel';
+import SignIn from '../screens/Message/SignIn';
 
 const NotificationService = createExpoNotificationService(ExpoNotifications);
 const ClipboardService = createExpoClipboardService(ExpoClipboard);
@@ -30,17 +33,45 @@ const FileService = createExpoFileService({
   documentPickerModule: ExpoDocumentPicker,
 });
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
-function messageStack() {
-    const { currentUser } = useSendbirdChat();
+function MessageStack() {
+  const { currentUser } = useSendbirdChat();
 
-    return (
-        <NavigationContainer>
-            <Stack.Navigator>
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {!currentUser ? (
+        <Stack.Screen name={'SignIn'} component={SignIn} />
+      ) : (
+        <>
+          <Stack.Screen name={'ChannelList'} component={ChannelList} />
+          <Stack.Screen name={'CreateChannel'} component={CreateChannel} />
+          <Stack.Screen name={'Channel'} component={Channel} />
+        </>
+      )}
+    </Stack.Navigator>
+  );
+}
 
-                
-            </Stack.Navigator>
-        </NavigationContainer>
-    )
+export default function MessageNavigator() {
+  return (
+    <SendbirdUIKitContainer
+      appId={'6CD12A00-3AA4-4F84-A4CB-C202BA86B06A'}
+      chatOptions={{ localCacheStorage: AsyncStorage }}
+      userProfile={{
+        onCreateChannel: (channel) => {
+          if (channel.isGroupChannel()) {
+            navigationActions.push(Routes.GroupChannel, { channelUrl: channel.url });
+          }
+        },
+      }}
+      platformServices={{
+        file: FileService,
+        notification: NotificationService,
+        clipboard: ClipboardService,
+      }}
+    >
+      <MessageStack />
+    </SendbirdUIKitContainer>
+  );
 }

@@ -1,11 +1,11 @@
-
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { View, Text } from 'react-native-ui-lib';
 
 
 export default function Home() {
   return (
-      <View style={styles.container}>
+      <View>
         <Text>Hello! Rabbit</Text>
         <StatusBar style="auto" />
       </View>
