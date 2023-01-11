@@ -1,46 +1,38 @@
 import React from 'react';
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { StyleSheet, Text, View } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 
 //Navigators
-import Main from "./src/navigation/Main"
+import Main from './src/navigation/Main';
 
 // Screens
-import Header from "./Shared/Header";
+import Header from './Shared/Header';
 
 //Redux
 import { Provider } from 'react-redux';
 import store from './src/utils/store';
 
 //native-base
-import { NativeBaseProvider, extendTheme } from 'native-base';
-const newColorTheme = {
-  brand: {
-    900: '#5B8DF6',
-    800: '#ffffff',
-    700: '#cccccc',
-  },
-};
+// import { NativeBaseProvider, extendTheme } from 'native-base';
+// const newColorTheme = {
+//   brand: {
+//     900: '#5B8DF6',
+//     800: '#ffffff',
+//     700: '#cccccc',
+//   },
+// };
 
-const theme = extendTheme({
-  colors: newColorTheme,
-});
-
+// const theme = extendTheme({
+//   colors: newColorTheme,
+// });
 
 const httpLink = createHttpLink({
   uri: 'https://rabbit-app.herokuapp.com/graphql',
 });
-
 
 const authLink = setContext((_, { headers }) => {
   const token = AsyncStorage.getItem('id_token');
@@ -52,8 +44,6 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-
-
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
@@ -61,7 +51,6 @@ const client = new ApolloClient({
 
 export default function App() {
   return (
-    <NativeBaseProvider>
       <ApolloProvider client={client}>
         <Provider store={store}>
           <NavigationContainer>
@@ -70,8 +59,5 @@ export default function App() {
           </NavigationContainer>
         </Provider>
       </ApolloProvider>
-    </NativeBaseProvider>
-
-
   );
 }
