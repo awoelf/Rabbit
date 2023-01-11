@@ -1,12 +1,6 @@
 import React, { useState } from "react";
-import { Button } from "native-base";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
-// import FormContainer from "../../Shared/Form/FormContainer";
-// import Input from "../../Shared/Form/Input";
-// import Error from "../../Shared/Error";
-import Toast from "react-native-toast-message";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-// import EasyButton from "../../Shared/StyledComponents/EasyButton";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native"
+import {Button } from 'react-native-ui-lib';
 import { ADD_USER } from '../../utils/mutations';
 import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
@@ -26,7 +20,7 @@ const Register = (props) => {
       setError("Please fill in the form correctly");
     }
 
-    event.preventDefault();
+    // event.preventDefault();
 
     try {
         const mutationResponse = await addUser({
@@ -88,14 +82,22 @@ const Register = (props) => {
         />
       </View>
 
-      <Button
+      {/* <Button
         size="md"
         isDisabled={!email || !password||!firstName||!lastName}
         style={Styles.btn}
         onPress={registerHandler}
-      >
-        <Text style={{ color: "#fff" }}>Sign Up</Text>
-      </Button>
+      > */}
+        <Button 
+        label={'Sign Up'} 
+        size={Button.sizes.medium} 
+        backgroundColor={{color: "#900" }}
+        disabled={!email || !password||!firstName||!lastName}
+        onPress={registerHandler}/>
+          {/* <Text style={{ color: "#fff" }}>Sign Up</Text> */}
+      
+
+        
 
       <Text
         style={{
@@ -133,10 +135,6 @@ const Styles = StyleSheet.create({
     fontSize: 15,
   },
 
-  btn: {
-    backgroundColor: "#900",
-    padding: 5,
-  },
 })
 
 

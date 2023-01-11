@@ -29,9 +29,17 @@ export default function Login(props) {
   };
 
   return (
-    <View>
+    
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "#fff",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Text style={{ fontSize: 20, margin: 20 }}>Already have an account?</Text>
-      <View>
+      <View style={{ width: "70%" }}>
         <TextField
           migrate
           style={Styles.input}
@@ -55,9 +63,16 @@ export default function Login(props) {
         />
       </View>
 
-      <Button size='md' isDisabled={!email || !password} style={Styles.btn} onPress={loginHandler}>
+      {/* <Button size='md' disabled={!email || !password} onPress={loginHandler}>
         <Text style={{ color: '#fff' }}>Login</Text>
-      </Button>
+      </Button> */}
+      <Button 
+        label={'Login'}
+        color= '#fff'
+        size={Button.sizes.small} 
+        backgroundColor={{color: "#900" }}
+        disabled={!email || !password}
+        onPress={loginHandler}/>
 
       <Text
         style={{
@@ -77,10 +92,6 @@ export default function Login(props) {
           Sign Up
         </Text>
       </TouchableOpacity>
-
-      {/* <TouchableOpacity onPress={() => props.navigation.navigate("forgetpassword")}>
-                <Text  >  Forget Password   </Text>
-            </TouchableOpacity> */}
     </View>
   );
 }
@@ -97,8 +108,5 @@ const Styles = StyleSheet.create({
     fontSize: 15,
   },
 
-  btn: {
-    backgroundColor: '#900',
-    padding: 5,
-  },
+ 
 });
