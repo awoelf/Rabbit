@@ -1,12 +1,15 @@
 import { StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { Button, View, Text, TouchableOpacity, TextField } from 'react-native-ui-lib';
+import { Button, View, Text, TouchableOpacity, TextField, Image } from 'react-native-ui-lib';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
 import Home from '../Home';
 import UserProfile from './UserProfile';
+
+// Styles and assets
+import { logIn } from '../../styles/styles';
 
 export default function Login(props) {
   const [email, setEmail] = useState('');
@@ -30,6 +33,8 @@ export default function Login(props) {
 
   return (
     <View>
+      <Text style={logIn.header}>Rabbit</Text>
+      <Image  source={require('../../assets/icon.png')} />
       <Text style={{ fontSize: 20, margin: 20 }}>Already have an account?</Text>
       <View>
         <TextField
@@ -48,7 +53,7 @@ export default function Login(props) {
           style={Styles.input}
           placeholder={'******'}
           name={'password'}
-          type={'password'}
+          type='password'
           id={'pwd'}
           // value={email}
           onChangeText={setPassword}
