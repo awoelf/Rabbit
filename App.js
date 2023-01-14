@@ -1,6 +1,7 @@
 import React from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { useFonts, Mukta_400Regular, CreteRound_400Regular } from '@expo-google-fonts/dev';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -16,19 +17,8 @@ import Header from './Shared/Header';
 import { Provider } from 'react-redux';
 import store from './src/utils/store';
 
-//native-base
-// import { NativeBaseProvider, extendTheme } from 'native-base';
-// const newColorTheme = {
-//   brand: {
-//     900: '#5B8DF6',
-//     800: '#ffffff',
-//     700: '#cccccc',
-//   },
-// };
-
-// const theme = extendTheme({
-//   colors: newColorTheme,
-// });
+// Theme
+import rabbitTheme from './src/styles/theme';
 
 const httpLink = createHttpLink({
   uri: 'https://rabbit-app.herokuapp.com/graphql',
@@ -50,14 +40,22 @@ const client = new ApolloClient({
 });
 
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    Mukta_400Regular,
+    CreteRound_400Regular,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-      <ApolloProvider client={client}>
-        <Provider store={store}>
-          <NavigationContainer>
-            <Header />
-            <Main />
-          </NavigationContainer>
-        </Provider>
-      </ApolloProvider>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <NavigationContainer theme={rabbitTheme}>
+          <Main />
+        </NavigationContainer>
+      </Provider>
+    </ApolloProvider>
   );
 }
