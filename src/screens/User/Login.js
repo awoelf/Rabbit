@@ -1,12 +1,14 @@
-import { StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { Button, View, Text, TouchableOpacity, TextField } from 'react-native-ui-lib';
+import { Button, View, Text, TouchableOpacity, TextField, Icon } from 'react-native-ui-lib';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
 import Home from '../Home';
 import UserProfile from './UserProfile';
+
+// Styles and assets
+import { logIn } from '../../styles/styles';
 
 export default function Login(props) {
   const [email, setEmail] = useState('');
@@ -15,98 +17,63 @@ export default function Login(props) {
 
   const loginHandler = async (event) => {
     // event.preventDefault();
-
     try {
       const mutationResponse = await login({
         variables: { email: email, password: password },
       });
       const token = mutationResponse.data.login.token;
       Auth.login(token);
-      props.navigation.navigate('UserProfile');
+      props.navigation.navigate('Home');
     } catch (e) {
       console.log(e, 'error here');
     }
   };
 
   return (
-    
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Text style={{ fontSize: 20, margin: 20 }}>Already have an account?</Text>
-      <View style={{ width: "70%" }}>
+    <View flex-1>
+      <View row center flex-2>
+        <Text style={logIn.header}>Rabbit</Text>
+        <Icon source={require('../../assets/icon.png')} size={35} />
+      </View>
+      <View marginH-30 flex-1>
+        <Text style={logIn.text} center>Log in to your Rabbit account</Text>
         <TextField
           migrate
-          style={Styles.input}
-          placeholder={'youremail@test.com'}
-          // value={email}
+          style={logIn.textField}
+          placeholder={'Email'}
           name={'email'}
           type={'email'}
           id={'email'}
           onChangeText={setEmail}
         />
-
         <TextField
           migrate
-          style={Styles.input}
-          placeholder={'******'}
+          style={logIn.textField}
+          placeholder={'Password'}
           name={'password'}
-          type={'password'}
+          secureTextEntry={true}
           id={'pwd'}
-          // value={email}
           onChangeText={setPassword}
         />
+        <View center>
+          <Button disabled={!email || !password} style={logIn.button} onPress={loginHandler} center>
+            <Text style={logIn.text}>Log in</Text>
+          </Button>
+        </View>
       </View>
-
-      {/* <Button size='md' disabled={!email || !password} onPress={loginHandler}>
-        <Text style={{ color: '#fff' }}>Login</Text>
-      </Button> */}
-      <Button 
-        label={'Login'}
-        color= '#fff'
-        size={Button.sizes.small} 
-        backgroundColor={{color: "#900" }}
-        disabled={!email || !password}
-        onPress={loginHandler}/>
-
-      <Text
-        style={{
-          marginTop: 20,
-        }}
-      >
-        Or
-      </Text>
-      <TouchableOpacity onPress={() => props.navigation.navigate('Register')}>
-        <Text
-          style={{
-            color: '#900',
-            height: 30,
-            margin: 20,
-          }}
-        >
-          Sign Up
+      <View flex-3 centerH bottom>
+        <Text style={logIn.text}>
+          Don't have an account?
         </Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() => props.navigation.navigate('Register')}>
+          <Text style={logIn.link}>
+            Sign Up
+          </Text>
+        </TouchableOpacity>
+      </View>
+      {/* <TouchableOpacity onPress={() => props.navigation.navigate("forgetpassword")}>
+                <Text  >  Forget Password   </Text>
+            </TouchableOpacity> */}
     </View>
   );
 }
-
-const Styles = StyleSheet.create({
-  input: {
-    backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: '#b5b5b5',
-    padding: 10,
-    paddingLeft: 15,
-    borderRadius: 5,
-    marginVertical: 15,
-    fontSize: 15,
-  },
-
- 
-});

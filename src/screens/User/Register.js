@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native"
-import {Button } from 'react-native-ui-lib';
-import { ADD_USER } from '../../utils/mutations';
+import React, { useEffect, useState } from 'react';
+import { Button, View, Text, TouchableOpacity, TextField, Icon } from 'react-native-ui-lib';
 import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
+// Styles and assets
+import { logIn } from '../../styles/styles';
 
-const Register = (props) => {
+export default function Register(props) {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -15,127 +16,86 @@ const Register = (props) => {
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
 
-  const registerHandler = async(event) => {
+  const registerHandler = async (event) => {
+    console.log("here");
     if (email === "" || firstName === "" || lastName === "" || password === "") {
       setError("Please fill in the form correctly");
     }
 
-    // event.preventDefault();
-
     try {
-        const mutationResponse = await addUser({
-            variables: { email: email, password: password,firstName: firstName,lastName: lastName },
-        });
-        const token = mutationResponse.data.addUser.token;
-        Auth.login(token);
-        props.navigation.navigate("UserProfile");
+      const mutationResponse = await addUser({
+        variables: { email: email, password: password, firstName: firstName, lastName: lastName },
+      });
+      const token = mutationResponse.data.addUser.token;
+      Auth.login(token);
+      props.navigation.navigate("UserProfile");
     } catch (e) {
-        console.log(e, "error here");
+      console.log(e, "error here");
     }
 
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Text style={{ fontSize: 20, margin: 20 }}>Sign Up</Text>
-      <View style={{ width: "70%" }}>
-        <TextInput
-         style={Styles.input}
-          placeholder="youremail@test.com"
-          name="email"
-          type="email"
-          id="email"
-          onChangeText={setEmail}
-        />
-        <TextInput
-          style={Styles.input}
-          placeholder="first name"
-          name="firstName"
-          type="firstName"
-          id="firstName"
+    <View flex-1>
+      <View row center flex-2>
+        <Text style={logIn.header}>Rabbit</Text>
+        <Icon source={require('../../assets/icon.png')} size={35} />
+      </View>
+      <View marginH-30 flex-1>
+        <Text style={logIn.text} center>
+          Create a new Rabbit account
+        </Text>
+        <TextField
+          migrate
+          style={logIn.textField}
+          placeholder={'First Name'}
+          name={'firstName'}
+          type={'firstName'}
+          id={'firstName'}
           onChangeText={setFirstName}
         />
-        <TextInput
-          style={Styles.input}
-          placeholder="last name"
-          name="lastName"
-          type="lastName"
-          id="lastName"
+        <TextField
+          migrate
+          style={logIn.textField}
+          placeholder={'Last Name'}
+          name={'lastName'}
+          type={'lastName'}
+          id={'lastName'}
           onChangeText={setLastName}
         />
-
-        <TextInput
-          style={Styles.input}
-          placeholder="password"
-          name="password"
-          type="password"
-          id="pwd"
-          // value={email}
+        <TextField
+          migrate
+          style={logIn.textField}
+          placeholder={'Email'}
+          name={'email'}
+          type={'email'}
+          id={'email'}
+          onChangeText={setEmail}
+        />
+        <TextField
+          migrate
+          style={logIn.textField}
+          placeholder={'Password'}
+          name={'password'}
+          secureTextEntry={true}
+          id={'pwd'}
           onChangeText={setPassword}
         />
+        <View center>
+          <Button
+            label={'Sign Up'}
+            style={logIn.button}
+            disabled={!email || !password || !firstName || !lastName}
+            onPress={registerHandler} />
+    
+        </View>
       </View>
-
-      {/* <Button
-        size="md"
-        isDisabled={!email || !password||!firstName||!lastName}
-        style={Styles.btn}
-        onPress={registerHandler}
-      > */}
-        <Button 
-        label={'Sign Up'} 
-        size={Button.sizes.medium} 
-        backgroundColor={{color: "#900" }}
-        disabled={!email || !password||!firstName||!lastName}
-        onPress={registerHandler}/>
-          {/* <Text style={{ color: "#fff" }}>Sign Up</Text> */}
-      
-
-        
-
-      <Text
-        style={{
-          marginTop: 20,
-        }}
-      >
-        Or
-      </Text>
-      <TouchableOpacity onPress={() => props.navigation.navigate("Login")}>
-        <Text
-          style={{
-            color: "#900",
-            height: 30,
-            margin: 20,
-          }}
-        >
-          Sign In
-        </Text>
-      </TouchableOpacity>
-
+      <View flex-3 centerH bottom>
+        <Text style={logIn.text}>Already have an account?</Text>
+        <TouchableOpacity onPress={() => props.navigation.navigate('Login')}>
+          <Text style={logIn.link}>Log In</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
-};
-
-const Styles = StyleSheet.create({
-
-  input: {
-    backgroundColor: "#fff",
-    borderWidth: 1,
-    borderColor: "#b5b5b5",
-    padding: 10,
-    paddingLeft: 15,
-    borderRadius: 5,
-    marginVertical: 15,
-    fontSize: 15,
-  },
-
-})
-
-
-export default Register;
+}
