@@ -4,13 +4,19 @@ import Octicons from '@expo/vector-icons/Octicons';
 
 const AddContact = (props) => {
   return (
-    <View>
+    
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "#fff",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Octicons name='search' />
       <TextField
         migrate
         placeholder={'Search'}
-        // onFocus={openList}
-        // onChangeText={(text) => searchProduct(text)}
       />
     </View>
   );

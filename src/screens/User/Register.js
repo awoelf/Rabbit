@@ -1,10 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import { Button, View, Text, TouchableOpacity, TextField, Icon } from 'react-native-ui-lib';
+import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../../utils/mutations';
+import Auth from '../../utils/auth';
 
 // Styles and assets
 import { logIn } from '../../styles/styles';
 
 export default function Register(props) {
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [addUser, { error, data }] = useMutation(ADD_USER);
+
+
+  const registerHandler = async (event) => {
+    console.log("here");
+    if (email === "" || firstName === "" || lastName === "" || password === "") {
+      setError("Please fill in the form correctly");
+    }
+
+    try {
+      const mutationResponse = await addUser({
+        variables: { email: email, password: password, firstName: firstName, lastName: lastName },
+      });
+      const token = mutationResponse.data.addUser.token;
+      Auth.login(token);
+      props.navigation.navigate("UserProfile");
+    } catch (e) {
+      console.log(e, "error here");
+    }
+
+  };
+
   return (
     <View flex-1>
       <View row center flex-2>
@@ -18,11 +48,29 @@ export default function Register(props) {
         <TextField
           migrate
           style={logIn.textField}
+          placeholder={'First Name'}
+          name={'firstName'}
+          type={'firstName'}
+          id={'firstName'}
+          onChangeText={setFirstName}
+        />
+        <TextField
+          migrate
+          style={logIn.textField}
+          placeholder={'Last Name'}
+          name={'lastName'}
+          type={'lastName'}
+          id={'lastName'}
+          onChangeText={setLastName}
+        />
+        <TextField
+          migrate
+          style={logIn.textField}
           placeholder={'Email'}
           name={'email'}
           type={'email'}
           id={'email'}
-          // onChangeText={setEmail}
+          onChangeText={setEmail}
         />
         <TextField
           migrate
@@ -31,12 +79,15 @@ export default function Register(props) {
           name={'password'}
           secureTextEntry={true}
           id={'pwd'}
-          // onChangeText={setPassword}
+          onChangeText={setPassword}
         />
         <View center>
-          {/* <Button disabled={!email || !password} style={logIn.button} onPress={loginHandler} center>
-            <Text style={logIn.text}>Log in</Text>
-          </Button> */}
+          <Button
+            label={'Sign Up'}
+            style={logIn.button}
+            disabled={!email || !password || !firstName || !lastName}
+            onPress={registerHandler} />
+    
         </View>
       </View>
       <View flex-3 centerH bottom>
