@@ -1,28 +1,31 @@
 import { createTheme, LightUIKitTheme } from '@sendbird/uikit-react-native-foundation';
-import { rabbitPalette } from './palette';
+import { rabbit } from './palette';
 
+// Theme used by the navigation container
 export const rabbitTheme = {
   dark: false,
   colors: {
-    background: rabbitPalette.background_color,
-    border: rabbitPalette.border_color,
+    background: rabbit.background_color,
+    border: rabbit.border_color,
   },
 };
 
+// Theme used by the sendbird fragments
 export const rabbitMessageTheme = createTheme({
   colorScheme: 'rabbit',
   colors: () => ({
     ...LightUIKitTheme.colors,
-    primary: rabbitPalette.accent_color,
-    background: rabbitPalette.background_color,
+    primary: rabbit.accent_color,
+    background: rabbit.background_color,
+    onBackground01: rabbit.background_color
   }),
   typography: {
     shared: {
-      fontFamily: rabbitPalette.font_shared,
-      fontSize: rabbitPalette.font_size,
+      fontFamily: rabbit.font_shared,
+      fontSize: rabbit.font_size,
     },
     h1: {
-      fontFamily: rabbitPalette.font_header,
+      fontFamily: rabbit.font_header,
     },
   },
 });

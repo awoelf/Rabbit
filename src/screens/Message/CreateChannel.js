@@ -1,6 +1,6 @@
-import React from "react";
-import { useNavigation } from "@react-navigation/native";
-import { createGroupChannelCreateFragment } from '@sendbird/uikit-react-native'
+import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { createGroupChannelCreateFragment } from '@sendbird/uikit-react-native';
 
 const GroupChannelCreateFragment = createGroupChannelCreateFragment();
 
@@ -11,7 +11,7 @@ const CreateChannel = () => {
     <GroupChannelCreateFragment
       onCreateChannel={async (channel) => {
         // Navigate to GroupChannel key function.
-        navigation.replace("GroupChannel", {
+        navigation.replace('GroupChannel', {
           channelUrl: channel.url,
         });
       }}

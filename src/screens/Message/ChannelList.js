@@ -1,7 +1,12 @@
-import React, { useContext, createContext } from 'react';
+import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { createGroupChannelListFragment } from '@sendbird/uikit-react-native';
 import { Text, View, Button, LoaderScreen } from 'react-native-ui-lib';
+import Octicons from '@expo/vector-icons/Octicons';
+
+// Styles
+import { styles, iconStyle, headerStyle } from '../../styles/styles';
+import { rabbit } from '../../styles/palette';
 
 const ChannelList = () => {
   const navigation = useNavigation();
@@ -11,10 +16,15 @@ const ChannelList = () => {
     },
     Header: () => {
       return (
-        <>
-          <Text>Messages</Text>
-          <Button label='Yes' onPress={() => navigation.navigate('CreateChannel')} />
-        </>
+        <View row spread centerV style={headerStyle}>
+          <Text style={styles.header2}>Messages</Text>
+          <Button
+            iconSource={() => (<Octicons name='plus' style={iconStyle.icon} />)}
+            onPress={() => navigation.navigate('CreateChannel')}
+            style={iconStyle.button}
+            size={Button.sizes.xSmall}
+          />
+        </View>
       );
     },
   });

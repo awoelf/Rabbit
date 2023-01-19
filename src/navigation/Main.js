@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 
 // Style
 const iconSize = 25;
-import { styles } from '../styles/styles';
+import { tabBarStyle } from '../styles/styles';
 
 const HomeTabs = () => {
   return (
@@ -26,15 +26,15 @@ const HomeTabs = () => {
         tabBarActiveTintColor: 'black',
         tabBarInactiveTintColor: 'black',
         tabBarActiveBackgroundColor: '#D8C5A2',
-        tabBarStyle: styles.bottomBar,
+        tabBarStyle: tabBarStyle,
       }}
     >
       <Tab.Screen
         name='Contacts'
-        component={MessageNavigator}
+        component={ContactNavigator}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Octicons name='comment' color={color} size={iconSize} />
+            <Octicons name='person-add' color={color} size={iconSize} />
           ),
         }}
       />

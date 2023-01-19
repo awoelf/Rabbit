@@ -1,41 +1,58 @@
 import { StyleSheet } from 'react-native';
-import { rabbitPalette } from './palette';
+import { rabbit } from './palette';
 
+// General styles for the entire app
 export const styles = StyleSheet.create({
-  bottomBar: {
-    backgroundColor: rabbitPalette.accent_color,
+  header1: {
+    fontFamily: rabbit.font_header1,
+    fontSize: rabbit.font_size_header1,
   },
-});
-
-export const logIn = StyleSheet.create({
-  header: {
-    fontFamily: rabbitPalette.font_header,
-    fontSize: rabbitPalette.font_size_header,
+  header2: {
+    fontFamily: rabbit.font_shared,
+    fontSize: rabbit.font_size_header2,
   },
   text: {
-    fontFamily: rabbitPalette.font_shared,
-    fontSize: rabbitPalette.font_size,
+    fontFamily: rabbit.font_shared,
+    fontSize: rabbit.font_size,
   },
   textField: {
-    fontFamily: rabbitPalette.font_shared,
-    fontSize: rabbitPalette.font_size,
-    backgroundColor: rabbitPalette.box_color,
-    marginVertical: rabbitPalette.margin_vertical,
-    padding: rabbitPalette.input_padding,
-    borderRadius: rabbitPalette.border_radius,
-    height: rabbitPalette.box_height,
+    fontFamily: rabbit.font_shared,
+    fontSize: rabbit.font_size,
+    backgroundColor: rabbit.box_color,
+    marginVertical: rabbit.margin_vertical,
+    padding: rabbit.input_padding,
+    borderRadius: rabbit.border_radius,
+    height: rabbit.box_height,
   },
   button: {
-    backgroundColor: rabbitPalette.accent_color,
-    borderRadius: rabbitPalette.border_radius,
-    width: rabbitPalette.button_width,
-    height: rabbitPalette.box_height,
-    marginVertical: rabbitPalette.margin_vertical,
+    backgroundColor: rabbit.accent_color,
+    borderRadius: rabbit.border_radius,
+    marginVertical: rabbit.margin_vertical,
   },
   link: {
-    color: rabbitPalette.link_color,
-    font: rabbitPalette.font_shared,
-    fontSize: rabbitPalette.font_size,
-    marginBottom: rabbitPalette.margin_vertical
-  }
+    color: rabbit.link_color,
+    font: rabbit.font_shared,
+    fontSize: rabbit.font_size,
+    marginBottom: rabbit.margin_vertical,
+  },
 });
+
+// Styles for the bottom tab bar
+export const tabBarStyle = StyleSheet.create({
+  backgroundColor: rabbit.accent_color,
+});
+
+// Styles for icons and buttons with icons
+export const iconStyle = StyleSheet.create({
+  icon: { fontSize: rabbit.font_size_header2 },
+  button: {
+    backgroundColor: rabbit.accent_color,
+    width: rabbit.button_height,
+    height: rabbit.button_height,
+  },
+});
+
+export const headerStyle = StyleSheet.create({
+  padding: 20,
+  paddingTop: 50
+})
