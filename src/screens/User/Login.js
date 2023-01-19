@@ -17,7 +17,6 @@ export default function Login(props) {
 
   const loginHandler = async (event) => {
     // event.preventDefault();
-
     try {
       const mutationResponse = await login({
         variables: { email: email, password: password },

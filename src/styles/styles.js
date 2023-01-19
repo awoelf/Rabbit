@@ -58,3 +58,7 @@ export const logIn = StyleSheet.create({
     marginBottom: '5%'
   }
 });
+
+export const chat = StyleSheet.create({
+  
+})
