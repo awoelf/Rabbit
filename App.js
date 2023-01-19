@@ -16,23 +16,15 @@ import Header from './Shared/Header';
 import { Provider } from 'react-redux';
 import store from './src/utils/store';
 
-//native-base
-// import { NativeBaseProvider, extendTheme } from 'native-base';
-// const newColorTheme = {
-//   brand: {
-//     900: '#5B8DF6',
-//     800: '#ffffff',
-//     700: '#cccccc',
-//   },
-// };
-
-// const theme = extendTheme({
-//   colors: newColorTheme,
-// });
 
 const httpLink = createHttpLink({
   uri: 'https://rabbit-app.herokuapp.com/graphql',
 });
+
+// // Construct our main GraphQL API endpoint
+// const httpLink = createHttpLink({
+//   uri: '/graphql',
+// });
 
 const authLink = setContext((_, { headers }) => {
   const token = AsyncStorage.getItem('id_token');
