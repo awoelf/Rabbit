@@ -29,6 +29,20 @@ export default function Login(props) {
     }
   };
 
+  // For logging into app quickly. Will be removed in final product.
+  const quickLogIn = async () => {
+    try {
+      const mutationResponse = await login({
+        variables: { email: 'yeon@me.com', password: 'password12345' },
+      });
+      const token = mutationResponse.data.login.token;
+      Auth.login(token);
+      props.navigation.navigate('Home');
+    } catch (e) {
+      console.log(e, 'error here');
+    }
+  }
+
   return (
     <View flex-1>
       <View row center flex-2>
@@ -58,6 +72,9 @@ export default function Login(props) {
         <View center>
           <Button disabled={!email || !password} style={logIn.button} onPress={loginHandler} center>
             <Text style={logIn.text}>Log in</Text>
+          </Button>
+          <Button onPress={quickLogIn} style={logIn.button} center>
+            <Text style={logIn.text}>Quick log in</Text>
           </Button>
         </View>
       </View>

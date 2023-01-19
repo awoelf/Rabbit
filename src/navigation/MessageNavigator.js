@@ -15,8 +15,9 @@ import {
   createExpoNotificationService,
   SendbirdUIKitContainer,
   useSendbirdChat,
-  onCreateChannel
 } from '@sendbird/uikit-react-native';
+
+import { rabbitMessageTheme } from '../styles/themes';
 
 // import screens here
 import Channel from '../screens/Message/Channel';
@@ -70,6 +71,7 @@ export default function MessageNavigator() {
         notification: NotificationService,
         clipboard: ClipboardService,
       }}
+      styles={{ theme: rabbitMessageTheme }}
     >
       <MessageStack />
     </SendbirdUIKitContainer>

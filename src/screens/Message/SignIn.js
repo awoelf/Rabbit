@@ -1,27 +1,15 @@
-import { Pressable, Text, View } from 'react-native';
 import { useConnection } from '@sendbird/uikit-react-native';
+import auth from '../../utils/auth';
+import { LoaderScreen } from 'react-native-ui-lib';
 
 // TODO: When user signs into app, automatically log in to sendbird
+// Get user context for user_id and nickname
 const SignIn = () => {
   const { connect } = useConnection();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Pressable
-        style={{
-          width: 120,
-          height: 30,
-          backgroundColor: '#742DDD',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-        // user id and nickname will be from user
-        onPress={() => connect('USER_ID', { nickname: 'NICKNAME' })}
-      >
-        <Text style={{ color: 'white' }}>{'Sign in'}</Text>
-      </Pressable>
-    </View>
-  );
+  if (auth.loggedIn) {
+    connect('USER_ID', { nickname: 'NICKNAME' });
+  }
+  return <LoaderScreen message={'Loading'} />;
 };
 
 export default SignIn;

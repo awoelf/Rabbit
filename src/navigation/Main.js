@@ -30,6 +30,15 @@ const HomeTabs = () => {
       }}
     >
       <Tab.Screen
+        name='Contacts'
+        component={MessageNavigator}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Octicons name='comment' color={color} size={iconSize} />
+          ),
+        }}
+      />
+      <Tab.Screen
         name='Messages'
         component={MessageNavigator}
         options={{
@@ -38,7 +47,6 @@ const HomeTabs = () => {
           ),
         }}
       />
-
       <Tab.Screen
         name='Search'
         component={ContactNavigator}

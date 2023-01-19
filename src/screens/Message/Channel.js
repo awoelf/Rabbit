@@ -7,7 +7,7 @@ import { Text } from 'react-native-ui-lib';
 const GroupChannelFragment = createGroupChannelFragment();
 
 const Channel = () => {
-  const { navigation } = useNavigation();
+  const navigation = useNavigation();
   const { params } = useRoute();
 
   const { sdk } = useSendbirdChat();

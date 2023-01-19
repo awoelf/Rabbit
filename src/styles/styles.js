@@ -1,64 +1,41 @@
 import { StyleSheet } from 'react-native';
-
-// Colors
-const background_color = '#ECE5D8';
-const box_color = '#D9CCC1';
-const accent_color = '#D7B16C';
-const link_color = '#900';
-
-// Fonts
-const header_font = 'CreteRound_400Regular';
-const header_font_size = 40;
-const font = 'Mukta_400Regular';
-const font_size = 18;
-
-// Border
-const border_radius = 15;
-
-// Height and Width
-const box_height = 50;
-
-
+import { rabbitPalette } from './palette';
 
 export const styles = StyleSheet.create({
   bottomBar: {
-    backgroundColor: accent_color,
+    backgroundColor: rabbitPalette.accent_color,
   },
 });
 
 export const logIn = StyleSheet.create({
   header: {
-    fontFamily: header_font,
-    fontSize: header_font_size,
+    fontFamily: rabbitPalette.font_header,
+    fontSize: rabbitPalette.font_size_header,
   },
   text: {
-    fontFamily: font,
-    fontSize: font_size,
+    fontFamily: rabbitPalette.font_shared,
+    fontSize: rabbitPalette.font_size,
   },
   textField: {
-    fontFamily: font,
-    fontSize: font_size,
-    backgroundColor: box_color,
-    marginVertical: 5,
-    padding: 20,
-    borderRadius: border_radius,
-    height: box_height,
+    fontFamily: rabbitPalette.font_shared,
+    fontSize: rabbitPalette.font_size,
+    backgroundColor: rabbitPalette.box_color,
+    marginVertical: rabbitPalette.margin_vertical,
+    padding: rabbitPalette.input_padding,
+    borderRadius: rabbitPalette.border_radius,
+    height: rabbitPalette.box_height,
   },
   button: {
-    backgroundColor: accent_color,
-    borderRadius: border_radius,
-    width: 100,
-    height: box_height,
-    marginVertical: 5,
+    backgroundColor: rabbitPalette.accent_color,
+    borderRadius: rabbitPalette.border_radius,
+    width: rabbitPalette.button_width,
+    height: rabbitPalette.box_height,
+    marginVertical: rabbitPalette.margin_vertical,
   },
   link: {
-    color: link_color,
-    font: font,
-    fontSize: font_size,
-    marginBottom: '5%'
+    color: rabbitPalette.link_color,
+    font: rabbitPalette.font_shared,
+    fontSize: rabbitPalette.font_size,
+    marginBottom: rabbitPalette.margin_vertical
   }
 });
-
-export const chat = StyleSheet.create({
-  
-})
