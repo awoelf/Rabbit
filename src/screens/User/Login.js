@@ -15,7 +15,9 @@ export default function Login(props) {
   const [password, setPassword] = useState('');
   const [login, { error, data }] = useMutation(LOGIN);
 
-  const loginHandler = async (event) => {
+
+  const loginHandler = async () => {
+
     // event.preventDefault();
     try {
       const mutationResponse = await login({
@@ -55,11 +57,11 @@ export default function Login(props) {
           id={'pwd'}
           onChangeText={setPassword}
         />
-        <View center>
-          <Button disabled={!email || !password} style={logIn.button} onPress={loginHandler} center>
+      </View>
+      <View marginT-100 center>
+          <Button style={logIn.button} onPress={()=>props.navigation.navigate('Register')}>
             <Text style={logIn.text}>Log in</Text>
           </Button>
-        </View>
       </View>
       <View flex-3 centerH bottom>
         <Text style={logIn.text}>
