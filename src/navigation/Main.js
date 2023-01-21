@@ -7,13 +7,16 @@ import Octicons from '@expo/vector-icons/Octicons';
 import UserNavigator from './UserNavigator';
 import ContactNavigator from './ContactNavigator';
 import MessageNavigator from './MessageNavigator';
+import SearchNavigator from './SearchNavigation';
+import SettingsNavigator from './SettingsNavigator';
+import FeedNavigator from './FeedNavigator';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 // Style
 const iconSize = 25;
-import { styles } from '../styles/styles';
+import { tabBarStyle } from '../styles/styles';
 
 const HomeTabs = () => {
   return (
@@ -26,9 +29,18 @@ const HomeTabs = () => {
         tabBarActiveTintColor: 'black',
         tabBarInactiveTintColor: 'black',
         tabBarActiveBackgroundColor: '#D8C5A2',
-        tabBarStyle: styles.bottomBar,
+        tabBarStyle: tabBarStyle,
       }}
     >
+      <Tab.Screen
+        name='Contacts'
+        component={ContactNavigator}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Octicons name='person' color={color} size={iconSize} />
+          ),
+        }}
+      />
       <Tab.Screen
         name='Messages'
         component={MessageNavigator}
@@ -38,24 +50,23 @@ const HomeTabs = () => {
           ),
         }}
       />
-
       <Tab.Screen
         name='Search'
-        component={ContactNavigator}
+        component={SearchNavigator}
         options={{
           tabBarIcon: ({ color, size }) => <Octicons name='search' color={color} size={iconSize} />,
         }}
       />
       <Tab.Screen
         name='Feed'
-        component={UserNavigator}
+        component={FeedNavigator}
         options={{
           tabBarIcon: ({ color, size }) => <Octicons name='rss' color={color} size={iconSize} />,
         }}
       />
       <Tab.Screen
-        name='User Settings'
-        component={UserNavigator}
+        name='Settings'
+        component={SettingsNavigator}
         options={{
           tabBarIcon: ({ color, size }) => <Octicons name='gear' color={color} size={iconSize} />,
         }}

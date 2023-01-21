@@ -15,14 +15,15 @@ import {
   createExpoNotificationService,
   SendbirdUIKitContainer,
   useSendbirdChat,
-  onCreateChannel
 } from '@sendbird/uikit-react-native';
+
+import { rabbitMessageTheme } from '../styles/themes';
 
 // import screens here
 import Channel from '../screens/Message/Channel';
 import ChannelList from '../screens/Message/ChannelList';
 import CreateChannel from '../screens/Message/CreateChannel';
-import SignIn from '../screens/Message/SignIn';
+import Loading from '../screens/Message/Loading';
 
 const NotificationService = createExpoNotificationService(ExpoNotifications);
 const ClipboardService = createExpoClipboardService(ExpoClipboard);
@@ -41,7 +42,7 @@ function MessageStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {!currentUser ? (
-        <Stack.Screen name={'SignIn'} component={SignIn} />
+        <Stack.Screen name={'Loading'} component={Loading} />
       ) : (
         <>
           <Stack.Screen name={'ChannelList'} component={ChannelList} />
@@ -70,6 +71,7 @@ export default function MessageNavigator() {
         notification: NotificationService,
         clipboard: ClipboardService,
       }}
+      styles={{ theme: rabbitMessageTheme }}
     >
       <MessageStack />
     </SendbirdUIKitContainer>
