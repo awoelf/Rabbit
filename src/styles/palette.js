@@ -25,8 +25,9 @@ export const rabbit = {
 
   // Padding
   input_padding: 20,
-  header_padding_vertical: 40,
+  header_padding_vertical: 50,
   header_padding: 20,
+  container_padding: 30,
 
   // Margin
   margin_vertical: 5,

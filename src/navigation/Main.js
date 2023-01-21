@@ -7,6 +7,9 @@ import Octicons from '@expo/vector-icons/Octicons';
 import UserNavigator from './UserNavigator';
 import ContactNavigator from './ContactNavigator';
 import MessageNavigator from './MessageNavigator';
+import SearchNavigator from './SearchNavigation';
+import SettingsNavigator from './SettingsNavigator';
+import FeedNavigator from './FeedNavigator';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -34,7 +37,7 @@ const HomeTabs = () => {
         component={ContactNavigator}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Octicons name='person-add' color={color} size={iconSize} />
+            <Octicons name='person' color={color} size={iconSize} />
           ),
         }}
       />
@@ -49,21 +52,21 @@ const HomeTabs = () => {
       />
       <Tab.Screen
         name='Search'
-        component={ContactNavigator}
+        component={SearchNavigator}
         options={{
           tabBarIcon: ({ color, size }) => <Octicons name='search' color={color} size={iconSize} />,
         }}
       />
       <Tab.Screen
         name='Feed'
-        component={UserNavigator}
+        component={FeedNavigator}
         options={{
           tabBarIcon: ({ color, size }) => <Octicons name='rss' color={color} size={iconSize} />,
         }}
       />
       <Tab.Screen
-        name='User Settings'
-        component={UserNavigator}
+        name='Settings'
+        component={SettingsNavigator}
         options={{
           tabBarIcon: ({ color, size }) => <Octicons name='gear' color={color} size={iconSize} />,
         }}

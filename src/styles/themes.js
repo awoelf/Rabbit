@@ -17,7 +17,17 @@ export const rabbitMessageTheme = createTheme({
     ...LightUIKitTheme.colors,
     primary: rabbit.accent_color,
     background: rabbit.background_color,
-    onBackground01: rabbit.background_color
+    ui: {
+      ...LightUIKitTheme.colors.ui,
+      groupChannelPreview: {
+        default: {
+          none: {
+            background: rabbit.background_color
+          }
+        }
+      }
+    },
+    
   }),
   typography: {
     shared: {

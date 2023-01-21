@@ -1,7 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Contact from '../screens/Contacts/Contacts';
+import UserSettings from '../screens/Settings/UserSettings';
 
 const Stack = createNativeStackNavigator();
 
@@ -9,8 +9,8 @@ function MyStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name='Contact'
-        component={Contact}
+        name='UserSettings'
+        component={UserSettings}
         options={{
           headerShown: false,
         }}
@@ -19,6 +19,6 @@ function MyStack() {
   );
 }
 
-export default function ContactNavigator() {
+export default function SettingsNavigator() {
   return <MyStack />;
 }

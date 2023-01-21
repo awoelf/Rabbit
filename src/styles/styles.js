@@ -50,9 +50,17 @@ export const iconStyle = StyleSheet.create({
     width: rabbit.button_height,
     height: rabbit.button_height,
   },
+  transparent: {
+    backgroundColor: 'transparent',
+  }
 });
 
 export const headerStyle = StyleSheet.create({
-  padding: 20,
-  paddingTop: 50
+  marginHorizontal: rabbit.header_padding,
+  marginTop: rabbit.header_padding_vertical
+})
+
+export const containerStyle = StyleSheet.create({
+  marginHorizontal: rabbit.container_padding,
+  marginTop: rabbit.container_padding
 })
