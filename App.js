@@ -18,11 +18,16 @@ import { Provider } from 'react-redux';
 import store from './src/utils/store';
 
 // Theme
-import rabbitTheme from './src/styles/theme';
+import { rabbitTheme } from './src/styles/themes';
 
 const httpLink = createHttpLink({
   uri: 'https://rabbit-app.herokuapp.com/graphql',
 });
+
+// // Construct our main GraphQL API endpoint
+// const httpLink = createHttpLink({
+//   uri: '/graphql',
+// });
 
 const authLink = setContext((_, { headers }) => {
   const token = AsyncStorage.getItem('id_token');

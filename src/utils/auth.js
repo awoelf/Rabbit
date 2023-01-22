@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class AuthService {
   getProfile() {
-    return decode(this.getToken());
+    return decode(this.getToken(), { header: true });
   }
 
   loggedIn() {

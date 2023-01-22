@@ -1,64 +1,66 @@
 import { StyleSheet } from 'react-native';
+import { rabbit } from './palette';
 
-// Colors
-const background_color = '#ECE5D8';
-const box_color = '#D9CCC1';
-const accent_color = '#D7B16C';
-const link_color = '#900';
-
-// Fonts
-const header_font = 'CreteRound_400Regular';
-const header_font_size = 40;
-const font = 'Mukta_400Regular';
-const font_size = 18;
-
-// Border
-const border_radius = 15;
-
-// Height and Width
-const box_height = 50;
-
-
-
+// General styles for the entire app
 export const styles = StyleSheet.create({
-  bottomBar: {
-    backgroundColor: accent_color,
+  header1: {
+    fontFamily: rabbit.font_header1,
+    fontSize: rabbit.font_size_header1,
+  },
+  header2: {
+    fontFamily: rabbit.font_shared,
+    fontSize: rabbit.font_size_header2,
+  },
+  text: {
+    fontFamily: rabbit.font_shared,
+    fontSize: rabbit.font_size,
+  },
+  textField: {
+    fontFamily: rabbit.font_shared,
+    fontSize: rabbit.font_size,
+    backgroundColor: rabbit.box_color,
+    marginVertical: rabbit.margin_vertical,
+    padding: rabbit.input_padding,
+    borderRadius: rabbit.border_radius,
+    height: rabbit.box_height,
+  },
+  button: {
+    backgroundColor: rabbit.accent_color,
+    borderRadius: rabbit.border_radius,
+    marginVertical: rabbit.margin_vertical,
+  },
+  link: {
+    color: rabbit.link_color,
+    font: rabbit.font_shared,
+    fontSize: rabbit.font_size,
+    marginBottom: rabbit.margin_vertical,
   },
 });
 
-export const logIn = StyleSheet.create({
-  header: {
-    fontFamily: header_font,
-    fontSize: header_font_size,
-  },
-  text: {
-    fontFamily: font,
-    fontSize: font_size,
-  },
-  textField: {
-    fontFamily: font,
-    fontSize: font_size,
-    backgroundColor: box_color,
-    marginVertical: 5,
-    padding: 20,
-    borderRadius: border_radius,
-    height: box_height,
-  },
+// Styles for the bottom tab bar
+export const tabBarStyle = StyleSheet.create({
+  backgroundColor: rabbit.accent_color,
+});
+
+// Styles for icons and buttons with icons
+export const iconStyle = StyleSheet.create({
+  icon: { fontSize: rabbit.font_size_header2 },
   button: {
-    backgroundColor: accent_color,
-    borderRadius: border_radius,
-    width: 100,
-    height: box_height,
-    marginVertical: 5,
+    backgroundColor: rabbit.accent_color,
+    width: rabbit.button_height,
+    height: rabbit.button_height,
   },
-  link: {
-    color: link_color,
-    font: font,
-    fontSize: font_size,
-    marginBottom: '5%'
+  transparent: {
+    backgroundColor: 'transparent',
   }
 });
 
-export const chat = StyleSheet.create({
-  
+export const headerStyle = StyleSheet.create({
+  marginHorizontal: rabbit.header_padding,
+  marginTop: rabbit.header_padding_vertical
+})
+
+export const containerStyle = StyleSheet.create({
+  marginHorizontal: rabbit.container_padding,
+  marginTop: rabbit.container_padding
 })

@@ -1,7 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import AddContact from '../screens/Contacts/AddContact';
+import Contact from '../screens/Contacts/Contacts';
 
 const Stack = createNativeStackNavigator();
 
@@ -9,8 +9,8 @@ function MyStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name='AddContact'
-        component={AddContact}
+        name='Contact'
+        component={Contact}
         options={{
           headerShown: false,
         }}
