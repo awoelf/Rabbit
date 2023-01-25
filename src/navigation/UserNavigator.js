@@ -24,14 +24,14 @@ function MyStack() {
           headerShown: false,
         }}
       />
-      {/* user profile screen will be moved to separate tab */}
+      {/* user profile screen will be moved to separate tab
       <Stack.Screen
         name='UserProfile'
         component={UserProfile}
         options={{
           headerShown: false,
         }}
-      />
+      /> */}
     </Stack.Navigator>
   );
 }

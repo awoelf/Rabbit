@@ -56,24 +56,24 @@ function MessageStack() {
 
 export default function MessageNavigator() {
   return (
-    <SendbirdUIKitContainer
-      appId={'6CD12A00-3AA4-4F84-A4CB-C202BA86B06A'}
-      chatOptions={{ localCacheStorage: AsyncStorage }}
-      userProfile={{
-        onCreateChannel: (channel) => {
-          if (channel.isGroupChannel()) {
-            navigationActions.push(Routes.GroupChannel, { channelUrl: channel.url });
-          }
-        },
-      }}
-      platformServices={{
-        file: FileService,
-        notification: NotificationService,
-        clipboard: ClipboardService,
-      }}
-      styles={{ theme: rabbitMessageTheme }}
-    >
+    // <SendbirdUIKitContainer
+    //   appId={'6CD12A00-3AA4-4F84-A4CB-C202BA86B06A'}
+    //   chatOptions={{ localCacheStorage: AsyncStorage }}
+    //   userProfile={{
+    //     onCreateChannel: (channel) => {
+    //       if (channel.isGroupChannel()) {
+    //         navigationActions.push(Routes.GroupChannel, { channelUrl: channel.url });
+    //       }
+    //     },
+    //   }}
+    //   platformServices={{
+    //     file: FileService,
+    //     notification: NotificationService,
+    //     clipboard: ClipboardService,
+    //   }}
+    //   styles={{ theme: rabbitMessageTheme }}
+    // >
       <MessageStack />
-    </SendbirdUIKitContainer>
+    // </SendbirdUIKitContainer>
   );
 }
