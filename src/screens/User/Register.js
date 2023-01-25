@@ -7,16 +7,20 @@ import Auth from '../../utils/auth';
 // Styles and assets
 import { styles } from '../../styles/styles';
 
+import { useConnection } from '@sendbird/uikit-react-native';
+
 export default function Register(props) {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
 
+  const { connect } = useConnection();
+
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
   const registerHandler = async (event) => {
-    console.log('here');
+
     if (email === '' || firstName === '' || lastName === '' || password === '') {
       setError('Please fill in the form correctly');
     }
@@ -27,7 +31,10 @@ export default function Register(props) {
       });
       const token = mutationResponse.data.addUser.token;
       Auth.login(token);
-      props.navigation.navigate('UserProfile');
+
+      connect(firstName, { nickname: lastName });
+
+      props.navigation.navigate('Home');
     } catch (e) {
       console.log(e, 'error here');
     }
@@ -46,7 +53,7 @@ export default function Register(props) {
         <TextField
           migrate
           style={styles.textField}
-          placeholder={'First Name'}
+          placeholder={'firstName'}
           name={'firstName'}
           type={'firstName'}
           id={'firstName'}
@@ -55,7 +62,7 @@ export default function Register(props) {
         <TextField
           migrate
           style={styles.textField}
-          placeholder={'Last Name'}
+          placeholder={'lastName'}
           name={'lastName'}
           type={'lastName'}
           id={'lastName'}
@@ -79,14 +86,15 @@ export default function Register(props) {
           id={'pwd'}
           onChangeText={setPassword}
         />
-        <View center>
-          <Button
-            label={'Sign Up'}
-            style={styles.button}
-            disabled={!email || !password || !firstName || !lastName}
-            onPress={registerHandler}
-          />
-        </View>
+
+      </View>
+      <View center>
+        <Button
+          label={'Sign Up'}
+          style={styles.button}
+          disabled={!email || !password || !firstName || !lastName}
+          onPress={registerHandler}
+        />
       </View>
       <View flex-3 centerH bottom>
         <Text style={styles.text}>Already have an account?</Text>
