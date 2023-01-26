@@ -10,10 +10,14 @@ import UserProfile from './UserProfile';
 // Styles and assets
 import { styles } from '../../styles/styles';
 
+import { useConnection } from '@sendbird/uikit-react-native';
+
 export default function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [login, { error, data }] = useMutation(LOGIN);
+
+  const { connect } = useConnection();
 
   const loginHandler = async (event) => {
     // event.preventDefault();
@@ -23,6 +27,7 @@ export default function Login(props) {
       });
       const token = mutationResponse.data.login.token;
       Auth.login(token);
+      connect(mutationResponse.data.login.user.firstName, { nickname: mutationResponse.data.login.user.lastName });
       props.navigation.navigate('Home');
     } catch (e) {
       console.log(e, 'error here');
