@@ -105,14 +105,12 @@ export default function App() {
           notification: NotificationService,
           clipboard: ClipboardService,
         }}
-        styles={{ theme: rabbitMessageTheme }}
+        //styles={{ theme: rabbitMessageTheme }}
       >
-        {/* <AppContext.Provider value={initialState}> */}
-
-          <NavigationContainer theme={rabbitTheme}>
+          {/* <NavigationContainer theme={rabbitTheme}> */}
+          <NavigationContainer>
             <Main />
           </NavigationContainer>
-        {/* </AppContext.Provider> */}
       </SendbirdUIKitContainer>
     </ApolloProvider >
   );
