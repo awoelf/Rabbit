@@ -3,6 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Octicons from '@expo/vector-icons/Octicons';
 
+import { Text } from 'react-native-ui-lib';
+
 // Stacks
 import UserNavigator from './UserNavigator';
 import MessageNavigator from './MessageNavigator';

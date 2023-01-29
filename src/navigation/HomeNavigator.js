@@ -9,7 +9,7 @@ function MyStack() {
     return (
         <Stack.Navigator>
             <Stack.Screen 
-                name='Contact'
+                name='HomeScreen'
                 component={Contact}
                 options={{
                     headerShown: false

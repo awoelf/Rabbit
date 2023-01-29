@@ -1,23 +1,15 @@
 import React from 'react';
-import { StyleSheet, Image, SafeAreaView, Text } from 'react-native';
-import { Button } from 'react-native-ui-lib';
+import { StyleSheet, Image, SafeAreaView } from 'react-native';
+import { Text, Button } from 'react-native-ui-lib';
 
 import Auth from '../src/utils/auth';
 
-const Header = () => {
+const Header = ({ screenName, children }) => {
   if (Auth.loggedIn()) {
     return (
       <SafeAreaView style={styles.header}>
-        <Image source={require('../assets/icon.png')} resizeMode='contain' style={{ height: 30 }} />
-        <Button
-          label={'Log Out'}
-          color='red'
-          size={Button.sizes.small}
-          backgroundColor={{ color: 'black' }}
-          onPress={() => {
-            Auth.logout();
-          }}
-        />
+        <Text>{screenName}</Text>
+        {children}
       </SafeAreaView>
     );
   }
