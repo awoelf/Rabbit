@@ -5,11 +5,11 @@ import Octicons from '@expo/vector-icons/Octicons';
 
 // Stacks
 import UserNavigator from './UserNavigator';
-import ContactNavigator from './ContactNavigator';
 import MessageNavigator from './MessageNavigator';
 import SearchNavigator from './SearchNavigation';
 import SettingsNavigator from './SettingsNavigator';
 import FeedNavigator from './FeedNavigator';
+import HomeNavigator from './HomeNavigator';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -18,10 +18,10 @@ const Stack = createNativeStackNavigator();
 const iconSize = 25;
 import { tabBarStyle } from '../styles/styles';
 
-const HomeTabs = () => {
+const MainTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName='Home'
+      initialRouteName='Main'
       screenOptions={{
         headerShown: false,
         tabBarHideOnKeyboard: true,
@@ -33,11 +33,11 @@ const HomeTabs = () => {
       }}
     >
       <Tab.Screen
-        name='Contacts'
-        component={ContactNavigator}
+        name='Home'
+        component={HomeNavigator}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Octicons name='person' color={color} size={iconSize} />
+            <Octicons name='home' color={color} size={iconSize} />
           ),
         }}
       />
@@ -79,7 +79,7 @@ const Main = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='User'>
       <Stack.Screen name='User' component={UserNavigator} />
-      <Stack.Screen name='Home' component={HomeTabs} />
+      <Stack.Screen name='Main' component={MainTabs} />
     </Stack.Navigator>
   );
 };
