@@ -5,7 +5,6 @@ import { LOGIN } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
 import Home from '../Home';
-import UserProfile from './UserProfile';
 
 // Styles and assets
 import { styles } from '../../styles/styles';
@@ -78,7 +77,7 @@ export default function Login(props) {
         />
 
       </View>
-      <View center>
+      <View flex-3 centerH bottom>
         <Button
           disabled={!email || !password}
           style={styles.button}

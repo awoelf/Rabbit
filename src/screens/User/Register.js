@@ -53,7 +53,7 @@ export default function Register(props) {
         <TextField
           migrate
           style={styles.textField}
-          placeholder={'firstName'}
+          placeholder={'USER_ID'}
           name={'firstName'}
           type={'firstName'}
           id={'firstName'}
@@ -62,7 +62,7 @@ export default function Register(props) {
         <TextField
           migrate
           style={styles.textField}
-          placeholder={'lastName'}
+          placeholder={'Nick Name'}
           name={'lastName'}
           type={'lastName'}
           id={'lastName'}
@@ -88,7 +88,7 @@ export default function Register(props) {
         />
 
       </View>
-      <View center>
+      <View flex-3 centerH bottom>
         <Button
           label={'Sign Up'}
           style={styles.button}
