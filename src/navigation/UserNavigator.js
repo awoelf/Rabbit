@@ -3,7 +3,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Login from '../screens/User/Login';
 import Register from '../screens/User/Register';
-import UserProfile from '../screens/User/UserProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,14 +23,14 @@ function MyStack() {
           headerShown: false,
         }}
       />
-      {/* user profile screen will be moved to separate tab */}
+      {/* user profile screen will be moved to separate tab
       <Stack.Screen
         name='UserProfile'
         component={UserProfile}
         options={{
           headerShown: false,
         }}
-      />
+      /> */}
     </Stack.Navigator>
   );
 }

@@ -5,15 +5,18 @@ import { LOGIN } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
 import Home from '../Home';
-import UserProfile from './UserProfile';
 
 // Styles and assets
 import { styles } from '../../styles/styles';
+
+import { useConnection } from '@sendbird/uikit-react-native';
 
 export default function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [login, { error, data }] = useMutation(LOGIN);
+
+  const { connect } = useConnection();
 
   const loginHandler = async (event) => {
     // event.preventDefault();
@@ -23,6 +26,7 @@ export default function Login(props) {
       });
       const token = mutationResponse.data.login.token;
       Auth.login(token);
+      connect(mutationResponse.data.login.user.firstName, { nickname: mutationResponse.data.login.user.lastName });
       props.navigation.navigate('Main');
     } catch (e) {
       console.log(e, 'error here');
@@ -71,20 +75,22 @@ export default function Login(props) {
           id={'pwd'}
           onChangeText={setPassword}
         />
-        <View center>
-          <Button
-            disabled={!email || !password}
-            style={styles.button}
-            onPress={loginHandler}
-            center
-          >
-            <Text style={styles.text}>Log in</Text>
-          </Button>
-          <Button onPress={quickLogIn} style={styles.button} center>
-            <Text style={styles.text}>Quick log in</Text>
-          </Button>
-        </View>
+
       </View>
+      <View flex-3 centerH bottom>
+        <Button
+          disabled={!email || !password}
+          style={styles.button}
+          onPress={loginHandler}
+          center
+        >
+          <Text style={styles.text}>Log in</Text>
+        </Button>
+        <Button onPress={quickLogIn} style={styles.button} center>
+          <Text style={styles.text}>Quick log in</Text>
+        </Button>
+      </View>
+
       <View flex-3 centerH bottom>
         <Text style={styles.text}>Don't have an account?</Text>
         <TouchableOpacity onPress={() => props.navigation.navigate('Register')}>
