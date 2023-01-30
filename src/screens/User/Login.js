@@ -27,7 +27,7 @@ export default function Login(props) {
       const token = mutationResponse.data.login.token;
       Auth.login(token);
       connect(mutationResponse.data.login.user.firstName, { nickname: mutationResponse.data.login.user.lastName });
-      props.navigation.navigate('Home');
+      props.navigation.navigate('Main');
     } catch (e) {
       console.log(e, 'error here');
     }
@@ -41,7 +41,7 @@ export default function Login(props) {
       });
       const token = mutationResponse.data.login.token;
       Auth.login(token);
-      props.navigation.navigate('Home');
+      props.navigation.navigate('Main');
     } catch (e) {
       console.log(e, 'error here');
     }

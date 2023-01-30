@@ -4,7 +4,7 @@ import { LoaderScreen } from 'react-native-ui-lib';
 
 // TODO: When user signs into app, automatically log in to sendbird
 // Get user context for user_id and nickname
-const Loading = () => {
+const Loading = (props) => {
   const { connect } = useConnection();
   if (auth.loggedIn) {
     connect('USER_ID', { nickname: 'NICKNAME' });
