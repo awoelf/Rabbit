@@ -13,6 +13,9 @@ import Main from './src/navigation/Main';
 // Screens
 import Header from './Shared/Header';
 
+//Context API
+import {UserProvider} from './src/utils/UserContext'
+
 //Redux
 import { Provider } from 'react-redux';
 import store from './src/utils/store';
@@ -20,7 +23,7 @@ import store from './src/utils/store';
 // Theme
 import { rabbitMessageTheme, rabbitTheme } from './src/styles/themes';
 
-//sendbird
+//sendbird/
 import {
   createNativeClipboardService,
   createNativeFileService,
@@ -89,29 +92,33 @@ export default function App() {
   }
 
   return (
+
     <ApolloProvider client={client}>
-      <SendbirdUIKitContainer
-        appId={'6CD12A00-3AA4-4F84-A4CB-C202BA86B06A'}
-        chatOptions={{ localCacheStorage: AsyncStorage }}
-        userProfile={{
-          onCreateChannel: (channel) => {
-            if (channel.isGroupChannel()) {
-              navigationActions.push(Routes.GroupChannel, { channelUrl: channel.url });
-            }
-          },
-        }}
-        platformServices={{
-          file: FileService,
-          notification: NotificationService,
-          clipboard: ClipboardService,
-        }}
+      <UserProvider>
+        <SendbirdUIKitContainer
+          appId={'6CD12A00-3AA4-4F84-A4CB-C202BA86B06A'}
+          chatOptions={{ localCacheStorage: AsyncStorage }}
+          userProfile={{
+            onCreateChannel: (channel) => {
+              if (channel.isGroupChannel()) {
+                navigationActions.push(Routes.GroupChannel, { channelUrl: channel.url });
+              }
+            },
+          }}
+          platformServices={{
+            file: FileService,
+            notification: NotificationService,
+            clipboard: ClipboardService,
+          }}
         //styles={{ theme: rabbitMessageTheme }}
-      >
+        >
           {/* <NavigationContainer theme={rabbitTheme}> */}
           <NavigationContainer>
             <Main />
           </NavigationContainer>
-      </SendbirdUIKitContainer>
+        </SendbirdUIKitContainer>
+      </UserProvider>
     </ApolloProvider >
+
   );
 }
