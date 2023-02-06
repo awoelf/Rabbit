@@ -6,12 +6,19 @@ import Auth from '../../utils/auth';
 
 import Home from '../Home';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import decode from 'jwt-decode';
+
 // Styles and assets
 import { styles } from '../../styles/styles';
 
 import { useConnection } from '@sendbird/uikit-react-native';
 
+
 export default function Login(props) {
+
+
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [login, { error, data }] = useMutation(LOGIN);
@@ -27,7 +34,7 @@ export default function Login(props) {
       const token = mutationResponse.data.login.token;
       Auth.login(token);
       connect(mutationResponse.data.login.user.firstName, { nickname: mutationResponse.data.login.user.lastName });
-      props.navigation.navigate('Main');
+      // props.navigation.navigate('Main');
     } catch (e) {
       console.log(e, 'error here');
     }
@@ -41,7 +48,7 @@ export default function Login(props) {
       });
       const token = mutationResponse.data.login.token;
       Auth.login(token);
-      props.navigation.navigate('Main');
+      //props.navigation.navigate('Main');
     } catch (e) {
       console.log(e, 'error here');
     }

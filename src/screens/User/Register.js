@@ -34,7 +34,7 @@ export default function Register(props) {
 
       connect(firstName, { nickname: lastName });
 
-      props.navigation.navigate('Home');
+      // props.navigation.navigate('Home');
     } catch (e) {
       console.log(e, 'error here');
     }
