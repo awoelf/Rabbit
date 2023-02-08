@@ -91,14 +91,16 @@ const MainTabs = () => {
 const Main = () => {
   const { connect } = useConnection();
   const { currentUser } = useSendbirdChat();
-  const { user } = useUserContext();
+  const userContext = useUserContext();
 
   //need to refactor with reducer and action
   useEffect(()=>{
     //Connect sendbird by using logged information
-    connect(user.data.firstName,{nickname:user.data.lastName});
+    if(userContext.stateUser.isAuthenticated){
+       connect(userContext.stateUser.user.data.firstName,{nickname:userContext.stateUser.user.data.lastName});
+    }
 
-  },[user])
+  },[])
 
 
   return (
