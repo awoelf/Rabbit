@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useReducer} from 'react';
 // import { Text, Image, View } from 'react-native';
 // import { Text, TextField } from 'react-native-ui-lib';
 import { Text, Image, View, Button } from 'react-native-ui-lib'
@@ -7,22 +7,39 @@ import Header from '../../components/Header';
 import HeaderText from '../../components/HeaderText';
 
 
+
 import { styles } from '../../styles/styles';
 
 import { useConnection, useSendbirdChat } from '@sendbird/uikit-react-native';
-// import { Button } from '@sendbird/uikit-react-native-foundation';
+
+// User Context
+import { useUserContext } from '../../utils/UserContext';
+import reducer from '../../utils/reducers';
+
+import auth from '../../utils/auth';
 
 
 
 const UserSettings = (props) => {
+  
   const { currentUser, updateCurrentUserInfo } = useSendbirdChat();
+  const userContext = useUserContext();
   const { disconnect } = useConnection();
 
+  const logout = async () => {
+    //Delete JWT token from LocalStorage
+    auth.logout()
 
+    //Delete user from context
+    userContext.dispatch({
+      type: 'SET_CURRENT_USER',
+      payload: {}});
 
-  // if (!currentUser) {
-  //   return <Button onPress={() => connect('USER_ID', { nickname: 'NICKNAME' })}>{'Connect'}</Button>;
-  // }
+    //disconnect SendBird
+    disconnect();
+   
+  };
+
 
   return (
 
@@ -35,7 +52,7 @@ const UserSettings = (props) => {
       <View row center flex-2>
         <Button
           style={styles.button}
-          onPress={() => disconnect()}
+          onPress={() => logout()}
 
         ><Text style={styles.text}>Log out</Text></Button>
 
