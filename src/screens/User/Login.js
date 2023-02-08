@@ -13,6 +13,8 @@ import decode from 'jwt-decode';
 import { styles } from '../../styles/styles';
 
 import { useConnection } from '@sendbird/uikit-react-native';
+import auth from '../../utils/auth';
+import { useUserContext } from "../../utils/UserContext"
 
 
 export default function Login(props) {
@@ -22,6 +24,9 @@ export default function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [login, { error, data }] = useMutation(LOGIN);
+  const userContext = useUserContext();
+ 
+
 
   const { connect } = useConnection();
 
@@ -32,7 +37,15 @@ export default function Login(props) {
         variables: { email: email, password: password },
       });
       const token = mutationResponse.data.login.token;
-      Auth.login(token);
+      auth.login(token);
+
+      userContext.dispatch({
+        type: 'SET_CURRENT_USER',
+        payload: {
+          user: decode(token)
+        }
+      })
+
       connect(mutationResponse.data.login.user.firstName, { nickname: mutationResponse.data.login.user.lastName });
       // props.navigation.navigate('Main');
     } catch (e) {
