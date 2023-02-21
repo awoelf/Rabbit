@@ -41,6 +41,8 @@ export default function Login(props) {
       });
       const token = mutationResponse.data.login.token;
       Auth.login(token);
+      // Testing getProfile() here
+      Auth.getProfile();
       props.navigation.navigate('Main');
     } catch (e) {
       console.log(e, 'error here');

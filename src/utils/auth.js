@@ -2,11 +2,13 @@ import decode from 'jwt-decode';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class AuthService {
-  getProfile() {
-    return decode(this.getToken(), { header: true });
+  async getProfile() {
+    const decoded = decode(this.getToken());
+    console.log(decoded);
+    return decoded;
   }
 
-  loggedIn() {
+  async loggedIn() {
     // Checks if there is a saved token and it's still valid
     const token = this.getToken();
     return !!token && !this.isTokenExpired(token);
@@ -23,23 +25,20 @@ class AuthService {
     }
   }
 
-  getToken() {
+  async getToken() {
     // Retrieves the user token from localStorage
-    return AsyncStorage.getItem('id_token');
+    const value = await AsyncStorage.getItem('id_token');
+    return value;
   }
 
-  login(idToken) {
+  async login(idToken) {
     // Saves user token to localStorage
-    AsyncStorage.setItem('id_token', idToken);
-
-    // window.location.assign('/');
+    await AsyncStorage.setItem('id_token', idToken);
   }
 
-  logout() {
+  async logout() {
     // Clear user token and profile data from localStorage
-    AsyncStorage.removeItem('id_token');
-    // this will reload the page and reset the state of the application
-    // window.location.assign('/');
+    await AsyncStorage.removeItem('id_token');
   }
 }
 
