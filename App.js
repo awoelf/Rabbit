@@ -88,8 +88,6 @@ export default function App() {
     return null;
   }
 
-  console.log();
-
   return (
     <ApolloProvider client={client}>
       <SendbirdUIKitContainer

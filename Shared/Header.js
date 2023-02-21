@@ -4,7 +4,7 @@ import { Text, Button } from 'react-native-ui-lib';
 
 import Auth from '../src/utils/auth';
 
-const Header = ({ screenName, children }) => {1
+const Header = ({ screenName, children }) => {
   if (Auth.loggedIn()) {
     return (
       <SafeAreaView style={styles.header}>
