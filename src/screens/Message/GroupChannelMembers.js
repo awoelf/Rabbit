@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSendbirdChat, createGroupChannelMembersFragment, UserActionBar } from '@sendbird/uikit-react-native';
 import { useGroupChannel } from "@sendbird/uikit-chat-hooks";
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { useChannelContext } from '@sendbird/uikit-react/Channel/context';
+// import { useChannelContext } from '@sendbird/uikit-react/Channel/context';
 import { useBottomSheet } from '@sendbird/uikit-react-native-foundation';
 
 
