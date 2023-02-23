@@ -6,15 +6,27 @@ import Auth from '../../utils/auth';
 
 import Home from '../Home';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import decode from 'jwt-decode';
+
 // Styles and assets
 import { styles } from '../../styles/styles';
 
 import { useConnection } from '@sendbird/uikit-react-native';
+import auth from '../../utils/auth';
+import { useUserContext } from "../../utils/UserContext"
+
 
 export default function Login(props) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+
+
+
+  const [email, setEmail] = useState('yeon@me.com');
+  const [password, setPassword] = useState('password12345');
   const [login, { error, data }] = useMutation(LOGIN);
+  const userContext = useUserContext();
+ 
+
 
   const { connect } = useConnection();
 
@@ -25,9 +37,17 @@ export default function Login(props) {
         variables: { email: email, password: password },
       });
       const token = mutationResponse.data.login.token;
-      Auth.login(token);
+      auth.login(token);
+
+      userContext.dispatch({
+        type: 'SET_CURRENT_USER',
+        payload: {
+          user: decode(token)
+        }
+      })
+
       connect(mutationResponse.data.login.user.firstName, { nickname: mutationResponse.data.login.user.lastName });
-      props.navigation.navigate('Main');
+      // props.navigation.navigate('Main');
     } catch (e) {
       console.log(e, 'error here');
     }
@@ -41,7 +61,7 @@ export default function Login(props) {
       });
       const token = mutationResponse.data.login.token;
       Auth.login(token);
-      props.navigation.navigate('Main');
+      //props.navigation.navigate('Main');
     } catch (e) {
       console.log(e, 'error here');
     }

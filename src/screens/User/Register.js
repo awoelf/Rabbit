@@ -8,6 +8,7 @@ import Auth from '../../utils/auth';
 import { styles } from '../../styles/styles';
 
 import { useConnection } from '@sendbird/uikit-react-native';
+import { useUserContext } from "../../utils/UserContext"
 
 export default function Register(props) {
   const [email, setEmail] = useState('');
@@ -16,6 +17,7 @@ export default function Register(props) {
   const [password, setPassword] = useState('');
 
   const { connect } = useConnection();
+  const userContext = useUserContext();
 
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
@@ -32,9 +34,17 @@ export default function Register(props) {
       const token = mutationResponse.data.addUser.token;
       Auth.login(token);
 
-      connect(firstName, { nickname: lastName });
+      userContext.dispatch({
+        type: 'SET_CURRENT_USER',
+        payload: {
+          user: decode(token)
+        }
+      })
 
-      props.navigation.navigate('Home');
+      connect(mutationResponse.data.login.user.firstName, { nickname: mutationResponse.data.login.user.lastName });
+      
+
+      // props.navigation.navigate('Home');
     } catch (e) {
       console.log(e, 'error here');
     }
