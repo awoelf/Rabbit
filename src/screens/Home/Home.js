@@ -11,7 +11,7 @@ import SmallButton from '../../components/SmallButton';
 import Weather from '../../components/Weather';
 import Facts from '../../components/Facts';
 import Word from '../../components/Word';
-import News from '../../components/News';
+import News from '../../components/NewsComponent';
 
 const Home = (props) => {
   return (

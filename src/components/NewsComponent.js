@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Card, Text, LoaderScreen } from 'react-native-ui-lib';
-import { NEWS_URL, NEWS_API_KEY } from '@env';
+import { NEWS_URL, NEWS_API_KEY, FACTS_URL, NINJA_API_KEY } from '@env';
 import { styles, cardStyle } from '../styles/styles';
 
-const News = () => {
+const NewsComponent = () => {
   const [newsData, setNewsData] = useState(null);
   useEffect(() => {
     const GetNews = async () => {
@@ -34,4 +34,4 @@ const News = () => {
   );
 };
 
-export default News;
+export default NewsComponent;
