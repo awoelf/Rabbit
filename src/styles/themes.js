@@ -31,8 +31,8 @@ export const rabbitMessageTheme = createTheme({
   }),
   typography: {
     shared: {
-      fontFamily: rabbit.font_shared,
-      fontSize: rabbit.font_size,
+      // fontFamily: rabbit.font_shared,
+      // fontSize: rabbit.font_size,
     },
     h1: {
       fontFamily: rabbit.font_header,
