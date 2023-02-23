@@ -2,10 +2,9 @@ import React from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { useFonts, Mukta_400Regular, CreteRound_400Regular } from '@expo-google-fonts/dev';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import { NavigationContainer } from '@react-navigation/native';
+import { SENDBIRD_APP_ID } from '@env';
 
 //Navigators
 import Main from './src/navigation/Main';
@@ -18,7 +17,39 @@ import { Provider } from 'react-redux';
 import store from './src/utils/store';
 
 // Theme
-import { rabbitTheme } from './src/styles/themes';
+import { rabbitMessageTheme, rabbitTheme } from './src/styles/themes';
+
+//sendbird
+import {
+  createNativeClipboardService,
+  createNativeFileService,
+  createNativeMediaService,
+  createNativeNotificationService,
+} from '@sendbird/uikit-react-native';
+
+import * as ExpoClipboard from 'expo-clipboard';
+import * as ExpoDocumentPicker from 'expo-document-picker';
+import * as ExpoFS from 'expo-file-system';
+import * as ExpoImagePicker from 'expo-image-picker';
+import * as ExpoMediaLibrary from 'expo-media-library';
+import * as ExpoNotifications from 'expo-notifications';
+
+import {
+  createExpoClipboardService,
+  createExpoFileService,
+  createExpoNotificationService,
+  SendbirdUIKitContainer,
+  useSendbirdChat,
+} from '@sendbird/uikit-react-native';
+
+const NotificationService = createExpoNotificationService(ExpoNotifications);
+const ClipboardService = createExpoClipboardService(ExpoClipboard);
+const FileService = createExpoFileService({
+  fsModule: ExpoFS,
+  imagePickerModule: ExpoImagePicker,
+  mediaLibraryModule: ExpoMediaLibrary,
+  documentPickerModule: ExpoDocumentPicker,
+});
 
 const httpLink = createHttpLink({
   uri: 'https://rabbit-app.herokuapp.com/graphql',
@@ -56,11 +87,27 @@ export default function App() {
 
   return (
     <ApolloProvider client={client}>
-      <Provider store={store}>
+      <SendbirdUIKitContainer
+        appId={SENDBIRD_APP_ID}
+        chatOptions={{ localCacheStorage: AsyncStorage }}
+        userProfile={{
+          onCreateChannel: (channel) => {
+            if (channel.isGroupChannel()) {
+              navigationActions.push(Routes.GroupChannel, { channelUrl: channel.url });
+            }
+          },
+        }}
+        platformServices={{
+          file: FileService,
+          notification: NotificationService,
+          clipboard: ClipboardService,
+        }}
+        styles={{ theme: rabbitMessageTheme }}
+      >
         <NavigationContainer theme={rabbitTheme}>
           <Main />
         </NavigationContainer>
-      </Provider>
+      </SendbirdUIKitContainer>
     </ApolloProvider>
   );
 }
