@@ -1,33 +1,50 @@
 import axios from 'axios';
-import * as Location from 'expo-location'
-import { Card } from 'react-native-ui-lib';
+import { useState, useEffect } from 'react';
+import * as Location from 'expo-location';
+import { Card, Text, LoaderScreen } from 'react-native-ui-lib';
 import { WEATHER_API_KEY, CURRENT_WEATHER_URL } from '@env';
 import { styles, cardStyle } from '../styles/styles';
 
-const GetWeather = async () => {
-  let { status } = await Location.requestForegroundPermissionsAsync();
+const Weather = () => {
+  const [weatherData, setWeatherData] = useState(null);
+  useEffect(() => {
+    const GetWeather = async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
 
-  if(status !== 'granted') {
-    console.log('Location is required to use this feature.');
-    return;
-  }
+      if (status !== 'granted') {
+        console.log('Location is required to use this feature.');
+        return;
+      }
 
-  const location = await Location.getCurrentPositionAsync();
-  const { latitude, longitude } = location.coords;
-  const response = await axios({
-    method: 'get',
-    url: `${CURRENT_WEATHER_URL}?lat=${latitude}&lon=${longitude}&key=${WEATHER_API_KEY}`,
-    responseType: 'json'
-  })
-  return response.data.data;
-}
+      const location = await Location.getCurrentPositionAsync();
+      const { latitude, longitude } = location.coords;
+      const response = await axios({
+        method: 'get',
+        url: `${CURRENT_WEATHER_URL}?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}`,
+        responseType: 'json',
+        error: console.error('Error when fetching weather data.')
+      });
 
-const Weather = async () => {
+      setWeatherData(response.data);
+    };
+    GetWeather();
+  }, []);
+
   return (
-    <Card style={cardStyle}>
-      
-    </Card>
-  )
-}
+    <>
+      {weatherData ? (
+        <Card>
+          <Text>{weatherData.main.temp}</Text>
+          <Text>{weatherData.name}</Text>
+          <Text>{weatherData.weather[0].description}</Text>
+        </Card>
+      ) : (
+        <Card>
+          <LoaderScreen />
+        </Card>
+      )}
+    </>
+  );
+};
 
 export default Weather;
