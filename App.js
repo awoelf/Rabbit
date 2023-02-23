@@ -2,10 +2,9 @@ import React from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { useFonts, Mukta_400Regular, CreteRound_400Regular } from '@expo-google-fonts/dev';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import { NavigationContainer } from '@react-navigation/native';
+import { SENDBIRD_APP_ID } from '@env';
 
 //Navigators
 import Main from './src/navigation/Main';
@@ -46,7 +45,6 @@ import {
   useSendbirdChat,
 } from '@sendbird/uikit-react-native';
 
-
 const NotificationService = createExpoNotificationService(ExpoNotifications);
 const ClipboardService = createExpoClipboardService(ExpoClipboard);
 const FileService = createExpoFileService({
@@ -55,7 +53,6 @@ const FileService = createExpoFileService({
   mediaLibraryModule: ExpoMediaLibrary,
   documentPickerModule: ExpoDocumentPicker,
 });
-
 
 const httpLink = createHttpLink({
   uri: 'https://rabbit-app.herokuapp.com/graphql',

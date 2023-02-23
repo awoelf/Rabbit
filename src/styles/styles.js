@@ -52,15 +52,19 @@ export const iconStyle = StyleSheet.create({
   },
   transparent: {
     backgroundColor: 'transparent',
-  }
+  },
 });
 
 export const headerStyle = StyleSheet.create({
   marginHorizontal: rabbit.header_padding,
-  marginTop: rabbit.header_padding_vertical
-})
+  marginTop: rabbit.header_padding_vertical,
+});
 
 export const containerStyle = StyleSheet.create({
   marginHorizontal: rabbit.container_padding,
-  marginTop: rabbit.container_padding
-})
+  marginTop: rabbit.container_padding,
+});
+
+export const cardStyle = StyleSheet.create({
+  backgroundColor: rabbit.box_color,
+});
