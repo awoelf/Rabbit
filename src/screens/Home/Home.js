@@ -9,6 +9,9 @@ import SmallButton from '../../components/SmallButton';
 
 // Components
 import Weather from '../../components/Weather';
+import Facts from '../../components/Facts';
+import Word from '../../components/Word';
+import News from '../../components/News';
 
 const Home = (props) => {
   return (
@@ -19,6 +22,9 @@ const Home = (props) => {
       </Header>
       <Container>
         <Weather />
+        <Facts />
+        <Word />
+        <News />
       </Container>
     </>
   );
