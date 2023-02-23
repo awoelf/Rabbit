@@ -14,7 +14,7 @@ import Main from './src/navigation/Main';
 import Header from './Shared/Header';
 
 //Context API
-import {UserProvider} from './src/utils/UserContext'
+import { UserProvider } from './src/utils/UserContext'
 
 //Redux
 import { Provider } from 'react-redux';

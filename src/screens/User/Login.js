@@ -21,8 +21,8 @@ export default function Login(props) {
 
 
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('yeon@me.com');
+  const [password, setPassword] = useState('password12345');
   const [login, { error, data }] = useMutation(LOGIN);
   const userContext = useUserContext();
  
