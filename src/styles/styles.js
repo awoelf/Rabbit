@@ -64,7 +64,3 @@ export const containerStyle = StyleSheet.create({
   marginHorizontal: rabbit.container_padding,
   marginTop: rabbit.container_padding,
 });
-
-export const cardStyle = StyleSheet.create({
-  backgroundColor: rabbit.box_color,
-});

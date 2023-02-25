@@ -26,7 +26,6 @@ const Weather = () => {
       method: 'get',
       url: `${CURRENT_WEATHER_URL}?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}`,
       responseType: 'json',
-      error: console.error('Error when fetching weather data.'),
     });
 
     setWeatherData(response.data);
