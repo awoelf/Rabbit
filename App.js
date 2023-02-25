@@ -9,9 +9,6 @@ import { SENDBIRD_APP_ID } from '@env';
 //Navigators
 import Main from './src/navigation/Main';
 
-// Screens
-import Header from './Shared/Header';
-
 //Context API
 import { UserProvider } from './src/utils/UserContext'
 
@@ -22,14 +19,7 @@ import store from './src/utils/store';
 // Theme
 import { rabbitMessageTheme, rabbitTheme } from './src/styles/themes';
 
-//sendbird/
-import {
-  createNativeClipboardService,
-  createNativeFileService,
-  createNativeMediaService,
-  createNativeNotificationService,
-} from '@sendbird/uikit-react-native';
-
+//sendbird
 import * as ExpoClipboard from 'expo-clipboard';
 import * as ExpoDocumentPicker from 'expo-document-picker';
 import * as ExpoFS from 'expo-file-system';
@@ -93,7 +83,7 @@ export default function App() {
     <ApolloProvider client={client}>
       <UserProvider>
         <SendbirdUIKitContainer
-          appId={'6CD12A00-3AA4-4F84-A4CB-C202BA86B06A'}
+          appId={SENDBIRD_APP_ID}
           chatOptions={{ localCacheStorage: AsyncStorage }}
           userProfile={{
             onCreateChannel: (channel) => {
@@ -107,10 +97,9 @@ export default function App() {
             notification: NotificationService,
             clipboard: ClipboardService,
           }}
-        //styles={{ theme: rabbitMessageTheme }}
+        styles={{ theme: rabbitMessageTheme }}
         >
-          {/* <NavigationContainer theme={rabbitTheme}> */}
-          <NavigationContainer>
+          <NavigationContainer theme={rabbitTheme}>
             <Main />
           </NavigationContainer>
         </SendbirdUIKitContainer>

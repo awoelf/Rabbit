@@ -2,8 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Card, Text, LoaderScreen } from 'react-native-ui-lib';
-import { NEWS_URL, NEWS_API_KEY } from '@env';
-import { styles, cardStyle } from '../../styles/styles';
+import { NEWS_URL, NEWS_API_KEY, FACTS_URL, NINJA_API_KEY } from '@env';
 
 // Components
 import Container from '../../components/Container';
@@ -24,6 +23,8 @@ const News = () => {
 
       setNewsData(response.data);
     };
+    GetNews();
+
     const GetFacts = async () => {
       const response = await axios({
         method: 'get',
@@ -31,12 +32,11 @@ const News = () => {
         headers: { 'X-Api-Key': NINJA_API_KEY },
         responseType: 'json',
       });
-
+      
       setFactsData(response.data);
     };
 
     GetFacts();
-    GetNews();
   }, []);
 
   return (
