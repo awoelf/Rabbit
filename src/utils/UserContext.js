@@ -5,6 +5,7 @@ import * as Location from 'expo-location';
 
 import authReducer from './reducers';
 import { setCurrentUser, SET_CURRENT_USER } from './action';
+import { features } from 'process';
 
 const UserContext = createContext();
 
@@ -18,6 +19,7 @@ export const UserProvider = (props) => {
 
   const [user, setUser] = useState('');
   const [location, setLocation] = useState(null);
+  const [countryCode, setCountryCode] = useState('US');
 
   const getUser = async () => {
     try {
@@ -39,12 +41,15 @@ export const UserProvider = (props) => {
     let { status } = await Location.requestForegroundPermissionsAsync();
 
     if (status !== 'granted') {
-      console.log('Location is required to use this feature.');
+      console.log('Location is required to use this app\'s features.');
       return;
     }
 
     const location = await Location.getCurrentPositionAsync();
     setLocation(location);
+
+    const geocode = await Location.reverseGeocodeAsync(location.coords, false);
+    setCountryCode(geocode[0].isoCountryCode);
   }
 
   useEffect(() => {
@@ -57,7 +62,8 @@ export const UserProvider = (props) => {
       value={{
         stateUser,
         dispatch,
-        location
+        location,
+        countryCode
       }}
     >
       {props.children}

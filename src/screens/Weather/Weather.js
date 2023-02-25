@@ -2,8 +2,8 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Card, Text, LoaderScreen } from 'react-native-ui-lib';
 import { WEATHER_API_KEY, CURRENT_WEATHER_URL } from '@env';
-import { styles, cardStyle } from '../../styles/styles';
 import { useUserContext } from '../../utils/UserContext';
+import { styles, cardStyle } from '../../styles/styles';
 
 // Components
 import Container from '../../components/Container';

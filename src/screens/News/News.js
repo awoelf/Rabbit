@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Card, Text, LoaderScreen } from 'react-native-ui-lib';
 import { NEWS_URL, NEWS_API_KEY, FACTS_URL, NINJA_API_KEY } from '@env';
+import { useUserContext } from '../../utils/UserContext';
 
 // Components
 import Container from '../../components/Container';
@@ -13,11 +14,13 @@ import SmallButton from '../../components/SmallButton';
 const News = () => {
   const [newsData, setNewsData] = useState(null);
   const [factsData, setFactsData] = useState(null);
+  const userContext = useUserContext();
+  const countryCode = userContext.countryCode;
   useEffect(() => {
     const GetNews = async () => {
       const response = await axios({
         method: 'get',
-        url: `${NEWS_URL}&apiKey=${NEWS_API_KEY}`,
+        url: `${NEWS_URL}?country=${countryCode}&apiKey=${NEWS_API_KEY}`,
         responseType: 'json',
       });
 

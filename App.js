@@ -12,10 +12,6 @@ import Main from './src/navigation/Main';
 //Context API
 import { UserProvider } from './src/utils/UserContext'
 
-//Redux
-import { Provider } from 'react-redux';
-import store from './src/utils/store';
-
 // Theme
 import { rabbitMessageTheme, rabbitTheme } from './src/styles/themes';
 
@@ -47,11 +43,6 @@ const FileService = createExpoFileService({
 const httpLink = createHttpLink({
   uri: 'https://rabbit-app.herokuapp.com/graphql',
 });
-
-// // Construct our main GraphQL API endpoint
-// const httpLink = createHttpLink({
-//   uri: '/graphql',
-// });
 
 const authLink = setContext((_, { headers }) => {
   const token = AsyncStorage.getItem('id_token');
