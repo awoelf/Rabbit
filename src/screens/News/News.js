@@ -16,6 +16,7 @@ const News = () => {
   const [factsData, setFactsData] = useState(null);
   const userContext = useUserContext();
   const countryCode = userContext.countryCode;
+  
   useEffect(() => {
     const GetNews = async () => {
       const response = await axios({
@@ -26,6 +27,7 @@ const News = () => {
 
       setNewsData(response.data);
     };
+
     GetNews();
 
     const GetFacts = async () => {

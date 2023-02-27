@@ -20,6 +20,7 @@ export const UserProvider = (props) => {
   const [user, setUser] = useState('');
   const [location, setLocation] = useState(null);
   const [countryCode, setCountryCode] = useState('US');
+  const [units, setUnits] = useState('imperial')
 
   const getUser = async () => {
     try {
@@ -63,7 +64,8 @@ export const UserProvider = (props) => {
         stateUser,
         dispatch,
         location,
-        countryCode
+        countryCode,
+        units
       }}
     >
       {props.children}

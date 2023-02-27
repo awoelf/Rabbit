@@ -53,6 +53,7 @@ export const iconStyle = StyleSheet.create({
   transparent: {
     backgroundColor: 'transparent',
   },
+  // weather: { margin: 0, padding: 0, borderWidth: 2, borderColor: 'black', borderStyle: 'solid' },
 });
 
 export const headerStyle = StyleSheet.create({
