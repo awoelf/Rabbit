@@ -72,6 +72,16 @@ export default function Login(props) {
           onChangeText={setPassword}
         />
       </View>
+      <View flex-3 centerH center>
+        <Button
+          disabled={!email || !password}
+          style={styles.button}
+          onPress={loginHandler}
+          center
+        >
+          <Text style={styles.text}>Log in</Text>
+        </Button>
+      </View>
       <View flex-3 centerH bottom>
         <Text style={styles.text}>Don't have an account?</Text>
         <TouchableOpacity onPress={() => props.navigation.navigate('Register')}>
