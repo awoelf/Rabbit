@@ -65,6 +65,9 @@ export const containerStyle = StyleSheet.create({
   marginTop: rabbit.container_padding,
 });
 
-export const cardStyle = StyleSheet.create({
-  backgroundColor: rabbit.box_color,
-});
+export const weatherStyle = StyleSheet.create({
+  borderBottom: {
+    borderBottomColor: 'black',
+    borderBottomWidth: .5
+  }
+})

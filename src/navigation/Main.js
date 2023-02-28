@@ -3,20 +3,16 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Octicons from '@expo/vector-icons/Octicons';
 
-import { Text } from 'react-native-ui-lib';
-
 // Stacks
 import UserNavigator from './UserNavigator';
 import MessageNavigator from './MessageNavigator';
-import SearchNavigator from './SearchNavigation';
 import SettingsNavigator from './SettingsNavigator';
-import FeedNavigator from './FeedNavigator';
-import HomeNavigator from './HomeNavigator';
 
-import {
-  useSendbirdChat,
-} from '@sendbird/uikit-react-native';
+// Screens
+import Weather from '../screens/Weather/Weather';
+import News from '../screens/News/News';
 
+import { useSendbirdChat } from '@sendbird/uikit-react-native';
 import { useConnection } from '@sendbird/uikit-react-native';
 
 const Tab = createBottomTabNavigator();
@@ -32,7 +28,7 @@ import { useUserContext } from '../utils/UserContext';
 const MainTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName='Main'
+      initialRouteName='Messages'
       screenOptions={{
         headerShown: false,
         tabBarHideOnKeyboard: true,
@@ -43,15 +39,6 @@ const MainTabs = () => {
         tabBarStyle: tabBarStyle,
       }}
     >
-      {/* <Tab.Screen
-        name='Home'
-        component={HomeNavigator}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Octicons name='home' color={color} size={iconSize} />
-          ),
-        }}
-      /> */}
       <Tab.Screen
         name='Messages'
         component={MessageNavigator}
@@ -62,17 +49,17 @@ const MainTabs = () => {
         }}
       />
       <Tab.Screen
-        name='Search'
-        component={SearchNavigator}
+        name='Weather'
+        component={Weather}
         options={{
-          tabBarIcon: ({ color, size }) => <Octicons name='search' color={color} size={iconSize} />,
+          tabBarIcon: ({ color, size }) => <Octicons name='sun' color={color} size={iconSize} />,
         }}
       />
       <Tab.Screen
-        name='Feed'
-        component={FeedNavigator}
+        name='News'
+        component={News}
         options={{
-          tabBarIcon: ({ color, size }) => <Octicons name='rss' color={color} size={iconSize} />,
+          tabBarIcon: ({ color, size }) => <Octicons name='book' color={color} size={iconSize} />,
         }}
       />
       <Tab.Screen
@@ -86,22 +73,20 @@ const MainTabs = () => {
   );
 };
 
-
-
 const Main = () => {
   const { connect } = useConnection();
   const { currentUser } = useSendbirdChat();
   const userContext = useUserContext();
 
   //need to refactor with reducer and action
-  useEffect(()=>{
+  useEffect(() => {
     //Connect sendbird by using logged information
-    if(userContext.stateUser.isAuthenticated){
-       connect(userContext.stateUser.user.data.firstName,{nickname:userContext.stateUser.user.data.lastName});
+    if (userContext.stateUser.isAuthenticated) {
+      connect(userContext.stateUser.user.data.firstName, {
+        nickname: userContext.stateUser.user.data.lastName,
+      });
     }
-
-  },[])
-
+  }, []);
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
