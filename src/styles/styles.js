@@ -69,5 +69,12 @@ export const weatherStyle = StyleSheet.create({
   borderBottom: {
     borderBottomColor: 'black',
     borderBottomWidth: .5
+  },
+  borderRight: {
+    borderRightColor: 'black',
+    borderRightWidth: .5
+  },
+  forecast: {
+    flexDirection: 'row',
   }
 })

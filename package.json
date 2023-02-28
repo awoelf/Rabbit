@@ -50,7 +50,8 @@
     "react-native-web": "~0.18.9",
     "react-redux": "^8.0.5",
     "redux": "^4.2.0",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "unix-timestamp": "^1.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
