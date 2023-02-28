@@ -5,7 +5,7 @@ import { weatherStyle } from '../styles/styles';
 
 const WeatherDetail = ({ iconName, name, hideBorder, children }) => {
   return (
-    <ListItem marginH-s3 style={hideBorder ? null : weatherStyle.borderBottom}>
+    <View marginH-s3 paddingV-s3 style={hideBorder ? null : weatherStyle.borderBottom}>
       <View row centerV flex spread>
         <View row centerV>
           <View marginR-s3>
@@ -15,7 +15,7 @@ const WeatherDetail = ({ iconName, name, hideBorder, children }) => {
         </View>
         {children}
       </View>
-    </ListItem>
+    </View>
   );
 };
 
