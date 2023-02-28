@@ -53,7 +53,6 @@ export const iconStyle = StyleSheet.create({
   transparent: {
     backgroundColor: 'transparent',
   },
-  // weather: { margin: 0, padding: 0, borderWidth: 2, borderColor: 'black', borderStyle: 'solid' },
 });
 
 export const headerStyle = StyleSheet.create({
@@ -65,3 +64,10 @@ export const containerStyle = StyleSheet.create({
   marginHorizontal: rabbit.container_padding,
   marginTop: rabbit.container_padding,
 });
+
+export const weatherStyle = StyleSheet.create({
+  borderBottom: {
+    borderBottomColor: 'black',
+    borderBottomWidth: .5
+  }
+})

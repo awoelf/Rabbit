@@ -1,32 +1,32 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Card, Text, LoaderScreen, Icon, View, ListItem } from 'react-native-ui-lib';
-import { WEATHER_API_KEY, CURRENT_WEATHER_URL } from '@env';
+import { WEATHER_API_KEY, WEATHER_URL, FORECAST_API_KEY, FORECAST_URL } from '@env';
 import { useUserContext } from '../../utils/UserContext';
 import { styles, cardStyle } from '../../styles/styles';
 import Octicons from '@expo/vector-icons/Octicons';
-import Feather from '@expo/vector-icons/Feather';
 
 // Components
 import Container from '../../components/Container';
 import Header from '../../components/Header';
 import HeaderText from '../../components/HeaderText';
+import WeatherDetail from '../../components/WeatherDetail';
 
 const Weather = () => {
   const [weatherData, setWeatherData] = useState(null);
   const userContext = useUserContext();
   const { latitude, longitude } = userContext.location.coords;
+  const city = userContext.geocode.city;
   const units = userContext.units;
 
   const GetWeather = async () => {
     const response = await axios({
       method: 'get',
-      url: `${CURRENT_WEATHER_URL}?lat=${latitude}&lon=${longitude}&units=${units}&appid=${WEATHER_API_KEY}`,
+      url: `${WEATHER_URL}?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=${units}&appid=${WEATHER_API_KEY}`,
       responseType: 'json',
     });
 
     setWeatherData(response.data);
-    console.log(weatherData);
   };
 
   useEffect(() => {
@@ -42,59 +42,38 @@ const Weather = () => {
         {weatherData ? (
           <>
             <View centerH>
-              <View row center>
+              <View row centerV>
                 <Icon
                   source={{
-                    uri: `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`,
+                    uri: `https://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@4x.png`,
                   }}
                   size={100}
                 />
-                <Text>{weatherData.main.temp}°</Text>
+                <Text>{weatherData.current.temp}°</Text>
               </View>
-              <Text>{weatherData.weather[0].description}</Text>
+              <Text>{weatherData.current.weather[0].description}</Text>
               <View row centerV>
                 <Octicons name='location' />
-                <Text>{weatherData.name}</Text>
+                <Text>{city}</Text>
               </View>
             </View>
 
             <Card>
-              <ListItem>
-                <View>
-                  <Feather name='thermometer' size={24} color='black' />
-                  <Text>Feels like</Text>
-                </View>
-              </ListItem>
-              <ListItem>
-                <View>
-                <Feather name='cloud-snow' size={24} color='black' />
-                  <Text>Pressure</Text>
-                </View>
-              </ListItem>
-              <ListItem>
-                <View>
-                  <Feather name='cloud-rain' size={24} color='black' />
-                  <Text>Rain</Text>
-                </View>
-              </ListItem>
-              <ListItem>
-                <View>
-                  <Feather name='droplet' size={24} color='black' />
-                  <Text>Humidity</Text>
-                </View>
-              </ListItem>
-              <ListItem>
-                <View>
-                  <Feather name='wind' size={24} color='black' />
-                  <Text>Wind</Text>
-                </View>
-              </ListItem>
-              <ListItem>
-                <View>
-                  <Feather name='cloud' size={24} color='black' />
-                  <Text>Clouds</Text>
-                </View>
-              </ListItem>
+              <WeatherDetail name={'Feels like'} iconName={'thermometer'}>
+                <Text>{weatherData.current.feels_like}°</Text>
+              </WeatherDetail>
+              <WeatherDetail name={'Pressure'} iconName={'cloud-snow'}>
+                <Text>{weatherData.current.pressure} hPa</Text>
+              </WeatherDetail>
+              <WeatherDetail name={'Humidity'} iconName={'droplet'}>
+                <Text>{weatherData.current.humidity}%</Text>
+              </WeatherDetail>
+              <WeatherDetail name={'Wind speed'} iconName={'wind'}>
+                <Text>{weatherData.current.wind_speed} mi/hr</Text>
+              </WeatherDetail>
+              <WeatherDetail name={'Clouds'} iconName={'cloud'} hideBorder={true}>
+                <Text>{weatherData.current.clouds}%</Text>
+              </WeatherDetail>
             </Card>
           </>
         ) : (
