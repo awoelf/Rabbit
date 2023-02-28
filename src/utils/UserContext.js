@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useReducer, useState, useEffect } from 'react';
 import decode from 'jwt-decode';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as Location from 'expo-location';
 
 import authReducer from './reducers';
 import { setCurrentUser, SET_CURRENT_USER } from './action';
@@ -18,9 +17,6 @@ export const UserProvider = (props) => {
   });
 
   const [user, setUser] = useState('');
-  const [location, setLocation] = useState(null);
-  const [geocode, setGeocode] = useState(null);
-  const [units, setUnits] = useState('imperial')
 
   const getUser = async () => {
     try {
@@ -37,21 +33,6 @@ export const UserProvider = (props) => {
       return null;
     }
   };
-
-  const getLocation = async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
-
-    if (status !== 'granted') {
-      console.log('Location is required to use this app\'s features.');
-      return;
-    }
-
-    const location = await Location.getCurrentPositionAsync();
-    setLocation(location);
-
-    const geocode = await Location.reverseGeocodeAsync(location.coords, false);
-    setGeocode(geocode[0]);
-  }
 
   useEffect(() => {
     getUser();

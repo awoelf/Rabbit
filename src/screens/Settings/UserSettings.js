@@ -1,12 +1,8 @@
-import React,{useReducer} from 'react';
-// import { Text, Image, View } from 'react-native';
-// import { Text, TextField } from 'react-native-ui-lib';
-import { Text, Image, View, Button } from 'react-native-ui-lib'
+import React, { useReducer } from 'react';
+import { Text, Image, View, Button } from 'react-native-ui-lib';
 import Container from '../../components/Container';
 import Header from '../../components/Header';
 import HeaderText from '../../components/HeaderText';
-
-
 
 import { styles } from '../../styles/styles';
 
@@ -18,44 +14,37 @@ import reducer from '../../utils/reducers';
 
 import auth from '../../utils/auth';
 
-
-
 const UserSettings = (props) => {
-  
   const { currentUser, updateCurrentUserInfo } = useSendbirdChat();
   const userContext = useUserContext();
   const { disconnect } = useConnection();
 
   const logout = async () => {
     //Delete JWT token from LocalStorage
-    auth.logout()
+    auth.logout();
 
     //Delete user from context
     userContext.dispatch({
       type: 'SET_CURRENT_USER',
-      payload: {}});
+      payload: {},
+    });
 
     //disconnect SendBird
     disconnect();
-   
   };
 
-
   return (
-
     <View flex-1>
       <View row center flex-2>
         <Image source={{ uri: currentUser.profileUrl }} style={style.profileImage} />
-        <Text style={styles.text} center>Hello {currentUser.userId}</Text>
+        <Text style={styles.text} center>
+          Hello {currentUser.userId}
+        </Text>
       </View>
-
-      <View row center flex-2>
-        <Button
-          style={styles.button}
-          onPress={() => logout()}
-
-        ><Text style={styles.text}>Log out</Text></Button>
-
+      <View row centerH flex-2>
+        <Button style={styles.button} onPress={() => logout()}>
+          <Text style={styles.text}>Log out</Text>
+        </Button>
       </View>
     </View>
   );
@@ -96,8 +85,5 @@ const style = {
     color: '#666',
   },
 };
-
-
-
 
 export default UserSettings;
