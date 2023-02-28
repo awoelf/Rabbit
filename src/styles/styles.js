@@ -64,3 +64,10 @@ export const containerStyle = StyleSheet.create({
   marginHorizontal: rabbit.container_padding,
   marginTop: rabbit.container_padding,
 });
+
+export const weatherStyle = StyleSheet.create({
+  borderBottom: {
+    borderBottomColor: 'black',
+    borderBottomWidth: .5
+  }
+})

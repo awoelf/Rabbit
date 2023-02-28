@@ -19,7 +19,8 @@ export const UserProvider = (props) => {
 
   const [user, setUser] = useState('');
   const [location, setLocation] = useState(null);
-  const [countryCode, setCountryCode] = useState('US');
+  const [geocode, setGeocode] = useState(null);
+  const [units, setUnits] = useState('imperial')
 
   const getUser = async () => {
     try {
@@ -49,7 +50,7 @@ export const UserProvider = (props) => {
     setLocation(location);
 
     const geocode = await Location.reverseGeocodeAsync(location.coords, false);
-    setCountryCode(geocode[0].isoCountryCode);
+    setGeocode(geocode[0]);
   }
 
   useEffect(() => {
@@ -63,7 +64,8 @@ export const UserProvider = (props) => {
         stateUser,
         dispatch,
         location,
-        countryCode
+        geocode,
+        units
       }}
     >
       {props.children}
