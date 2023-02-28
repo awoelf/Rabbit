@@ -13,6 +13,7 @@ const ForecastDay = ({ temp, day, iconCode, hideBorder }) => {
           size={40}
         />
         <Text>{temp}°</Text>
+        <Text>{day}</Text>
       </View>
     </View>
   );

@@ -2,11 +2,11 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { ScrollView } from 'react-native';
 import { Card, Text, LoaderScreen, Icon, View, GridView, ListItem } from 'react-native-ui-lib';
-import { WEATHER_API_KEY, WEATHER_URL } from '@env';
+import { WEATHER_API_KEY, WEATHER_URL, AIR_POLLUTION_URL } from '@env';
 import { useUserContext } from '../../utils/UserContext';
 import { styles, cardStyle, weatherStyle } from '../../styles/styles';
 import Octicons from '@expo/vector-icons/Octicons';
-import { toDate } from 'unix-timestamp';
+import dayjs from 'dayjs';
 
 // Components
 import Container from '../../components/Container';
@@ -14,9 +14,11 @@ import Header from '../../components/Header';
 import HeaderText from '../../components/HeaderText';
 import WeatherDetail from '../../components/WeatherDetail';
 import ForecastDay from '../../components/ForecastDay';
+import AirPollution from '../../components/AirPollution';
 
 const Weather = () => {
   const [weatherData, setWeatherData] = useState(null);
+  const [airData, setAirData] = useState(null);
   const userContext = useUserContext();
   const { latitude, longitude } = userContext.location.coords;
   const city = userContext.geocode.city;
@@ -30,6 +32,16 @@ const Weather = () => {
     });
 
     setWeatherData(response.data);
+  };
+
+  const GetAirPollution = async () => {
+    const response = await axios({
+      method: 'get',
+      url: `${AIR_POLLUTION_URL}?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}`,
+      responseType: 'json',
+    });
+
+    setAirData(response.data);
   };
 
   useEffect(() => {
@@ -80,7 +92,7 @@ const Weather = () => {
                 </WeatherDetail>
               </Card>
 
-              {/* TO DO: add week forecast and map */}
+              {/* TO DO: add week forecast and air pollution */}
               <Card>
                 <ScrollView horizontal={true}>
                   {weatherData.daily.map((day, key, array) => (
@@ -89,19 +101,23 @@ const Weather = () => {
                         <ForecastDay
                           temp={day.temp.day}
                           iconCode={day.weather[0].icon}
-                          day={day.dt}
+                          day={dayjs(day.dt).format('ddd')}
                         />
                       ) : (
                         <ForecastDay
                           temp={day.temp.day}
                           iconCode={day.weather[0].icon}
-                          day={day.dt}
+                          day={dayjs(day.dt).format('ddd')}
                           hideBorder={true}
                         />
                       )}
                     </View>
                   ))}
                 </ScrollView>
+              </Card>
+
+              <Card>
+                <AirPollution />
               </Card>
             </>
           ) : (
