@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { ScrollView } from 'react-native';
-import { Card, Text, LoaderScreen, Icon, View, GridView, ListItem } from 'react-native-ui-lib';
 import { WEATHER_API_KEY, WEATHER_URL, AIR_POLLUTION_URL } from '@env';
 import { useUserContext } from '../../utils/UserContext';
 import { styles, cardStyle, weatherStyle } from '../../styles/styles';
@@ -22,7 +21,7 @@ const Weather = () => {
   const userContext = useUserContext();
   const { latitude, longitude } = userContext.stateLocation.data.location.coords;
   // const { latitude, longitude } = userContext.location.coords;
-  const city = userContext.stateLocation.data.geocode[0].city;
+  const city = userContext.stateLocation.data.geocode.city;
   const units = userContext.units;
 
   const GetWeather = async () => {
@@ -117,9 +116,7 @@ const Weather = () => {
                 </ScrollView>
               </Card>
 
-              <Card>
-                {/* <AirPollution /> */}
-              </Card>
+              <Card>{/* <AirPollution /> */}</Card>
             </>
           ) : (
             <LoaderScreen />

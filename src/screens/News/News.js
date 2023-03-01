@@ -15,8 +15,7 @@ const News = () => {
   const [newsData, setNewsData] = useState(null);
   const [factsData, setFactsData] = useState(null);
   const userContext = useUserContext();
-  const countryCode = userContext.stateLocation.data.geocode[0].isoCountryCode;
-  console.log(countryCode)
+  const countryCode = userContext.stateLocation.data.geocode.isoCountryCode;
   
   useEffect(() => {
     const GetNews = async () => {
