@@ -20,8 +20,9 @@ const Weather = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [airData, setAirData] = useState(null);
   const userContext = useUserContext();
-  const { latitude, longitude } = userContext.location.coords;
-  const city = userContext.geocode.city;
+  const { latitude, longitude } = userContext.stateLocation.data.location.coords;
+  // const { latitude, longitude } = userContext.location.coords;
+  const city = userContext.stateLocation.data.geocode[0].city;
   const units = userContext.units;
 
   const GetWeather = async () => {
@@ -117,7 +118,7 @@ const Weather = () => {
               </Card>
 
               <Card>
-                <AirPollution />
+                {/* <AirPollution /> */}
               </Card>
             </>
           ) : (
