@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { ScrollView } from 'react-native';
+import { Card, Text, LoaderScreen, Icon, View, GridView, ListItem } from 'react-native-ui-lib';
 import { WEATHER_API_KEY, WEATHER_URL, AIR_POLLUTION_URL } from '@env';
 import { useUserContext } from '../../utils/UserContext';
 import { styles, cardStyle, weatherStyle } from '../../styles/styles';
