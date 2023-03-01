@@ -4,14 +4,14 @@ export const rabbit = {
   background_color: '#ECE5D8',
   accent_color: '#D7B16C',
   link_color: '#900',
-  box_color: '#D9CCC1',
+  box_color: '#E2DAD0',
 
   // Fonts
   font_shared: 'Mukta_400Regular',
   font_header1: 'CreteRound_400Regular',
   
   // Sizes
-  font_size: 18,
+  font_size: 16,
   font_size_header1: 40,
   font_size_header2: 22,
 
@@ -31,6 +31,7 @@ export const rabbit = {
 
   // Margin
   margin_vertical: 5,
+  card_margin_vertical: 10,
 
   // Button
   button_width: '100%',

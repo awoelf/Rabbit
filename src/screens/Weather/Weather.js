@@ -5,6 +5,7 @@ import { Card, Text, LoaderScreen, Icon, View, GridView, ListItem } from 'react-
 import { WEATHER_API_KEY, WEATHER_URL, AIR_POLLUTION_URL } from '@env';
 import { useUserContext } from '../../utils/UserContext';
 import { styles, cardStyle, weatherStyle } from '../../styles/styles';
+import { rabbit } from '../../styles/palette';
 import Octicons from '@expo/vector-icons/Octicons';
 import dayjs from 'dayjs';
 
@@ -55,7 +56,7 @@ const Weather = () => {
         <HeaderText>Weather</HeaderText>
       </Header>
       <ScrollView>
-        <Container>
+        <Container removeTopMargin={true}>
           {weatherData ? (
             <>
               <View centerH>
@@ -66,35 +67,43 @@ const Weather = () => {
                     }}
                     size={100}
                   />
-                  <Text>{weatherData.current.temp}°</Text>
+                  <Text style={styles.header1}>
+                    {weatherData.current.temp}°
+                    {units === 'Imperial' ? <Text>F</Text> : <Text>C</Text>}
+                  </Text>
                 </View>
-                <Text>{weatherData.current.weather[0].description}</Text>
+                <Text style={styles.header2}>
+                  {weatherData.current.weather[0].description.charAt(0).toUpperCase() +
+                    weatherData.current.weather[0].description.slice(1)}
+                </Text>
                 <View row centerV>
-                  <Octicons name='location' />
-                  <Text>{city}</Text>
+                  <View paddingR-s1>
+                    <Octicons name='location' size={rabbit.font_size_header2} />
+                  </View>
+                  <Text style={styles.header2}>{city}</Text>
                 </View>
               </View>
 
-              <Card>
+              <Card style={cardStyle}>
                 <WeatherDetail name={'Feels like'} iconName={'thermometer'}>
-                  <Text>{weatherData.current.feels_like}°</Text>
+                  <Text style={styles.text}>{weatherData.current.feels_like}°</Text>
                 </WeatherDetail>
                 <WeatherDetail name={'Pressure'} iconName={'cloud-snow'}>
-                  <Text>{weatherData.current.pressure} hPa</Text>
+                  <Text style={styles.text}>{weatherData.current.pressure} hPa</Text>
                 </WeatherDetail>
                 <WeatherDetail name={'Humidity'} iconName={'droplet'}>
-                  <Text>{weatherData.current.humidity}%</Text>
+                  <Text style={styles.text}>{weatherData.current.humidity}%</Text>
                 </WeatherDetail>
                 <WeatherDetail name={'Wind speed'} iconName={'wind'}>
-                  <Text>{weatherData.current.wind_speed} mi/hr</Text>
+                  <Text style={styles.text}>{weatherData.current.wind_speed} mi/hr</Text>
                 </WeatherDetail>
                 <WeatherDetail name={'Clouds'} iconName={'cloud'} hideBorder={true}>
-                  <Text>{weatherData.current.clouds}%</Text>
+                  <Text style={styles.text}>{weatherData.current.clouds}%</Text>
                 </WeatherDetail>
               </Card>
 
               {/* TO DO: add week forecast and air pollution */}
-              <Card>
+              <Card style={cardStyle}>
                 <ScrollView horizontal={true}>
                   {weatherData.daily.map((day, key, array) => (
                     <View key={key}>
@@ -102,13 +111,13 @@ const Weather = () => {
                         <ForecastDay
                           temp={day.temp.day}
                           iconCode={day.weather[0].icon}
-                          day={dayjs(day.dt).format('ddd')}
+                          day={dayjs.unix(day.dt).format('ddd')}
                         />
                       ) : (
                         <ForecastDay
                           temp={day.temp.day}
                           iconCode={day.weather[0].icon}
-                          day={dayjs(day.dt).format('ddd')}
+                          day={dayjs.unix(day.dt).format('ddd')}
                           hideBorder={true}
                         />
                       )}
