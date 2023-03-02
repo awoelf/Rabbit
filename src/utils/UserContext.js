@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import authReducer from './reducers';
 import { SET_CURRENT_USER, SET_NEW_LOCATION } from './action';
-import { getLocation } from './Location';
+import { getLocation } from './location';
 
 const UserContext = createContext();
 
