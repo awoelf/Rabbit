@@ -10,11 +10,11 @@ import { NEWS_URL, NEWS_API_KEY, FACTS_URL, NINJA_API_KEY } from '@env';
 import { useUserContext } from '../../utils/UserContext';
 
 // Components
-import Container from '../../components/Container';
 import Header from '../../components/Header';
 import HeaderText from '../../components/HeaderText';
-import SmallButton from '../../components/SmallButton';
 import NewsList from '../../components/NewsList';
+
+import Octicons from '@expo/vector-icons/Octicons';
 
 // Styles and assets
 import { styles, NewsContainerStyle } from '../../styles/styles';
@@ -25,8 +25,8 @@ const News = () => {
   const [searchName, setSearchName] = useState(null);
   // const [factsData, setFactsData] = useState(null);
   const userContext = useUserContext();
-  const countryCode = userContext.stateLocation.data.geocode.isoCountryCode;
-  
+
+
   useEffect(() => {
     const GetNews = async () => {
       const response = await axios({
@@ -42,7 +42,7 @@ const News = () => {
     GetNews();
 
   }, []);
-  
+
 
   const searchHandle = async (event) => {
     const response = await axios({
@@ -63,14 +63,14 @@ const News = () => {
       <Header>
         <HeaderText text70>News</HeaderText>
       </Header>
-   
+
       <ScrollView>
         {/* News Here */}
         {newsData ? (
 
           <View row marginV-10 >
             {newsData.articles.map((article) => {
-             
+
               return (
                 <NewsList
                   item={article}
@@ -91,20 +91,26 @@ const News = () => {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View>
-            <TextField
-              migrate
-              style={styles.textField}
-              placeholder={'Search'}
-              onChangeText={setSearchName}
-            />
-            <Button
-              style={styles.button}
-              onPress={searchHandle}
-              center
-            >
-              <Text style={styles.text}>Search</Text>
-            </Button>
+          <View >
+            <View row flex centerV>
+              <TextField
+                migrate
+          
+                // style={styles.textField}
+                placeholder={'Search'}
+                onChangeText={setSearchName}
+              />
+              <View>
+                <Button
+                  style={{ width: 10, backgroundColor: '#ECE5D8' }}
+                  onPress={searchHandle}
+                >
+                  <Octicons name='search' size={20} />
+                </Button>
+
+              </View>
+            </View>
+
 
           </View>
         </TouchableWithoutFeedback>
