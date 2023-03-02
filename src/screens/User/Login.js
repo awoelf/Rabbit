@@ -71,17 +71,20 @@ export default function Login(props) {
           id={'pwd'}
           onChangeText={setPassword}
         />
-        <View centerH center>
-          <Button
-            disabled={!email || !password}
-            style={styles.button}
-            onPress={loginHandler}
-            center
-          >
-            <Text style={styles.text}>Log in</Text>
-          </Button>
-        </View>
+
+
       </View>
+      <View marginH-30 centerH center>
+        <Button
+          disabled={!email || !password}
+          style={styles.button}
+          onPress={loginHandler}
+          center
+        >
+          <Text style={styles.text}>Log in</Text>
+        </Button>
+      </View>
+
 
       <View flex-3 centerH bottom>
         <Text style={styles.text}>Don't have an account?</Text>
