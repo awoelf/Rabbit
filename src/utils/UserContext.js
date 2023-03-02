@@ -1,11 +1,10 @@
 import React, { createContext, useContext, useReducer, useState, useEffect } from 'react';
 import decode from 'jwt-decode';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as Location from 'expo-location';
 
 import authReducer from './reducers';
-import { setCurrentUser, SET_CURRENT_USER } from './action';
-import { features } from 'process';
+import { SET_CURRENT_USER, SET_NEW_LOCATION } from './action';
+import { getLocation } from './Location';
 
 const UserContext = createContext();
 
@@ -16,11 +15,12 @@ export const UserProvider = (props) => {
     isAuthenticated: null,
     user: {},
   });
+  const [stateLocation, dispatchLocation] = useReducer(authReducer, {
+    data: {},
+  });
 
   const [user, setUser] = useState('');
-  const [location, setLocation] = useState(null);
-  const [geocode, setGeocode] = useState(null);
-  const [units, setUnits] = useState('imperial')
+  const [units, setUnits] = useState('Imperial');
 
   const getUser = async () => {
     try {
@@ -32,30 +32,18 @@ export const UserProvider = (props) => {
           type: SET_CURRENT_USER,
           payload: decode(value),
         });
+        dispatchLocation({
+          type: SET_NEW_LOCATION,
+          payload: await getLocation()
+        });
       }
     } catch (error) {
       return null;
     }
-  };
-
-  const getLocation = async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
-
-    if (status !== 'granted') {
-      console.log('Location is required to use this app\'s features.');
-      return;
-    }
-
-    const location = await Location.getCurrentPositionAsync();
-    setLocation(location);
-
-    const geocode = await Location.reverseGeocodeAsync(location.coords, false);
-    setGeocode(geocode[0]);
-  }
+  }; 
 
   useEffect(() => {
     getUser();
-    getLocation();
   }, []);
 
   return (
@@ -63,9 +51,9 @@ export const UserProvider = (props) => {
       value={{
         stateUser,
         dispatch,
-        location,
-        geocode,
-        units
+        stateLocation,
+        dispatchLocation,
+        units,
       }}
     >
       {props.children}
