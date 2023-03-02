@@ -2,9 +2,9 @@ import { View } from 'react-native-ui-lib';
 
 import { containerStyle } from '../styles/styles';
 
-const Container = ({ children }) => {
+const Container = ({ children, removeTopMargin }) => {
   return (
-    <View style={containerStyle}>
+    <View style={removeTopMargin ? {...containerStyle, marginTop: 0} : containerStyle}>
       {children}
     </View>
   );

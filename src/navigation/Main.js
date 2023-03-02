@@ -11,6 +11,7 @@ import SettingsNavigator from './SettingsNavigator';
 // Screens
 import Weather from '../screens/Weather/Weather';
 import News from '../screens/News/News';
+import LocationPermission from '../screens/User/LocationPermission';
 
 import { useSendbirdChat } from '@sendbird/uikit-react-native';
 import { useConnection } from '@sendbird/uikit-react-native';
@@ -93,7 +94,13 @@ const Main = () => {
       {!currentUser ? (
         <Stack.Screen name='User' component={UserNavigator} />
       ) : (
-        <Stack.Screen name='Main' component={MainTabs} />
+        <>
+          {userContext.stateLocation.data.status !== 'granted' ? (
+            <Stack.Screen name='LocationPermission' component={LocationPermission} />
+          ) : (
+            <Stack.Screen name='Main' component={MainTabs} />
+          )}
+        </>
       )}
     </Stack.Navigator>
   );

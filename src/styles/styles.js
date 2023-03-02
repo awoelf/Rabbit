@@ -62,7 +62,7 @@ export const headerStyle = StyleSheet.create({
 
 export const containerStyle = StyleSheet.create({
   marginHorizontal: rabbit.container_padding,
-  marginTop: rabbit.container_padding,
+  marginTop: rabbit.header_padding,
 });
 
 export const weatherStyle = StyleSheet.create({
@@ -77,4 +77,9 @@ export const weatherStyle = StyleSheet.create({
   forecast: {
     flexDirection: 'row',
   }
+})
+
+export const cardStyle = StyleSheet.create({
+  backgroundColor: rabbit.box_color,
+  marginVertical: rabbit.card_margin_vertical,
 })
