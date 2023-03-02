@@ -18,9 +18,11 @@ export const UserProvider = (props) => {
   const [stateLocation, dispatchLocation] = useReducer(authReducer, {
     data: {},
   });
+  const [stateUnits, dispatchUnits] = useReducer(authReducer, {
+    useImperial: true
+  })
 
   const [user, setUser] = useState('');
-  const [units, setUnits] = useState('Imperial');
 
   const getUser = async () => {
     try {
@@ -53,7 +55,8 @@ export const UserProvider = (props) => {
         dispatch,
         stateLocation,
         dispatchLocation,
-        units,
+        stateUnits,
+        dispatchUnits
       }}
     >
       {props.children}
