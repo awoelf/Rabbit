@@ -1,27 +1,38 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Card, Text, LoaderScreen } from 'react-native-ui-lib';
+import {
+  KeyboardAvoidingView, ScrollView, View, Platform,
+  TouchableWithoutFeedback, Keyboard
+} from "react-native";
+import { Card, Text, LoaderScreen, TextField, Button } from 'react-native-ui-lib';
 import { NEWS_URL, NEWS_API_KEY, FACTS_URL, NINJA_API_KEY } from '@env';
 import { useUserContext } from '../../utils/UserContext';
 
 // Components
-import Container from '../../components/Container';
 import Header from '../../components/Header';
 import HeaderText from '../../components/HeaderText';
-import SmallButton from '../../components/SmallButton';
+import NewsList from '../../components/NewsList';
+
+import Octicons from '@expo/vector-icons/Octicons';
+
+// Styles and assets
+import { styles, NewsContainerStyle } from '../../styles/styles';
+import { endAsyncEvent } from 'react-native/Libraries/Performance/Systrace';
 
 const News = () => {
   const [newsData, setNewsData] = useState(null);
-  const [factsData, setFactsData] = useState(null);
+  const [searchName, setSearchName] = useState(null);
+  // const [factsData, setFactsData] = useState(null);
   const userContext = useUserContext();
-  const countryCode = userContext.stateLocation.data.geocode.isoCountryCode;
-  
+
+
   useEffect(() => {
     const GetNews = async () => {
       const response = await axios({
         method: 'get',
-        url: `${NEWS_URL}?country=${countryCode}&apiKey=${NEWS_API_KEY}`,
+        //url: `${NEWS_URL}?country=${countryCode}&apiKey=${NEWS_API_KEY}`,
+        url: `https://newsapi.org/v2/top-headlines?country=us&apiKey=5d33573d86754a639d8a5f2ac1455a70`,
         responseType: 'json',
       });
 
@@ -30,52 +41,84 @@ const News = () => {
 
     GetNews();
 
-    const GetFacts = async () => {
-      const response = await axios({
-        method: 'get',
-        url: FACTS_URL,
-        headers: { 'X-Api-Key': NINJA_API_KEY },
-        responseType: 'json',
-      });
-      
-      setFactsData(response.data);
-    };
-
-    GetFacts();
   }, []);
+
+
+  const searchHandle = async (event) => {
+    const response = await axios({
+      method: 'get',
+      //url: `${NEWS_URL}?country=${countryCode}&apiKey=${NEWS_API_KEY}`,
+      url: `https://newsapi.org/v2/everything?q=${searchName}&sortBy=popularity&apiKey=5d33573d86754a639d8a5f2ac1455a70`,
+      responseType: 'json',
+    });
+
+    setNewsData(response.data);
+    setSearchName("");
+
+  }
+
 
   return (
     <>
       <Header>
-        <HeaderText>News</HeaderText>
+        <HeaderText text70>News</HeaderText>
       </Header>
-      <Container>
+
+      <ScrollView>
         {/* News Here */}
         {newsData ? (
-          // Only displays 1 headlines at the moment.
-          // TODO: Change so that it displays several headlines and a pressable link to each article.
-          <Card>
-            <Text>Top headlines: {newsData.articles[0].title}</Text>
-          </Card>
+
+          <View row marginV-10 >
+            {newsData.articles.map((article) => {
+
+              return (
+                <NewsList
+                  item={article}
+                  key={article.title}
+                />
+              )
+            })}
+          </View>
+
         ) : (
           <Card>
             <LoaderScreen />
           </Card>
         )}
 
-        {/* Fun facts here */}
-        {factsData ? (
-          <Card>
-            <Text>Fun fact: {factsData[0].fact}</Text>
-          </Card>
-        ) : (
-          <Card>
-            <LoaderScreen />
-          </Card>
-        )}
-      </Container>
+      </ScrollView>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View >
+            <View row flex centerV>
+              <TextField
+                migrate
+          
+                // style={styles.textField}
+                placeholder={'Search'}
+                onChangeText={setSearchName}
+              />
+              <View>
+                <Button
+                  style={{ width: 10, backgroundColor: '#ECE5D8' }}
+                  onPress={searchHandle}
+                >
+                  <Octicons name='search' size={20} />
+                </Button>
+
+              </View>
+            </View>
+
+
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+
     </>
   );
 };
+
 
 export default News;

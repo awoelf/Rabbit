@@ -3,6 +3,7 @@ import { Button, View, Text, TouchableOpacity, TextField, Icon } from 'react-nat
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
+import decode from 'jwt-decode';
 
 // Styles and assets
 import { styles } from '../../styles/styles';
