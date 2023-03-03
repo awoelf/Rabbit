@@ -6,7 +6,18 @@ import { weatherStyle } from '../styles/styles';
 const AirPollution = ({ labels, data }) => {
   return (
     <View>
-        <BarChart/>
+      <BarChart
+        data={{
+          labels: ['A', 'B', 'C'],
+          datasets: [
+            {
+              data: [100, 200, 300],
+            },
+          ],
+        }}
+        width={100}
+        height={200}
+      />
     </View>
   );
 };

@@ -1,10 +1,20 @@
 import React, { useReducer } from 'react';
-import { Text, Image, View, Button } from 'react-native-ui-lib';
+import {
+  Text,
+  Image,
+  View,
+  Button,
+  ListItem,
+  TouchableOpacity,
+  TextField,
+} from 'react-native-ui-lib';
 import Container from '../../components/Container';
 import Header from '../../components/Header';
 import HeaderText from '../../components/HeaderText';
+import Octicons from '@expo/vector-icons/Octicons';
 
-import { styles } from '../../styles/styles';
+import { styles, cardStyle } from '../../styles/styles';
+import { rabbit } from '../../styles/palette';
 
 import { useConnection, useSendbirdChat } from '@sendbird/uikit-react-native';
 
@@ -34,19 +44,60 @@ const UserSettings = (props) => {
   };
 
   return (
-    <View flex-1>
-      <View row center flex-2>
-        <Image source={{ uri: currentUser.profileUrl }} style={style.profileImage} />
-        <Text style={styles.text} center>
-          Hello {currentUser.userId}
-        </Text>
-      </View>
-      <View row centerH flex-2>
-        <Button style={styles.button} onPress={() => logout()}>
-          <Text style={styles.text}>Log out</Text>
-        </Button>
-      </View>
-    </View>
+    <>
+      <Header>
+        <HeaderText>User Settings</HeaderText>
+      </Header>
+
+      <Container>
+        {/* TO DO: Click on image to change profile picture */}
+        <TouchableOpacity centerH>
+          <View row>
+            <Image source={{ uri: currentUser.profileUrl }} style={styles.profileImage} />
+            <View absR>
+              <Octicons name='pencil' size={rabbit.font_size} />
+            </View>
+          </View>
+
+          <Text style={styles.text} center>
+            Hello {currentUser.userId}!
+          </Text>
+        </TouchableOpacity>
+
+        <ListItem>
+          <View flex row centerV>
+            <View marginR-s1>
+              <Octicons name='person' size={rabbit.font_size} />
+            </View>
+            <Text style={styles.text}>Update user profile</Text>
+          </View>
+        </ListItem>
+
+        <ListItem>
+          <View flex row centerV>
+            <View marginR-s1>
+              <Octicons name='mail' size={rabbit.font_size} />
+            </View>
+            <Text style={styles.text}>Update email and password</Text>
+          </View>
+        </ListItem>
+
+        <ListItem>
+          <View flex row centerV>
+            <View marginR-s1>
+              <Octicons name='info' size={rabbit.font_size} />
+            </View>
+            <Text style={styles.text}>Change weather units</Text>
+          </View>
+        </ListItem>
+
+        <View bottom center>
+          <Button style={styles.button} onPress={() => logout()}>
+            <Text style={styles.text}>Log out</Text>
+          </Button>
+        </View>
+      </Container>
+    </>
   );
 };
 

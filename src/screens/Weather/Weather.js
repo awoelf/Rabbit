@@ -27,27 +27,37 @@ const Weather = () => {
   const units = userContext.units;
 
   const GetWeather = async () => {
-    const response = await axios({
-      method: 'get',
-      url: `${WEATHER_URL}?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=${units}&appid=${WEATHER_API_KEY}`,
-      responseType: 'json',
-    });
+    try {
+      const response = await axios({
+        method: 'get',
+        url: `${WEATHER_URL}?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=${units}&appid=${WEATHER_API_KEY}`,
+        responseType: 'json',
+      });
 
-    setWeatherData(response.data);
+      setWeatherData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const GetAirPollution = async () => {
-    const response = await axios({
-      method: 'get',
-      url: `${AIR_POLLUTION_URL}?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}`,
-      responseType: 'json',
-    });
+    try {
+      const response = await axios({
+        method: 'get',
+        url: `${AIR_POLLUTION_URL}?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}`,
+        responseType: 'json',
+      });
 
-    setAirData(response.data);
+      setAirData(response.data);
+      console.log(airData);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     GetWeather();
+    GetAirPollution();
   }, []);
 
   return (
@@ -126,7 +136,9 @@ const Weather = () => {
                 </ScrollView>
               </Card>
 
-              <Card>{/* <AirPollution /> */}</Card>
+              <Card>
+                <AirPollution />
+              </Card>
             </>
           ) : (
             <LoaderScreen />

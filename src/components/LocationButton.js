@@ -3,7 +3,7 @@ import Octicons from '@expo/vector-icons/Octicons';
 
 import { styles } from '../styles/styles';
 import { rabbit } from '../styles/palette';
-import { getLocation } from '../utils/Location';
+import { getLocation } from '../utils/location';
 import { useUserContext } from '../utils/UserContext';
 
 const LocationButton = () => {

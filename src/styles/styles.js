@@ -35,6 +35,11 @@ export const styles = StyleSheet.create({
     fontSize: rabbit.font_size,
     marginBottom: rabbit.margin_vertical,
   },
+  profileImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 100
+  }
 });
 
 // Styles for the bottom tab bar
