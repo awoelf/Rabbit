@@ -1,5 +1,5 @@
 import { SET_CURRENT_USER, SET_NEW_LOCATION, TOGGLE_UNITS } from './action';
-import isEmpty from './helper';
+import { isEmpty } from './helper';
 
 export default function (state, action) {
   switch (action.type) {
@@ -14,9 +14,7 @@ export default function (state, action) {
         data: action.payload,
       };
     case TOGGLE_UNITS:
-      return {
-        
-      }
+      return action.payload
     
     // case LOG_OUT_USER:
     //   return {

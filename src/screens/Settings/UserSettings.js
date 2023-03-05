@@ -64,7 +64,7 @@ const UserSettings = (props) => {
           </Text>
         </TouchableOpacity>
 
-        <ListItem>
+        <ListItem onPress={() => props.navigation.navigate('UpdateUser')}>
           <View flex row centerV>
             <View marginR-s1>
               <Octicons name='person' size={rabbit.font_size} />
@@ -73,7 +73,7 @@ const UserSettings = (props) => {
           </View>
         </ListItem>
 
-        <ListItem>
+        <ListItem onPress={() => props.navigation.navigate('UpdateEmailPassword')}>
           <View flex row centerV>
             <View marginR-s1>
               <Octicons name='mail' size={rabbit.font_size} />
@@ -82,7 +82,7 @@ const UserSettings = (props) => {
           </View>
         </ListItem>
 
-        <ListItem>
+        <ListItem onPress={() => props.navigation.navigate('ChangeUnits')}>
           <View flex row centerV>
             <View marginR-s1>
               <Octicons name='info' size={rabbit.font_size} />
@@ -99,42 +99,6 @@ const UserSettings = (props) => {
       </Container>
     </>
   );
-};
-
-const style = {
-  container: {
-    flexDirection: 'row',
-    paddingHorizontal: 20,
-    paddingTop: 15,
-    paddingBottom: 8,
-    alignItems: 'center',
-  },
-  profileImageContainer: {
-    position: 'relative',
-    width: 40,
-    height: 40,
-    marginRight: 12,
-  },
-  profileImage: {
-    position: 'absolute',
-    width: 40,
-    height: 40,
-    borderWidth: 0,
-    borderRadius: 20,
-  },
-  check: {
-    position: 'absolute',
-    width: 40,
-    height: 40,
-    opacity: 0.6,
-    borderWidth: 0,
-    borderRadius: 20,
-    backgroundColor: '#666',
-  },
-  nickname: {
-    fontSize: 18,
-    color: '#666',
-  },
 };
 
 export default UserSettings;

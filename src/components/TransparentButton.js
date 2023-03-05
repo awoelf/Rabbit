@@ -9,7 +9,7 @@ const TransparentButton = ({ page, icon }) => {
   return (
     <Button
       iconSource={() => <Octicons name={icon} style={iconStyle.icon} />}
-      // onPress={() => }
+      onPress={navigation.navigate(page)}
       style={iconStyle.transparent}
       size={Button.sizes.xSmall}
     />
