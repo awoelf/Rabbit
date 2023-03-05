@@ -14,9 +14,7 @@ export default function (state, action) {
         data: action.payload,
       };
     case TOGGLE_UNITS:
-      return {
-        
-      }
+      return action.payload
     
     // case LOG_OUT_USER:
     //   return {

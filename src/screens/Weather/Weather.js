@@ -1,7 +1,16 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { ScrollView } from 'react-native';
-import { Card, Text, LoaderScreen, Icon, View, GridView, ListItem } from 'react-native-ui-lib';
+import {
+  Card,
+  Text,
+  LoaderScreen,
+  Icon,
+  View,
+  GridView,
+  ListItem,
+  TouchableOpacity,
+} from 'react-native-ui-lib';
 import { WEATHER_API_KEY, WEATHER_URL, AIR_POLLUTION_URL } from '@env';
 import { useUserContext } from '../../utils/UserContext';
 import { styles, cardStyle, weatherStyle } from '../../styles/styles';
@@ -22,9 +31,8 @@ const Weather = () => {
   const [airData, setAirData] = useState(null);
   const userContext = useUserContext();
   const { latitude, longitude } = userContext.stateLocation.data.location.coords;
-  // const { latitude, longitude } = userContext.location.coords;
   const city = userContext.stateLocation.data.geocode.city;
-  const units = userContext.units;
+  const units = userContext.stateUnits.units;
 
   const GetWeather = async () => {
     try {
@@ -48,8 +56,7 @@ const Weather = () => {
         responseType: 'json',
       });
 
-      setAirData(response.data);
-      console.log(airData);
+      setAirData(response.data.list[0].components);
     } catch (error) {
       console.log(error);
     }
@@ -78,8 +85,7 @@ const Weather = () => {
                     size={100}
                   />
                   <Text style={styles.header1}>
-                    {weatherData.current.temp}°
-                    {units === 'Imperial' ? <Text>F</Text> : <Text>C</Text>}
+                    {weatherData.current.temp}°{units ? <Text>F</Text> : <Text>C</Text>}
                   </Text>
                 </View>
                 <Text style={styles.header2}>
@@ -95,6 +101,9 @@ const Weather = () => {
               </View>
 
               <Card style={cardStyle}>
+                <Text center marginT-s3 style={styles.text}>
+                  Weather Details
+                </Text>
                 <WeatherDetail name={'Feels like'} iconName={'thermometer'}>
                   <Text style={styles.text}>{weatherData.current.feels_like}°</Text>
                 </WeatherDetail>
@@ -112,8 +121,10 @@ const Weather = () => {
                 </WeatherDetail>
               </Card>
 
-              {/* TO DO: add week forecast and air pollution */}
               <Card style={cardStyle}>
+                <Text center marginT-s3 style={styles.text}>
+                  Weekly Forecast
+                </Text>
                 <ScrollView horizontal={true}>
                   {weatherData.daily.map((day, key, array) => (
                     <View key={key}>
@@ -136,8 +147,11 @@ const Weather = () => {
                 </ScrollView>
               </Card>
 
-              <Card>
-                <AirPollution />
+              <Card style={cardStyle}>
+                <Text center marginT-s3 style={styles.text}>
+                  Air Pollution (μg/m3)
+                </Text>
+                <AirPollution data={airData} />
               </Card>
             </>
           ) : (

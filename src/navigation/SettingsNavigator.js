@@ -1,5 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Text } from 'react-native-ui-lib';
+
 
 // Screens
 import UserSettings from '../screens/Settings/UserSettings';
@@ -21,7 +23,10 @@ function MyStack() {
         name='ChangeUnits'
         component={ChangeUnits}
         options={{
-          headerShown: false,
+          headerShown: true,
+          header: (<>
+            <Text>Hi</Text>
+          </>)
         }}
       />
     </Stack.Navigator>
