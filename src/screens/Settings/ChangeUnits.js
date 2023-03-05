@@ -1,5 +1,6 @@
 import { TouchableOpacity, Switch, View, Text } from 'react-native-ui-lib';
 import Octicons from '@expo/vector-icons/Octicons';
+import { useUserContext } from '../../utils/UserContext';
 
 import { iconStyle, styles } from '../../styles/styles';
 import { rabbit } from '../../styles/palette';
@@ -9,6 +10,7 @@ import HeaderText from '../../components/HeaderText';
 import Container from '../../components/Container';
 
 const ChangeUnits = (props) => {
+  const userContext = useUserContext();
   return (
     <>
       <Header>
@@ -27,7 +29,14 @@ const ChangeUnits = (props) => {
       <Container>
         <View row spread>
           <Text>Enable metric units </Text>
-          <Switch />
+          <Switch value={userContext.stateUnits.units} onValueChange={() => {
+            userContext.dispatchUnits({
+              type: 'TOGGLE_UNITS',
+              payload: {
+                units: !userContext.stateUnits.units
+              }
+            })
+          }} />
         </View>
       </Container>
     </>

@@ -19,7 +19,7 @@ export const UserProvider = (props) => {
     data: {},
   });
   const [stateUnits, dispatchUnits] = useReducer(authReducer, {
-    units: 'imperial'
+    units: false
   })
 
   const [user, setUser] = useState('');

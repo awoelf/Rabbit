@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { ScrollView } from 'react-native';
+import { useIsFocused, CommonActions } from '@react-navigation/native';
 import { Card, Text, LoaderScreen, Icon, View, TouchableOpacity } from 'react-native-ui-lib';
 import { WEATHER_API_KEY, WEATHER_URL, AIR_POLLUTION_URL } from '@env';
 import { useUserContext } from '../../utils/UserContext';
@@ -17,15 +18,15 @@ import HeaderText from '../../components/HeaderText';
 import WeatherDetail from '../../components/WeatherDetail';
 import ForecastDay from '../../components/ForecastDay';
 import AirPollution from '../../components/AirPollution';
-import SmallButton from '../../components/SmallButton';
 
-const Weather = () => {
+const Weather = (props) => {
   const [weatherData, setWeatherData] = useState(null);
   const [airData, setAirData] = useState(null);
   const userContext = useUserContext();
   const { latitude, longitude } = userContext.stateLocation.data.location.coords;
   const city = userContext.stateLocation.data.geocode.city;
-  const units = userContext.stateUnits.units;
+  const units = userContext.stateUnits.units ? 'Metric' : 'Imperial';
+  const isFocused = useIsFocused();
 
   const GetWeather = async () => {
     try {
@@ -58,23 +59,15 @@ const Weather = () => {
   useEffect(() => {
     GetWeather();
     GetAirPollution();
-  }, []);
+  }, [isFocused]);
 
   return (
     <>
       <Header>
         <HeaderText>Weather</HeaderText>
-        <SmallButton
-          icon={'gear'}
-          page={('Main',
-            {
-              name: 'Settings',
-              params: {
-                screen: 'ChangeUnits',
-              },
-            })
-          }
-        />
+        <TouchableOpacity>
+            <Octicons name='sync' style={iconStyle.icon} />
+          </TouchableOpacity>
       </Header>
       <ScrollView>
         <Container removeTopMargin={true}>
@@ -89,7 +82,7 @@ const Weather = () => {
                     size={100}
                   />
                   <Text style={styles.header1}>
-                    {weatherData.current.temp}°{units ? <Text>F</Text> : <Text>C</Text>}
+                    {weatherData.current.temp}°{units ? <Text>C</Text> : <Text>F</Text>}
                   </Text>
                 </View>
                 <Text style={styles.header2}>
@@ -118,7 +111,7 @@ const Weather = () => {
                 </WeatherDetail>
                 <WeatherDetail name={'Wind speed'} iconName={'wind'}>
                   <Text style={styles.text}>
-                    {roundNumber(weatherData.current.wind_speed)} mi/hr
+                    {roundNumber(weatherData.current.wind_speed)} {units ? <Text>m/sec</Text> : <Text>mi/hr</Text>}
                   </Text>
                 </WeatherDetail>
                 <WeatherDetail name={'Clouds'} iconName={'cloud'} hideBorder={true}>
