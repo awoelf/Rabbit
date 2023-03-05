@@ -6,8 +6,7 @@ import { Text } from 'react-native-ui-lib';
 
 const GroupChannelFragment = createGroupChannelFragment();
 
-const Channel = () => {
-  const navigation = useNavigation();
+const Channel = (props) => {
   const { params } = useRoute();
 
   const { sdk } = useSendbirdChat();
@@ -19,15 +18,15 @@ const Channel = () => {
       channel={channel}
       onChannelDeleted={() => {
         // Navigate to GroupChannelList key function.
-        navigation.navigate('ChannelList');
+        props.navigation.navigate('ChannelList');
       }}
       onPressHeaderLeft={() => {
         // Go back to the previous screen.
-        navigation.goBack();
+        props.navigation.goBack();
       }}
       onPressHeaderRight={() => {
         // Navigate to GroupChannelSettings key function.
-        navigation.navigate('GroupChannelSettings', {
+        props.navigation.navigate('GroupChannelSettings', {
           channelUrl: channel.url,
         });
       }}

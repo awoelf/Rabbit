@@ -73,6 +73,8 @@ const UserSettings = (props) => {
 
 
 
+  console.log(currentUser);
+
   return (
     <>
       <Header>
@@ -81,6 +83,7 @@ const UserSettings = (props) => {
 
       <Container>
         {/* TO DO: Click on image to change profile picture */}
+
         <TouchableOpacity 
         centerH 
         onPress={()=>pickImage()}>
