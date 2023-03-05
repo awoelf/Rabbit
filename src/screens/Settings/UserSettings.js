@@ -64,7 +64,7 @@ const UserSettings = (props) => {
           </Text>
         </TouchableOpacity>
 
-        <ListItem>
+        <ListItem onPress={() => props.navigation.navigate('UpdateUser')}>
           <View flex row centerV>
             <View marginR-s1>
               <Octicons name='person' size={rabbit.font_size} />
@@ -73,7 +73,7 @@ const UserSettings = (props) => {
           </View>
         </ListItem>
 
-        <ListItem>
+        <ListItem onPress={() => props.navigation.navigate('UpdateEmailPassword')}>
           <View flex row centerV>
             <View marginR-s1>
               <Octicons name='mail' size={rabbit.font_size} />

@@ -6,6 +6,8 @@ import { Text } from 'react-native-ui-lib';
 // Screens
 import UserSettings from '../screens/Settings/UserSettings';
 import ChangeUnits from '../screens/Settings/ChangeUnits';
+import UpdateEmailPassword from '../screens/Settings/UpdateEmailPassword';
+import UpdateUser from '../screens/Settings/UpdateUser';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,10 +25,21 @@ function MyStack() {
         name='ChangeUnits'
         component={ChangeUnits}
         options={{
-          headerShown: true,
-          header: (<>
-            <Text>Hi</Text>
-          </>)
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name='UpdateEmailPassword'
+        component={UpdateEmailPassword}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name='UpdateUser'
+        component={UpdateUser}
+        options={{
+          headerShown: false,
         }}
       />
     </Stack.Navigator>
