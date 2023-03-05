@@ -9,6 +9,7 @@ export const rabbit = {
   // Fonts
   font_shared: 'Mukta_400Regular',
   font_header1: 'CreteRound_400Regular',
+  font_news:'Newsreader_500Medium',
   
   // Sizes
   font_size: 16,

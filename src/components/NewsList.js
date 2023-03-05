@@ -22,19 +22,13 @@ const NewsList = ({ item }) => {
         <Card
             flex
             activeOpacity={1}
-            margin-20
+            margin-15
             onPress={handlePress}
             style={{ background: "#D9CCC1" }}
         >
             <View>
-
-                {/* <Image
-                    // style={styles.image}
-                    resizeMode="contain"
-                    source={{ uri: "https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png" }} /> */}
-                <Text style={{ padding: 5, fontSize: 15, color: 'gray', font: 'Mukta_400Regular' }}>{item.author}</Text>
-                <Text style={{ padding: 5, fontSize: 20, bold: 3 }}>{item.title}</Text>
-
+                <Text style={styles.newsHead}>{item.author}</Text>
+                <Text style={styles.news}>{item.title}</Text>
             </View>
 
         </Card>

@@ -39,6 +39,17 @@ export const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 100
+  },
+  newsHead:{
+    fontFamily: rabbit.font_news,
+    padding: 5, 
+    fontSize: 15, 
+    color:'gray'
+  },
+  news:{
+    fontFamily: rabbit.font_news,
+    padding: 5, 
+    fontSize: 20, 
   }
 });
 
