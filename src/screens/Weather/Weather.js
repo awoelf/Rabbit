@@ -65,9 +65,14 @@ const Weather = (props) => {
     <>
       <Header>
         <HeaderText>Weather</HeaderText>
-        <TouchableOpacity>
-            <Octicons name='sync' style={iconStyle.icon} />
-          </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            GetWeather();
+            GetAirPollution();
+          }}
+        >
+          <Octicons name='sync' style={iconStyle.icon} />
+        </TouchableOpacity>
       </Header>
       <ScrollView>
         <Container removeTopMargin={true}>
@@ -111,7 +116,8 @@ const Weather = (props) => {
                 </WeatherDetail>
                 <WeatherDetail name={'Wind speed'} iconName={'wind'}>
                   <Text style={styles.text}>
-                    {roundNumber(weatherData.current.wind_speed)} {units ? <Text>m/sec</Text> : <Text>mi/hr</Text>}
+                    {roundNumber(weatherData.current.wind_speed)}{' '}
+                    {units ? <Text>m/sec</Text> : <Text>mi/hr</Text>}
                   </Text>
                 </WeatherDetail>
                 <WeatherDetail name={'Clouds'} iconName={'cloud'} hideBorder={true}>

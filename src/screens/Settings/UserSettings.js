@@ -43,6 +43,8 @@ const UserSettings = (props) => {
     disconnect();
   };
 
+  console.log(currentUser);
+
   return (
     <>
       <Header>
@@ -51,9 +53,11 @@ const UserSettings = (props) => {
 
       <Container>
         {/* TO DO: Click on image to change profile picture */}
-        <TouchableOpacity centerH>
+        <TouchableOpacity centerH onPress={async () => {
+          // const updatedUserWithFile = await updateCurrentUserInfo('new photo', 'https://theawesomedaily.com/wp-content/uploads/2017/08/cute-cats-21.jpg')
+        }}>
           <View row>
-            <Image source={{ uri: currentUser.profileUrl }} style={styles.profileImage} />
+            <Image source={{ uri: currentUser.plainProfileUrl }} style={styles.profileImage} />
             <View absR>
               <Octicons name='pencil' size={rabbit.font_size} />
             </View>
