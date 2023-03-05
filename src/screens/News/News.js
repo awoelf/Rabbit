@@ -92,17 +92,17 @@ const News = () => {
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View >
-            <View row flex centerV>
+            <View >
               <TextField
                 migrate
-          
-                // style={styles.textField}
+                style={styles.textField}
                 placeholder={'Search'}
                 onChangeText={setSearchName}
               />
               <View>
                 <Button
-                  style={{ width: 10, backgroundColor: '#ECE5D8' }}
+                style={styles.button}
+                  //style={{ width: 10, backgroundColor: '#ECE5D8' }}
                   onPress={searchHandle}
                 >
                   <Octicons name='search' size={20} />

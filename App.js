@@ -1,7 +1,7 @@
 import React from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { useFonts, Mukta_400Regular, CreteRound_400Regular } from '@expo-google-fonts/dev';
+import { useFonts, Mukta_400Regular, CreteRound_400Regular, Newsreader_500Medium,IBMPlexSansHebrew_100Thin} from '@expo-google-fonts/dev';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { SENDBIRD_APP_ID } from '@env';
@@ -63,6 +63,7 @@ export default function App() {
   let [fontsLoaded] = useFonts({
     Mukta_400Regular,
     CreteRound_400Regular,
+    Newsreader_500Medium,
   });
 
   if (!fontsLoaded) {
@@ -74,7 +75,8 @@ export default function App() {
     <ApolloProvider client={client}>
       <UserProvider>
         <SendbirdUIKitContainer
-          appId={SENDBIRD_APP_ID}
+          //appId={SENDBIRD_APP_ID}
+          appId={'6CD12A00-3AA4-4F84-A4CB-C202BA86B06A'}
           chatOptions={{ localCacheStorage: AsyncStorage }}
           userProfile={{
             onCreateChannel: (channel) => {
