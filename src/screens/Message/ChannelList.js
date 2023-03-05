@@ -1,16 +1,15 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
 import { createGroupChannelListFragment } from '@sendbird/uikit-react-native';
-import { Text, View, Button, LoaderScreen } from 'react-native-ui-lib';
+import { Text, View, Button, LoaderScreen, TouchableOpacity } from 'react-native-ui-lib';
 import Octicons from '@expo/vector-icons/Octicons';
+
+import { iconStyle } from '../../styles/styles';
 
 // Components
 import Header from '../../components/Header';
 import HeaderText from '../../components/HeaderText';
-import SmallButton from '../../components/SmallButton';
 
-const ChannelList = () => {
-  const navigation = useNavigation();
+const ChannelList = (props) => {
   const GroupChannelListFragment = createGroupChannelListFragment({
     StatusLoading: () => {
       return <LoaderScreen message='Loading' />;
@@ -19,7 +18,14 @@ const ChannelList = () => {
       return (
         <Header>
           <HeaderText>Messages</HeaderText>
-          <SmallButton icon={'plus'} page={'CreateChannel'} />
+          <TouchableOpacity
+            onPress={() => {
+              props.navigation.navigate('CreateChannel');
+            }}
+
+          >
+            <Octicons name='plus' style={iconStyle.icon} />
+          </TouchableOpacity>
         </Header>
       );
     },
