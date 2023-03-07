@@ -3,7 +3,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/awoelf/rabbit)
 ![GitHub last commit](https://img.shields.io/github/last-commit/awoelf/rabbit)
 
-![rabbit-logo](https://github.com/awoelf/Rabbit)
+[![rabbit-logo]](https://github.com/awoelf/Rabbit)
 
 ## About
 
