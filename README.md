@@ -3,7 +3,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/awoelf/rabbit)
 ![GitHub last commit](https://img.shields.io/github/last-commit/awoelf/rabbit)
 
-![rabbit-logo]
+![rabbit-logo](https://github.com/awoelf/Rabbit)
 
 ## About
 
@@ -46,25 +46,27 @@ Distributed unter the MIT license. See `LICENSE.txt` for more information
 ## Contact
 
 Yeon Seo
+<br>
 <a href='mailto:rogseo@gmail.com'>
-  <img src='./assets/email.svg' width='20'/>
+  <img src='./assets/email.svg' width='30'/>
 </a>
 <a href='https://www.linkedin.com/in/seo-yeon-6267b3158/'>
-  <img src='./assets/linkedin.svg' width='20'/>
+  <img src='./assets/linkedin.svg' width='30'/>
 </a>
 <a href='https://github.com/rogseo'>
-  <img src='./assets/github.svg' width='20'/>
+  <img src='./assets/github.svg' width='30'/>
 </a>
 
 Alexis Woelffer
+<br>
 <a href='mailto:awoelf@outlook.com'>
-  <img src='./assets/email.svg' width='20'/>
+  <img src='./assets/email.svg' width='30'/>
 </a>
 <a href='https://linkedin.com/in/alexis-w-dev'>
-  <img src='./assets/linkedin.svg' width='20'/>
+  <img src='./assets/linkedin.svg' width='30'/>
 </a>
 <a href='https://github.com/awoelf'>
-  <img src='./assets/github.svg' width='20'/>
+  <img src='./assets/github.svg' width='30'/>
 </a>
 
 <!-- Links and images -->
