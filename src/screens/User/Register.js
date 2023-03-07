@@ -64,7 +64,7 @@ export default function Register(props) {
         <TextField
           migrate
           style={styles.textField}
-          placeholder={'USER_ID'}
+          placeholder={'User id'}
           name={'firstName'}
           type={'firstName'}
           id={'firstName'}
@@ -73,7 +73,7 @@ export default function Register(props) {
         <TextField
           migrate
           style={styles.textField}
-          placeholder={'Nick Name'}
+          placeholder={'Nickname'}
           name={'lastName'}
           type={'lastName'}
           id={'lastName'}
@@ -101,11 +101,12 @@ export default function Register(props) {
       </View>
       <View flex-3 centerH bottom>
         <Button
-          label={'Sign Up'}
           style={styles.button}
           disabled={!email || !password || !firstName || !lastName}
           onPress={registerHandler}
-        />
+        >
+          <Text style={styles.text}>Sign up</Text>
+        </Button>
       </View>
       <View flex-3 centerH bottom>
         <Text style={styles.text}>Already have an account?</Text>
