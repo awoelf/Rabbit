@@ -6,6 +6,7 @@ export const rabbit = {
   link_color: '#900',
   box_color: '#E2DAD0',
   pressed_color: '#BD9A58',
+  light_text_color: 'rgba(0, 0, 0, 0.5)',
 
   // Fonts
   font_shared: 'Mukta_400Regular',
@@ -199,7 +200,7 @@ export const rabbitMessagePalette = {
           },
         },
       },
-      placeholder: { default: { none: { content: 'rgba(0,0,0,0.38)', highlight: rabbit.box_color } } },
+      placeholder: { default: { none: { content: 'rgba(0,0,0,0.38)', highlight: rabbit.accent_color } } },
       profileCard: {
         default: {
           none: {
