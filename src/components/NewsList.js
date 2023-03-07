@@ -5,6 +5,7 @@ import React, { useCallback } from 'react';
 import { styles, cardStyle } from '../styles/styles';
 
 import Octicons from '@expo/vector-icons/Octicons';
+import { rabbit } from '../styles/palette';
 
 const NewsList = ({ item }) => {
   const handlePress = useCallback(async () => {
@@ -32,7 +33,7 @@ const NewsList = ({ item }) => {
             ) : null}
           </View>
           <View marginH-s4>
-            <Octicons name='link-external' color={'gray'} size={15} />
+            <Octicons name='link-external' color={rabbit.light_text_color} size={15} />
           </View>
         </View>
         <View>

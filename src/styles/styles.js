@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
     fontFamily: rabbit.font_news,
     paddingHorizontal: 8,
     fontSize: 15,
-    color: 'gray',
+    color: rabbit.light_text_color,
   },
   news: {
     fontFamily: rabbit.font_news,
