@@ -161,7 +161,7 @@ const Weather = (props) => {
               </Card>
             </>
           ) : (
-            <LoaderScreen />
+            <LoaderScreen loaderColor={rabbit.accent_color}/>
           )}
         </Container>
       </ScrollView>

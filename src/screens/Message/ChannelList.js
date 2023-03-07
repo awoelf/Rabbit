@@ -4,6 +4,7 @@ import { Text, View, Button, LoaderScreen, TouchableOpacity } from 'react-native
 import Octicons from '@expo/vector-icons/Octicons';
 
 import { iconStyle } from '../../styles/styles';
+import { rabbit } from '../../styles/palette';
 
 // Components
 import Header from '../../components/Header';
@@ -12,7 +13,7 @@ import HeaderText from '../../components/HeaderText';
 const ChannelList = (props) => {
   const GroupChannelListFragment = createGroupChannelListFragment({
     StatusLoading: () => {
-      return <LoaderScreen message='Loading' />;
+      return <LoaderScreen loaderColor={rabbit.accent_color}/>;
     },
     Header: () => {
       return (

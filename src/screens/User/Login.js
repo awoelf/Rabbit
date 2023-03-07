@@ -71,7 +71,7 @@ export default function Login(props) {
           id={'pwd'}
           onChangeText={setPassword}
         />
-        <View marginH-30 centerH center>
+        <View center>
           <Button
             disabled={!email || !password}
             style={styles.button}
