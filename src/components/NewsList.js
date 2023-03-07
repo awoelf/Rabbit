@@ -1,5 +1,5 @@
 import { Text, Card, View, Image } from 'react-native-ui-lib';
-import { Linking, ScrollView } from 'react-native';
+import { Linking, Dimensions } from 'react-native';
 import React, { useCallback } from 'react';
 
 import { styles, cardStyle } from '../styles/styles';
@@ -19,14 +19,16 @@ const NewsList = ({ item }) => {
     }
   }, [item.url]);
 
+  const newsHeaderWidth = Dimensions.get('window').width * .7;
+
   return (
     <Card flex activeOpacity={1} onPress={handlePress} style={cardStyle}>
       <View marginV-s2>
         <View marginB-s2 row centerV spread>
-          <View>
-            {item.author ? <Text style={styles.newsHead}>{item.author}</Text> : null}
+          <View width={newsHeaderWidth}>
+            {item.author ? <Text style={styles.newsHead} numberOfLines={1}>{item.author}</Text> : null}
             {item.author !== item.source.name ? (
-              <Text style={styles.newsHead}>{item.source.name}</Text>
+              <Text style={styles.newsHead} numberOfLines={1}>{item.source.name}</Text>
             ) : null}
           </View>
           <View marginH-s4>

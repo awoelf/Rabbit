@@ -153,7 +153,7 @@ export const rabbitMessagePalette = {
         underline: {
           active: {
             background: 'transparent',
-            highlight: rabbit.accent_color,
+            highlight: rabbit.box_color,
             placeholder: 'rgba(0,0,0,0.38)',
             text: 'rgba(0,0,0,0.88)',
           },
@@ -199,7 +199,7 @@ export const rabbitMessagePalette = {
           },
         },
       },
-      placeholder: { default: { none: { content: 'rgba(0,0,0,0.38)', highlight: rabbit.accent_color } } },
+      placeholder: { default: { none: { content: 'rgba(0,0,0,0.38)', highlight: rabbit.box_color } } },
       profileCard: {
         default: {
           none: {

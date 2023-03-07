@@ -34,6 +34,10 @@ export const rabbitMessageTheme = createTheme({
       fontFamily: rabbit.font_shared,
       fontSize: rabbit.font_size,
       lineHeight: 24,
+    },
+    h1: {
+      fontFamily: rabbit.font_shared,
+      fontSize: rabbit.font_size_header1
     }
   },
 });
