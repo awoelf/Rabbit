@@ -100,7 +100,7 @@ const News = () => {
                 onPress={searchHandle}
                 size={Button.sizes.xSmall}
               >
-                <Octicons name='search' size={rabbit.font_size}/>
+                <Octicons name='search' style={iconStyle.icon}/>
               </Button>
             </View>
           </View>
