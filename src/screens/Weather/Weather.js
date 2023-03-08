@@ -25,14 +25,16 @@ const Weather = (props) => {
   const userContext = useUserContext();
   const { latitude, longitude } = userContext.stateLocation.data.location.coords;
   const city = userContext.stateLocation.data.geocode.city;
-  const units = userContext.stateUnits.units ? 'Metric' : 'Imperial';
+  const usingMetric = userContext.stateUnits.units;
   const isFocused = useIsFocused();
 
   const GetWeather = async () => {
     try {
       const response = await axios({
         method: 'get',
-        url: `${WEATHER_URL}?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=${units}&appid=${WEATHER_API_KEY}`,
+        url: `${WEATHER_URL}?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=${
+          usingMetric ? 'metric' : 'imperial'
+        }&appid=${WEATHER_API_KEY}`,
         responseType: 'json',
       });
 
@@ -65,9 +67,14 @@ const Weather = (props) => {
     <>
       <Header>
         <HeaderText>Weather</HeaderText>
-        <TouchableOpacity>
-            <Octicons name='sync' style={iconStyle.icon} />
-          </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            GetWeather();
+            GetAirPollution();
+          }}
+        >
+          <Octicons name='sync' style={iconStyle.icon} />
+        </TouchableOpacity>
       </Header>
       <ScrollView>
         <Container removeTopMargin={true}>
@@ -82,7 +89,7 @@ const Weather = (props) => {
                     size={100}
                   />
                   <Text style={styles.header1}>
-                    {weatherData.current.temp}°{units ? <Text>C</Text> : <Text>F</Text>}
+                    {weatherData.current.temp}°{usingMetric ? <Text>C</Text> : <Text>F</Text>}
                   </Text>
                 </View>
                 <Text style={styles.header2}>
@@ -111,7 +118,8 @@ const Weather = (props) => {
                 </WeatherDetail>
                 <WeatherDetail name={'Wind speed'} iconName={'wind'}>
                   <Text style={styles.text}>
-                    {roundNumber(weatherData.current.wind_speed)} {units ? <Text>m/sec</Text> : <Text>mi/hr</Text>}
+                    {roundNumber(weatherData.current.wind_speed)}{' '}
+                    {usingMetric ? <Text>m/sec</Text> : <Text>mi/hr</Text>}
                   </Text>
                 </WeatherDetail>
                 <WeatherDetail name={'Clouds'} iconName={'cloud'} hideBorder={true}>
@@ -153,7 +161,7 @@ const Weather = (props) => {
               </Card>
             </>
           ) : (
-            <LoaderScreen />
+            <LoaderScreen loaderColor={rabbit.accent_color}/>
           )}
         </Container>
       </ScrollView>

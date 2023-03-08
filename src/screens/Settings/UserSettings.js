@@ -1,4 +1,5 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
+import axios from 'axios';
 import {
   Text,
   Image,
@@ -8,26 +9,27 @@ import {
   TouchableOpacity,
   TextField,
 } from 'react-native-ui-lib';
-import Container from '../../components/Container';
-import Header from '../../components/Header';
-import HeaderText from '../../components/HeaderText';
 import Octicons from '@expo/vector-icons/Octicons';
-
 import { styles, cardStyle } from '../../styles/styles';
 import { rabbit } from '../../styles/palette';
-
 import { useConnection, useSendbirdChat } from '@sendbird/uikit-react-native';
 
 // User Context
 import { useUserContext } from '../../utils/UserContext';
 import reducer from '../../utils/reducers';
-
 import auth from '../../utils/auth';
+
+import Container from '../../components/Container';
+import Header from '../../components/Header';
+import HeaderText from '../../components/HeaderText';
+
+import * as ImagePicker from 'expo-image-picker';
 
 const UserSettings = (props) => {
   const { currentUser, updateCurrentUserInfo } = useSendbirdChat();
   const userContext = useUserContext();
   const { disconnect } = useConnection();
+  const [image, setImage] = useState(null);
 
   const logout = async () => {
     //Delete JWT token from LocalStorage
@@ -43,6 +45,25 @@ const UserSettings = (props) => {
     disconnect();
   };
 
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+      console.log(image);
+      const updatedUserWithUrl = await updateCurrentUserInfo(currentUser.nickname, image);
+      console.log(updatedUserWithUrl);
+      console.log('here', currentUser.plainProfileUrl);
+    }
+  };
+
+
   return (
     <>
       <Header>
@@ -50,10 +71,9 @@ const UserSettings = (props) => {
       </Header>
 
       <Container>
-        {/* TO DO: Click on image to change profile picture */}
-        <TouchableOpacity centerH>
+        <TouchableOpacity centerH onPress={() => pickImage()}>
           <View row>
-            <Image source={{ uri: currentUser.profileUrl }} style={styles.profileImage} />
+            <Image source={{ uri: currentUser.plainProfileUrl }} style={styles.profileImage} />
             <View absR>
               <Octicons name='pencil' size={rabbit.font_size} />
             </View>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
 import {
   useSendbirdChat,
   createGroupChannelListFragment,
@@ -13,8 +12,7 @@ import { styles, iconStyle, headerStyle } from '../../styles/styles';
 
 const GroupChannelCreateFragment = createGroupChannelCreateFragment();
 
-const CreateChannel = () => {
-  const navigation = useNavigation();
+const CreateChannel = (props) => {
   // const GroupChannelCreateFragment = createGroupChannelCreateFragment({
   //   Header: () => {
   //     return (
@@ -46,14 +44,14 @@ const CreateChannel = () => {
     <GroupChannelCreateFragment
       onCreateChannel={async (channel) => {
         // Navigate to GroupChannel key function.
-        navigation.navigate("Channel", {
+        props.navigation.navigate("Channel", {
           channelUrl: channel.url,
         });
       }}
  
       onPressHeaderLeft={() => {
         // Go back to the previous screen.
-        navigation.goBack();
+        props.navigation.goBack();
       }}
     />
   );
