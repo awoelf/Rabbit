@@ -24,13 +24,11 @@ import reducer from '../../utils/reducers';
 
 import auth from '../../utils/auth';
 
-import * as ImagePicker from 'expo-image-picker';
 
 const UserSettings = (props) => {
   const { currentUser, updateCurrentUserInfo } = useSendbirdChat();
   const userContext = useUserContext();
   const { disconnect } = useConnection();
-  const [image, setImage] = useState(null);
 
   const logout = async () => {
     //Delete JWT token from LocalStorage
@@ -47,29 +45,7 @@ const UserSettings = (props) => {
   };
  
 
-  const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-
-    if (!result.canceled) {
-    
-      setImage(result.assets[0].uri);
-      console.log(image);
-
-      const updatedUserWithUrl = await updateCurrentUserInfo(currentUser.nickname, image);
-      console.log(updatedUserWithUrl);
-      console.log("here",currentUser.plainProfileUrl)
-      
-
-    }
-    
-  };
+  
 
 
 
@@ -83,10 +59,9 @@ const UserSettings = (props) => {
         {/* TO DO: Click on image to change profile picture */}
         <TouchableOpacity 
         centerH 
-        onPress={()=>pickImage()}>
+        onPress={()=>props.navigation.navigate('UpdateUser')}>
           <View row>
-            {/* <Image source={{ uri: currentUser.plainProfileUrl }} style={styles.profileImage} /> */}
-            <Image source={{ uri: image }} style={styles.profileImage} />
+            <Image source={{ uri: currentUser.plainProfileUrl }} style={styles.profileImage} />
             <View absR >
               <Octicons name='pencil' size={rabbit.font_size} />
             </View>
@@ -102,7 +77,7 @@ const UserSettings = (props) => {
             <View marginR-s1>
               <Octicons name='person' size={rabbit.font_size} />
             </View>
-            <Text style={styles.text}>Update user profile</Text>
+            <Text style={styles.text}>Change Avatar</Text>
           </View>
         </ListItem>
 

@@ -29,14 +29,14 @@ const ChangeUnits = (props) => {
       <Container>
         <View row spread>
           <Text>Enable metric units </Text>
-          <Switch value={userContext.stateUnits.units} onValueChange={() => {
+          <Text>°F</Text><Switch value={userContext.stateUnits.units} onValueChange={() => {
             userContext.dispatchUnits({
               type: 'TOGGLE_UNITS',
               payload: {
                 units: !userContext.stateUnits.units
               }
             })
-          }} />
+          }} /><Text>°C</Text>
         </View>
       </Container>
     </>
