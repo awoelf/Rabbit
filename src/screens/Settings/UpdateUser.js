@@ -11,7 +11,6 @@ import HeaderText from '../../components/HeaderText';
 import Container from '../../components/Container';
 
 import { useSendbirdChat } from '@sendbird/uikit-react-native';
-import AvatarCard from '../../components/AvatarCard';
 
 
 
@@ -76,6 +75,7 @@ const UpdateUser = (props) => {
   const changeAvatar = async () => {
     const updatedUserWithUrl = await updateCurrentUserInfo(currentUser.nickname, value);
     console.log(updatedUserWithUrl);
+    props.navigation.goBack();
   }
 
 
@@ -98,8 +98,10 @@ const UpdateUser = (props) => {
         <View marginT-30 marginH-20 flex-1>
 
           <RadioGroup flex-1 initialValue={value} onValueChange={newValue => setValue(newValue)} value={value}>
-            <View margin-10 padding-5 style={{flexDirection: 'row',
-    flexWrap: 'wrap'}}>
+            <View margin-10 padding-5 style={{
+              flexDirection: 'row',
+              flexWrap: 'wrap'
+            }}>
               {
                 avatarStyles.map((style) => {
                   const uri = `https://avatars.dicebear.com/api/avataaars/${currentUser.nickname}.png?${style.options}=${style.name}`
@@ -107,7 +109,7 @@ const UpdateUser = (props) => {
                   return (
                     <View >
                       {/* <AvatarCard uri={style} /> */}
-                      <Image source={{ uri: uri }} style={styles.profileImage} />
+                      <Image key={uri} source={{ uri: uri }} style={styles.profileImage} />
                       <RadioButton value={uri} label={style.name} />
                     </View>
                   )

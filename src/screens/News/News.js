@@ -112,7 +112,7 @@ const News = () => {
         {newsData ? (
           <Container removeTopMargin={true}>
             {newsData.articles.map((article) => {
-              return <NewsList item={article} key={article.publishedAt} />;
+              return <NewsList item={article} key={article.title} />;
             })}
           </Container>
         ) : (
