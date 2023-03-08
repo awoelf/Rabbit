@@ -47,10 +47,7 @@ export default function Register(props) {
       console.log(mutationResponse.data.addUser.user)
       //connect sendbird
       connect(mutationResponse.data.addUser.user.firstName, { nickname: mutationResponse.data.addUser.user.lastName });
-      //Update profile url based on nickname
-      const updatedUserWithUrl = await updateCurrentUserInfo(currentUser.nickname, `https://avatars.dicebear.com/api/avataaars/${mutationResponse.data.addUser.user.lastName}.svg`);
-      console.log(updatedUserWithUrl);
-      
+     
 
       // props.navigation.navigate('Home');
     } catch (e) {
