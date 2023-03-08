@@ -62,7 +62,7 @@ const News = () => {
     const response = await axios({
       method: 'get',
       //url: `${NEWS_URL}?country=${countryCode}&apiKey=${NEWS_API_KEY}`,
-      url: `https://newsapi.org/v2/everything?q=${searchName}&sortBy=popularity&apiKey=5d33573d86754a639d8a5f2ac1455a70`,
+      url: `https://newsapi.org/v2/everything?q=${searchName}&sortBy=popularity&pageSize=20&apiKey=5d33573d86754a639d8a5f2ac1455a70`,
       responseType: 'json',
     });
 
@@ -112,7 +112,7 @@ const News = () => {
         {newsData ? (
           <Container removeTopMargin={true}>
             {newsData.articles.map((article) => {
-              return <NewsList item={article} key={article.publishedAt} />;
+              return <NewsList item={article} key={article.title} />;
             })}
           </Container>
         ) : (
