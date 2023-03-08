@@ -9,7 +9,7 @@ import decode from 'jwt-decode';
 import { styles } from '../../styles/styles';
 
 import { useConnection } from '@sendbird/uikit-react-native';
-import { useUserContext } from "../../utils/UserContext"
+import { useUserContext } from '../../utils/UserContext';
 
 import { useSendbirdChat } from '@sendbird/uikit-react-native';
 
@@ -26,7 +26,6 @@ export default function Register(props) {
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
   const registerHandler = async (event) => {
-
     if (email === '' || firstName === '' || lastName === '' || password === '') {
       setError('Please fill in the form correctly');
     }
@@ -41,13 +40,14 @@ export default function Register(props) {
       userContext.dispatch({
         type: 'SET_CURRENT_USER',
         payload: {
-          user: decode(token)
-        }
-      })
-      console.log(mutationResponse.data.addUser.user)
+          user: decode(token),
+        },
+      });
+      console.log(mutationResponse.data.addUser.user);
       //connect sendbird
-      connect(mutationResponse.data.addUser.user.firstName, { nickname: mutationResponse.data.addUser.user.lastName });
-     
+      connect(mutationResponse.data.addUser.user.firstName, {
+        nickname: mutationResponse.data.addUser.user.lastName,
+      });
 
       // props.navigation.navigate('Home');
     } catch (e) {
@@ -57,11 +57,11 @@ export default function Register(props) {
 
   return (
     <View flex-1>
-      <View row center flex-2>
+      <View row center flex-1>
         <Text style={styles.header1}>Rabbit</Text>
         <Icon source={require('../../assets/icon.png')} size={35} />
       </View>
-      <View marginH-30 flex-1>
+      <View marginH-30 flex-2>
         <Text style={styles.text} center>
           Create a new Rabbit account
         </Text>
@@ -101,22 +101,21 @@ export default function Register(props) {
           id={'pwd'}
           onChangeText={setPassword}
         />
-
-      </View>
-      <View flex-3 centerH bottom>
-        <Button
-          style={styles.button}
-          disabled={!email || !password || !firstName || !lastName}
-          onPress={registerHandler}
-        >
-          <Text style={styles.text}>Sign up</Text>
-        </Button>
-      </View>
-      <View flex-3 centerH bottom>
-        <Text style={styles.text}>Already have an account?</Text>
-        <TouchableOpacity onPress={() => props.navigation.navigate('Login')}>
-          <Text style={styles.link}>Log In</Text>
-        </TouchableOpacity>
+        <View centerH>
+          <Button
+            style={styles.button}
+            disabled={!email || !password || !firstName || !lastName}
+            onPress={() => registerHandler()}
+          >
+            <Text style={styles.text}>Sign up</Text>
+          </Button>
+        </View>
+        <View centerH bottom flex-1>
+          <Text style={styles.text}>Already have an account?</Text>
+          <TouchableOpacity onPress={() => props.navigation.navigate('Login')}>
+            <Text style={styles.link}>Log In</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
