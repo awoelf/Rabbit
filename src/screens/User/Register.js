@@ -11,6 +11,8 @@ import { styles } from '../../styles/styles';
 import { useConnection } from '@sendbird/uikit-react-native';
 import { useUserContext } from "../../utils/UserContext"
 
+import { useSendbirdChat } from '@sendbird/uikit-react-native';
+
 export default function Register(props) {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -18,6 +20,7 @@ export default function Register(props) {
   const [password, setPassword] = useState('');
 
   const { connect } = useConnection();
+  const { currentUser, updateCurrentUserInfo } = useSendbirdChat();
   const userContext = useUserContext();
 
   const [addUser, { error, data }] = useMutation(ADD_USER);
@@ -41,9 +44,10 @@ export default function Register(props) {
           user: decode(token)
         }
       })
-
-      connect(mutationResponse.data.login.user.firstName, { nickname: mutationResponse.data.login.user.lastName });
-      
+      console.log(mutationResponse.data.addUser.user)
+      //connect sendbird
+      connect(mutationResponse.data.addUser.user.firstName, { nickname: mutationResponse.data.addUser.user.lastName });
+     
 
       // props.navigation.navigate('Home');
     } catch (e) {

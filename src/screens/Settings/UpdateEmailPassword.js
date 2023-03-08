@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { TouchableOpacity, TextField, View, Text, Dialog, Button } from 'react-native-ui-lib';
+import { TouchableOpacity, TextField, View, Text, TextField, Button, Dialog, Button } from 'react-native-ui-lib';
 import Octicons from '@expo/vector-icons/Octicons';
-import { useMutation } from '@apollo/client';
+import React, {useState } from 'react';import { useMutation } from '@apollo/client';
 import { UPDATE_USER } from '../../utils/mutations';
 import { useUserContext } from '../../utils/UserContext';
 
@@ -12,33 +12,38 @@ import Header from '../../components/Header';
 import HeaderText from '../../components/HeaderText';
 import Container from '../../components/Container';
 
-import { useSendbirdChat } from '@sendbird/uikit-react-native';
-
+import { useUserContext } from '../../utils/UserContext';
+import { useMutation } from '@apollo/client';
+import { UPDATE_USER } from '../../utils/mutations';
 
 const UpdateEmailPassword = (props) => {
-  const { currentUser } = useSendbirdChat();
-  const userContext = useUserContext();
-  // const [newEmail, setNewEmail] = useState('');
-  const [userCredentials, setUserCredentials] = useState({
-    
-  })
-  const [showDialog, setShowDialog] = useState(false);
-  const [incorrectPass, setIncorrectPass] = useState(false);
+  const [email, setEmail] = useState(null);
+  const [password1, setPassword1] = useState(null);
+  const [password2, setPassword2] = useState(null);
   const [updateUser, { error, data }] = useMutation(UPDATE_USER);
 
-  const handleUpdateEmail = async () => {
+  const userContext = useUserContext();
+
+
+
+  const submitHandler = async (event) => {
     try {
-      const mutationResponse = await updateUser({
-        variables: { newEmail: newEmail }
-      })
-      setShowDialog(true);
-      console.log(mutationResponse);
-    } catch (error) {
-      console.log(error);
+      console.log("click")
+      if(password1===password2){
+        console.log("correct password")
+        const mutationResponse = await updateUser({
+          variables: { email: email},
+        });
+        console.log(mutationResponse);
+
+      }else{
+        console.log("confirm password again");
+      }
+
+    } catch (err){
+      console.log(err)
     }
-  };
-
-
+  }
 
   return (
     <>
@@ -55,69 +60,46 @@ const UpdateEmailPassword = (props) => {
           <HeaderText>Update Email and Password</HeaderText>
         </View>
       </Header>
-      <Container>
-        <Text style={styles.text}>Email</Text>
-        <TextField
-          migrate
-          style={styles.textField}
-          id={'email'}
-          placeholder={'New email'}
-          onChangeText={setNewEmail}
-        />
-        <Text style={styles.text}>Password</Text>
-        <TextField
-          migrate
-          style={styles.textField}
-          id={'password'}
-          secureTextEntry={true}
-          placeholder={'New password'}
-          onChangeText={setNewEmail}
-        />
-        <Text style={styles.text}>Nickname</Text>
-        <TextField
-          migrate
-          style={styles.textField}
-          id={'nickname'}
-          placeholder={'New nickname'}
-          onChangeText={setNewEmail}
-        />
-        <Text style={styles.text}>Current password</Text>
-        <TextField
-          migrate
-          style={styles.textField}
-          id={'nickname'}
-          secureTextEntry={true}
-          placeholder={'Password'}
-          onChangeText={setNewEmail}
-        />
-        <View bottom center>
+      <View marginT-30 marginH-20 flex-1>
+        
+          <TextField
+            migrate
+            style={styles.textField}
+            placeholder={'Update Email'}
+            name={'email'}
+            type={'email'}
+            id={'email'}
+            onChangeText={setEmail}
+          />
+          <TextField
+            migrate
+            style={styles.textField}
+            placeholder={'Password'}
+            name={'password'}
+            secureTextEntry={true}
+            id={'pwd'}
+            onChangeText={setPassword1}
+          />
+          <TextField
+            migrate
+            style={styles.textField}
+            placeholder={'Confirm Password'}
+            name={'confirm_password'}
+            secureTextEntry={true}
+            id={'confirm_pwd'}
+            onChangeText={setPassword2}
+          />
           <Button
-            style={styles.button}
-            onPress={() => {
-              handleUpdateEmail();
-            }}
-          >
-            <Text style={styles.text}>Save</Text>
-          </Button>
-        </View>
-      </Container>
+          disabled={!email || !password1 || !password2}
+          style={styles.button}
+          onPress={submitHandler}
+          center
+        >
+          <Text style={styles.text}>Submit</Text>
+        </Button>
 
-      <Dialog
-        visible={showDialog}
-        onDismiss={() => {
-          setShowDialog(false);
-        }}
-      >
-        <Text center style={styles.text}>User credentials successfully changed!</Text>
-      </Dialog>
-      <Dialog
-        visible={incorrectPass}
-        onDismiss={() => {
-          setIncorrectPass(false);
-        }}
-      >
-        <Text center style={styles.text}>Incorrect password. Please try again.</Text>
-      </Dialog>
+       
+      </View>
     </>
   );
 };
