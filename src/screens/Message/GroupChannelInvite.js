@@ -3,26 +3,27 @@ import { useSendbirdChat, createGroupChannelInviteFragment } from '@sendbird/uik
 import { useGroupChannel } from '@sendbird/uikit-chat-hooks';
 
 const GroupChannelInviteFragment = createGroupChannelInviteFragment();
-const GroupChannelInvite = ({route,navigation}) => {
+const GroupChannelInvite = ({ route, navigation }) => {
+  const { channelUrl } = route.params;
+  const { sdk } = useSendbirdChat();
+  const { channel } = useGroupChannel(sdk, channelUrl);
+  if (!channel) return null;
 
-    const {channelUrl}=route.params;
-    const { sdk } = useSendbirdChat();
-    const { channel } = useGroupChannel(sdk, channelUrl);
-    if (!channel) return null;
+  const navigateToBack = () => {};
+  const navigateToGroupChannel = () => {};
 
-    const navigateToBack = () => {};
-    const navigateToGroupChannel = () => {};
-
-    return (
-        <GroupChannelInviteFragment
-            channel={channel}
-            onPressHeaderLeft={() => {navigation.goBack();}}
-            onInviteMembers={()=>{
-                navigation.navigate('Channel', {
-                    channelUrl: channelUrl,
-                  });
-            }}
-        />
-    );
+  return (
+    <GroupChannelInviteFragment
+      channel={channel}
+      onPressHeaderLeft={() => {
+        navigation.goBack();
+      }}
+      onInviteMembers={() => {
+        navigation.navigate('Channel', {
+          channelUrl: channelUrl,
+        });
+      }}
+    />
+  );
 };
 export default GroupChannelInvite;

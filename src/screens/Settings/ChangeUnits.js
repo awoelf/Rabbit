@@ -27,16 +27,20 @@ const ChangeUnits = (props) => {
         </View>
       </Header>
       <Container>
-        <View row spread>
-          <Text>Enable metric units </Text>
-          <Text>°F</Text><Switch value={userContext.stateUnits.units} onValueChange={() => {
-            userContext.dispatchUnits({
-              type: 'TOGGLE_UNITS',
-              payload: {
-                units: !userContext.stateUnits.units
-              }
-            })
-          }} /><Text>°C</Text>
+        <View row spread centerV>
+          <Text style={styles.text}>Enable metric units</Text>
+          <Switch
+            value={userContext.stateUnits.units}
+            onValueChange={() => {
+              userContext.dispatchUnits({
+                type: 'TOGGLE_UNITS',
+                payload: {
+                  units: !userContext.stateUnits.units,
+                },
+              });
+            }}
+            onColor={rabbit.accent_color}
+          />
         </View>
       </Container>
     </>

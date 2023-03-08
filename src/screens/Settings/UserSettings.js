@@ -1,4 +1,5 @@
 import React, { useReducer, useState } from 'react';
+import axios from 'axios';
 import {
   Text,
   Image,
@@ -8,21 +9,19 @@ import {
   TouchableOpacity,
   TextField,
 } from 'react-native-ui-lib';
-import Container from '../../components/Container';
-import Header from '../../components/Header';
-import HeaderText from '../../components/HeaderText';
 import Octicons from '@expo/vector-icons/Octicons';
-
 import { styles, cardStyle } from '../../styles/styles';
 import { rabbit } from '../../styles/palette';
-
 import { useConnection, useSendbirdChat } from '@sendbird/uikit-react-native';
 
 // User Context
 import { useUserContext } from '../../utils/UserContext';
 import reducer from '../../utils/reducers';
-
 import auth from '../../utils/auth';
+
+import Container from '../../components/Container';
+import Header from '../../components/Header';
+import HeaderText from '../../components/HeaderText';
 
 
 const UserSettings = (props) => {

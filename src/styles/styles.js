@@ -38,19 +38,20 @@ export const styles = StyleSheet.create({
   profileImage: {
     width: 100,
     height: 100,
-    borderRadius: 100
+    borderRadius: 100,
+    backgroundColor: rabbit.box_color
   },
-  newsHead:{
+  newsHead: {
     fontFamily: rabbit.font_news,
-    padding: 5, 
-    fontSize: 15, 
-    color:'gray'
+    paddingHorizontal: 8,
+    fontSize: 15,
+    color: rabbit.light_text_color,
   },
-  news:{
+  news: {
     fontFamily: rabbit.font_news,
-    padding: 5, 
-    fontSize: 20, 
-  }
+    paddingHorizontal: 8,
+    fontSize: 20,
+  },
 });
 
 // Styles for the bottom tab bar
@@ -84,18 +85,18 @@ export const containerStyle = StyleSheet.create({
 export const weatherStyle = StyleSheet.create({
   borderBottom: {
     borderBottomColor: 'black',
-    borderBottomWidth: .5
+    borderBottomWidth: 0.5,
   },
   borderRight: {
     borderRightColor: 'black',
-    borderRightWidth: .5
+    borderRightWidth: 0.5,
   },
   forecast: {
     flexDirection: 'row',
-  }
-})
+  },
+});
 
 export const cardStyle = StyleSheet.create({
   backgroundColor: rabbit.box_color,
   marginVertical: rabbit.card_margin_vertical,
-})
+});
