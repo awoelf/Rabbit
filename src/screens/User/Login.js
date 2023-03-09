@@ -26,6 +26,7 @@ export default function Login(props) {
       });
       const token = mutationResponse.data.login.token;
       auth.login(token);
+      console.log(token);
 
       userContext.dispatch({
         type: 'SET_CURRENT_USER',
@@ -58,7 +59,7 @@ export default function Login(props) {
           style={styles.textField}
           placeholder={'Email'}
           name={'email'}
-          type={'email'}
+          keyboardType="email-address"
           id={'email'}
           onChangeText={setEmail}
         />

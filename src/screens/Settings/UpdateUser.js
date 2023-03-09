@@ -1,4 +1,14 @@
-import { TouchableOpacity, Switch, View, Text, Image, Button, RadioGroup, RadioButton, Avatar } from 'react-native-ui-lib';
+import {
+  TouchableOpacity,
+  Switch,
+  View,
+  Text,
+  Image,
+  Button,
+  RadioGroup,
+  RadioButton,
+  Avatar,
+} from 'react-native-ui-lib';
 import Octicons from '@expo/vector-icons/Octicons';
 import { ScrollView } from "react-native"
 import { useState, useEffect } from 'react';
@@ -143,7 +153,7 @@ const UpdateUser = (props) => {
           >
             <Octicons name='arrow-left' style={iconStyle.icon} />
           </TouchableOpacity>
-          <HeaderText>Update User Profile</HeaderText>
+          <HeaderText>Change Avatar</HeaderText>
         </View>
       </Header>
 
@@ -261,7 +271,6 @@ const UpdateUser = (props) => {
 
         </View>
       </ScrollView>
-
     </>
   );
 };
