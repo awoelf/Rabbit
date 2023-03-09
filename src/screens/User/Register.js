@@ -88,7 +88,7 @@ export default function Register(props) {
           style={styles.textField}
           placeholder={'Email'}
           name={'email'}
-          type={'email'}
+          keyboardType="email-address"
           id={'email'}
           onChangeText={setEmail}
         />

@@ -17,11 +17,11 @@ import Container from '../../components/Container';
 
 const UpdateEmailPassword = (props) => {
   const [newCredentials, setNewCredentials] = useState({
-    newEmail: '',
-    newId: '',
-    newNickname: '',
-    newPassword: '',
-    currentPassword: '',
+    newEmail: null,
+    newId: null,
+    newNickname: null,
+    newPassword: null,
+    currentPassword: null,
   });
   const [showSuccess, setShowSuccess] = useState(false);
   const [showFail, setShowFail] = useState(false);
@@ -40,16 +40,18 @@ const UpdateEmailPassword = (props) => {
         variables: { ...newCredentials },
       });
 
-      const token = data.updateUser.token;
+      console.log(data);
 
-      auth.login(token)
+      // const token = data.updateUser.token;
 
-      userContext.dispatch({
-        type: 'SET_CURRENT_USER',
-        payload: {
-          user: decode(token),
-        },
-      });
+      // auth.login(token);
+
+      // userContext.dispatch({
+      //   type: 'SET_CURRENT_USER',
+      //   payload: {
+      //     user: decode(token),
+      //   },
+      // });
 
       setShowSuccess(true);
     } catch (err) {
@@ -99,7 +101,7 @@ const UpdateEmailPassword = (props) => {
             style={styles.textField}
             placeholder={email}
             name={'email'}
-            type={'email'}
+            keyboardType='email-address'
             id={'email'}
             onChangeText={(value) => handleInputChange('newEmail', value)}
           />

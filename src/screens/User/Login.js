@@ -59,7 +59,7 @@ export default function Login(props) {
           style={styles.textField}
           placeholder={'Email'}
           name={'email'}
-          type={'email'}
+          keyboardType="email-address"
           id={'email'}
           onChangeText={setEmail}
         />
