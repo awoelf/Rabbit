@@ -46,6 +46,7 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   const token = AsyncStorage.getItem('id_token');
+
   return {
     headers: {
       ...headers,
