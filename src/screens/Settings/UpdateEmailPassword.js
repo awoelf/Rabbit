@@ -42,16 +42,16 @@ const UpdateEmailPassword = (props) => {
 
       console.log(data);
 
-      // const token = data.updateUser.token;
+      const token = data.updateUser.token;
 
-      // auth.login(token);
+      auth.login(token);
 
-      // userContext.dispatch({
-      //   type: 'SET_CURRENT_USER',
-      //   payload: {
-      //     user: decode(token),
-      //   },
-      // });
+      userContext.dispatch({
+        type: 'SET_CURRENT_USER',
+        payload: {
+          user: decode(token),
+        },
+      });
 
       setShowSuccess(true);
     } catch (err) {
