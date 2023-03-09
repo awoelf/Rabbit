@@ -1,5 +1,6 @@
 {
   "name": "rabbit",
+  "homepage": "https://awoelf.github.io/Rabbit/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
