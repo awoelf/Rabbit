@@ -32,6 +32,8 @@ export const UPDATE_USER = gql`
       token
       user {
         _id
+        firstName
+        lastName
       }
     }
   }
