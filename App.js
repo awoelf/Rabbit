@@ -4,6 +4,7 @@ import { setContext } from '@apollo/client/link/context';
 import { useFonts, Mukta_400Regular, CreteRound_400Regular, Newsreader_500Medium,IBMPlexSansHebrew_100Thin} from '@expo-google-fonts/dev';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
+import { StatusBar } from 'expo-status-bar';
 import { SENDBIRD_APP_ID } from '@env';
 
 //Navigators
@@ -94,6 +95,7 @@ export default function App() {
         styles={{ theme: rabbitMessageTheme }}
         >
           <NavigationContainer theme={rabbitTheme}>
+            <StatusBar style='dark'/>
             <Main />
           </NavigationContainer>
         </SendbirdUIKitContainer>

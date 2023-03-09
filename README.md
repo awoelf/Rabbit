@@ -29,7 +29,7 @@ Rabbit is a mobile app that lets you chat with other users and catch up on news 
 
 ### Prerequisite
 
-Coming soon
+To use this app, you must have an Android device that can connect to the internet and enable location permissions.
 
 ### Step by step
 1. Sign Up or Log In
@@ -55,18 +55,21 @@ Coming soon
 <img src="./src/snapshots/channelMember.PNG" alt="channelMember" width="200">
 <img src="./src/snapshots/InviteFriends.PNG" alt="invite" width="200">
 
-5. User Setting : Change profile avatar, change personal information, change unit setting
+5. User Setting : Change profile avatar, change personal information, change unit setting for weather.
 
 <img src="./src/snapshots/userSetting.PNG" alt="userSetting" width="200">
-<img src="./src/snapshots/avatarSetting.PNG" alt="avatarSetting" width="200">
+<img src="./src/snapshots/android_changeavatar.jpg" alt="avatarSetting" width="200">
+<img src="./src/snapshots/android_changeUnits.jpg" alt="changeUnits" width="200"/>
 
 6. News : Get the recent top 20 stories or search news.
 
 <img src="./src/snapshots/news.PNG" alt="news" width="200">
 <img src="./src/snapshots/searchNews.PNG" alt="searchNews" width="200">
 
-7. Weather
+7. Weather : Get local weather information. In the settings, you can change units to metric.
 
+<img src="./src/snapshots/android_weatherimperial.jpg" alt="changeUnits" width="200"/>
+<img src="./src/snapshots/android_weatherimperial2.jpg" alt="changeUnits" width="200"/>
 
 
 
@@ -104,11 +107,7 @@ Alexis Woelffer
   <img src='./assets/github.svg' width='30'/>
 </a>
 
-<!-- Links and images -->
-
+<!-- Images -->
 [rabbit-logo]: ./assets/rabbit.svg
-[linkedin-svg]: ./assets/linkedin.svg
-[email-svg]: ./assets/email.svg
-[github-svg]: ./assets/github.svg
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
