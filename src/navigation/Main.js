@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Octicons from '@expo/vector-icons/Octicons';
+import decode from 'jwt-decode';
+import auth from '../utils/auth';
 
 // Stacks
 import UserNavigator from './UserNavigator';
@@ -78,14 +81,25 @@ const Main = () => {
   const { connect } = useConnection();
   const { currentUser } = useSendbirdChat();
   const userContext = useUserContext();
+  const [token, setToken] = useState(null);
 
   //need to refactor with reducer and action
-  useEffect(() => {
+  useEffect(async () => {
     //Connect sendbird by using logged information
     if (userContext.stateUser.isAuthenticated) {
       connect(userContext.stateUser.user.data.firstName, {
         nickname: userContext.stateUser.user.data.lastName,
       });
+      setToken(await AsyncStorage.getItem('id_token'));
+      console.log(token)
+      // auth.login(token);
+      // console.log('logging in');
+      // userContext.dispatch({
+      //   type: 'SET_CURRENT_USER',
+      //   payload: {
+      //     user: decode(token),
+      //   },
+      // });
     }
   }, []);
 
@@ -96,7 +110,7 @@ const Main = () => {
       ) : (
         // <Stack.Screen name='Main' component={MainTabs} />
         <>
-          {userContext  .stateLocation.data.status !== 'granted' ? (
+          {userContext.stateLocation.data.status !== 'granted' ? (
             <Stack.Screen name='LocationPermission' component={LocationPermission} />
           ) : (
             <Stack.Screen name='Main' component={MainTabs} />
