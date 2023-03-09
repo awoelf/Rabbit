@@ -1,3 +1,0 @@
-export const SET_CURRENT_USER = 'SET_CURRENT_USER';
-export const SET_NEW_LOCATION = 'SET_NEW_LOCATION';
-export const TOGGLE_UNITS = 'TOGGLE_UNITS';
