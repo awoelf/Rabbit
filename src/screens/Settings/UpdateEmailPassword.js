@@ -15,6 +15,8 @@ import Header from '../../components/Header';
 import HeaderText from '../../components/HeaderText';
 import Container from '../../components/Container';
 
+import { useSendbirdChat } from '@sendbird/uikit-react-native';
+
 const UpdateEmailPassword = (props) => {
   const [newCredentials, setNewCredentials] = useState({
     newEmail: null,
@@ -27,36 +29,51 @@ const UpdateEmailPassword = (props) => {
   const [showFail, setShowFail] = useState(false);
   const [updateUser, { error, data }] = useMutation(UPDATE_USER);
 
+  const { updateCurrentUserInfo } = useSendbirdChat();
+
   const userContext = useUserContext();
-  const { email, firstName, lastName } = userContext.stateUser.user.data;
+
+  //const { email, firstName, lastName, _id } = userContext.stateUser.user.data;
 
   const handleInputChange = (name, value) => {
     setNewCredentials({ ...newCredentials, [name]: value });
   };
 
   const submitHandler = async (event) => {
+
+
     try {
-      const { data } = await updateUser({
-        variables: { ...newCredentials },
+    
+      const mutationResponse = await updateUser({
+        variables: { _id: userContext.stateUser.user.data._id, ...newCredentials },
       });
 
-      console.log(data);
+      const token = mutationResponse.data.updateUser.token;
+      // console.log('token',token)
+      if (token) {
 
-      // const token = data.updateUser.token;
+        auth.logout();
+        auth.login(token);
+        userContext.dispatch({
+          type: 'SET_CURRENT_USER',
+          payload: {
+            user: decode(token),
+          },
+        });
 
-      // auth.login(token);
+        const updatedUserWithUrl = await updateCurrentUserInfo(userContext.stateUser.user.data.lastName);
+        setShowSuccess(true);
+        props.navigation.goBack();
+      }
 
-      // userContext.dispatch({
-      //   type: 'SET_CURRENT_USER',
-      //   payload: {
-      //     user: decode(token),
-      //   },
-      // });
 
-      setShowSuccess(true);
+
+
+
+
     } catch (err) {
       setShowFail(true);
-      console.log(err);
+      console.log(err, "fail");
     }
   };
 
@@ -81,7 +98,7 @@ const UpdateEmailPassword = (props) => {
           <TextField
             migrate
             style={styles.textField}
-            placeholder={firstName}
+            //placeholder={firstName}
             name={'id'}
             id={'id'}
             onChangeText={(value) => handleInputChange('newId', value)}
@@ -90,7 +107,7 @@ const UpdateEmailPassword = (props) => {
           <TextField
             migrate
             style={styles.textField}
-            placeholder={lastName}
+            //placeholder={lastName}
             name={'nickname'}
             id={'nickname'}
             onChangeText={(value) => handleInputChange('newNickname', value)}
@@ -99,7 +116,7 @@ const UpdateEmailPassword = (props) => {
           <TextField
             migrate
             style={styles.textField}
-            placeholder={email}
+            //placeholder={email}
             name={'email'}
             keyboardType='email-address'
             id={'email'}

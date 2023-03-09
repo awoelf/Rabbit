@@ -70,6 +70,7 @@ export default function App() {
     return null;
   }
 
+
   return (
 
     <ApolloProvider client={client}>
