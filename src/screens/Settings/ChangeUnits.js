@@ -23,7 +23,7 @@ const ChangeUnits = (props) => {
           >
             <Octicons name='arrow-left' style={iconStyle.icon} />
           </TouchableOpacity>
-          <HeaderText>Change Units</HeaderText>
+          <HeaderText>Change Weather Units</HeaderText>
         </View>
       </Header>
       <Container>

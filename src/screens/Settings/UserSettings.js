@@ -83,9 +83,9 @@ const UserSettings = (props) => {
         <ListItem onPress={() => props.navigation.navigate('UpdateEmailPassword')}>
           <View flex row centerV>
             <View marginR-s1>
-              <Octicons name='mail' size={rabbit.font_size} />
+              <Octicons name='gear' size={rabbit.font_size} />
             </View>
-            <Text style={styles.text}>Update email and password</Text>
+            <Text style={styles.text}>Update User</Text>
           </View>
         </ListItem>
 
@@ -94,7 +94,7 @@ const UserSettings = (props) => {
             <View marginR-s1>
               <Octicons name='info' size={rabbit.font_size} />
             </View>
-            <Text style={styles.text}>Change weather units</Text>
+            <Text style={styles.text}>Change Weather Units</Text>
           </View>
         </ListItem>
 
