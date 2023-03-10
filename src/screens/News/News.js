@@ -29,6 +29,7 @@ import { rabbit } from '../../styles/palette';
 import Container from '../../components/Container';
 
 const News = () => {
+
   const [newsData, setNewsData] = useState(null);
   const [searchName, setSearchName] = useState(null);
   const [show, setShow] = useState(false);

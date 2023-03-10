@@ -76,7 +76,7 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
-
+  
   return (
     <ApolloProvider client={client}>
       <UserProvider>
