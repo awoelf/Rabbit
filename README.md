@@ -29,15 +29,72 @@ Rabbit is a mobile app that lets you chat with other users and catch up on news 
 
 ### Prerequisite
 
-Coming soon
+To use this app, you must have an Android device that can connect to the internet and enable location permissions.
 
 ### Step by step
 
-Coming soon
+1. Sign Up or Log In
 
-<!-- 1. After starting the app, input your log in credentials or navigate to the sign up screen to create an account.
-2. Once logged in, allow location services.
-3.  -->
+<p align="center">
+<img src="./src/snapshots/logIn.PNG" alt="logIn"  width="200" />
+&nbsp;
+<img src="./src/snapshots/signup_blank.PNG" alt="register"  width="200" />
+</p>
+
+2. Create new channel
+
+<p align="center">
+<img src="./src/snapshots/firstscreenAfterLogin.PNG" alt="register"  width="200" />
+&nbsp;
+<img src="./src/snapshots/create_channel.PNG" alt="register"  width="200" />
+&nbsp;
+<img src="./src/snapshots/newchannel.PNG" alt="register"  width="200" />
+</p>
+
+3. Send message and picture
+
+<p align="center">
+<img src="./src/snapshots/imagesending.PNG" alt="register"  width="200" />
+&nbsp;
+<img src="./src/snapshots/message.PNG" alt="register"  width="200" />
+</p>
+
+4. Channel Setting
+   : Share channel link, setting notification, invite friends, leave channel
+
+<p align="center">
+<img src="./src/snapshots/channelSetting.PNG" alt="channelsetting" width="200" />
+&nbsp;
+<img src="./src/snapshots/channelMember.PNG" alt="channelMember" width="200" />
+&nbsp;
+<img src="./src/snapshots/InviteFriends.PNG" alt="invite" width="200" />
+</p>
+
+5. User Setting : Change profile avatar, change personal information, change unit setting for weather.
+
+<p align="center">
+<img src="./src/snapshots/userSetting.PNG" alt="userSetting" width="200" />
+&nbsp;
+<img src="./src/snapshots/android_changeavatar.jpg" alt="avatarSetting" width="200" />
+&nbsp;
+<img src="./src/snapshots/android_changeunits.jpg" alt="changeUnits" width="200" />
+</p>
+
+6. News : Get the recent top 20 stories or search news.
+
+<p align="center">
+<img src="./src/snapshots/news.PNG" alt="news" width="200" />
+&nbsp;
+<img src="./src/snapshots/searchNews.PNG" alt="searchNews" width="200" />
+</p>
+
+7. Weather : Get local weather information. In the settings, you can change units to metric.
+
+<p align="center">
+<img src="./src/snapshots/android_weatherimperial.jpg" alt="changeUnits" width="200" />
+&nbsp;
+<img src="./src/snapshots/android_weatherimperial2.jpg" alt="changeUnits" width="200" />
+</p>
 
 ## License
 
@@ -48,32 +105,33 @@ Distributed unter the MIT license. See `LICENSE.txt` for more information
 Yeon Seo
 <br>
 <a href='mailto:rogseo@gmail.com'>
-  <img src='./assets/email.svg' width='30'/>
+<img src='./assets/email.svg' width='30'/>
 </a>
 <a href='https://www.linkedin.com/in/seo-yeon-6267b3158/'>
-  <img src='./assets/linkedin.svg' width='30'/>
+<img src='./assets/linkedin.svg' width='30'/>
 </a>
 <a href='https://github.com/rogseo'>
-  <img src='./assets/github.svg' width='30'/>
+<img src='./assets/github.svg' width='30'/>
 </a>
 
 Alexis Woelffer
 <br>
 <a href='mailto:awoelf@outlook.com'>
-  <img src='./assets/email.svg' width='30'/>
+<img src='./assets/email.svg' width='30'/>
 </a>
 <a href='https://linkedin.com/in/alexis-w-dev'>
-  <img src='./assets/linkedin.svg' width='30'/>
+<img src='./assets/linkedin.svg' width='30'/>
 </a>
 <a href='https://github.com/awoelf'>
-  <img src='./assets/github.svg' width='30'/>
+<img src='./assets/github.svg' width='30'/>
 </a>
 
-<!-- Links and images -->
+<p align="center">
+<img src="./assets/rabbit-mascot.svg" width="50">
+</p>
+
+<!-- Images -->
 
 [rabbit-logo]: ./assets/rabbit.svg
-[linkedin-svg]: ./assets/linkedin.svg
-[email-svg]: ./assets/email.svg
-[github-svg]: ./assets/github.svg
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
