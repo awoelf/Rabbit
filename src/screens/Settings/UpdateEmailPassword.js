@@ -39,17 +39,14 @@ const UpdateEmailPassword = (props) => {
   };
 
   const submitHandler = async (event) => {
-
     try {
-  
       const mutationResponse = await updateUser({
-        variables: { _id: _id,newId:currentUser.userId, ...newCredentials },
+        variables: { _id: _id, newId: currentUser.userId, ...newCredentials },
       });
 
       const token = mutationResponse.data.updateUser.token;
-     
-      if (token) {
 
+      if (token) {
         auth.logout();
         auth.login(token);
         userContext.dispatch({
@@ -58,15 +55,13 @@ const UpdateEmailPassword = (props) => {
         });
         //change nickname on sendBird
         const updatedUser = await updateCurrentUserInfo(newCredentials.newNickname);
-        console.log(updatedUser)
+        console.log(updatedUser);
         setShowSuccess(true);
         props.navigation.goBack();
       }
-
-
     } catch (err) {
       setShowFail(true);
-      console.log(err, "fail");
+      console.log(err, 'fail');
     }
   };
 
@@ -87,6 +82,9 @@ const UpdateEmailPassword = (props) => {
       </Header>
       <ScrollView>
         <Container>
+          <Text style={styles.text} center>
+            All fields are required!
+          </Text>
           {/* <Text style={styles.text}>User id</Text>
           <TextField
             migrate
@@ -109,7 +107,7 @@ const UpdateEmailPassword = (props) => {
           <TextField
             migrate
             style={styles.textField}
-            placeholder={""}
+            placeholder={''}
             name={'email'}
             keyboardType='email-address'
             id={'email'}
@@ -138,7 +136,12 @@ const UpdateEmailPassword = (props) => {
 
           <View bottom center>
             <Button
-              disabled={!newCredentials.currentPassword}
+              disabled={
+                !newCredentials.newNickname ||
+                !newCredentials.newEmail ||
+                !newCredentials.newPassword ||
+                !newCredentials.currentPassword
+              }
               disabledBackgroundColor={'gray'}
               style={styles.button}
               onPress={() => submitHandler()}
