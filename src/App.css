@@ -11,7 +11,7 @@
   --color-bg: #ece5d8;
   --color-font: 'black';
   --color-accent: #d7b16c;
-  --color-box: #E2DAD0;
+  --color-box: #e2dad0;
 }
 
 /* || General Styles */
@@ -46,4 +46,41 @@ h1 {
 .mascot {
   height: 100px;
   width: 100px;
+}
+
+/* || Video */
+.wistia_responsive_padding {
+  padding: 200.42% 0 0 0;
+  position: relative;
+}
+
+.wistia_responsive_wrapper {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.wistia_embed {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.wistia_swatch {
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  transition: opacity 200ms;
+  width: 100%;
+}
+
+.wistia-video {
+  filter: blur(5px);
+  height: 100%;
+  object-fit: contain;
+  width: 100%;
 }
