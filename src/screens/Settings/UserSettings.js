@@ -23,7 +23,6 @@ import Container from '../../components/Container';
 import Header from '../../components/Header';
 import HeaderText from '../../components/HeaderText';
 
-
 const UserSettings = (props) => {
   const { currentUser, updateCurrentUserInfo } = useSendbirdChat();
   const userContext = useUserContext();
@@ -42,11 +41,6 @@ const UserSettings = (props) => {
     //disconnect SendBird
     disconnect();
   };
- 
-
-  
-
-
 
   return (
     <>
@@ -56,12 +50,15 @@ const UserSettings = (props) => {
 
       <Container>
         {/* TO DO: Click on image to change profile picture */}
-        <TouchableOpacity 
-        centerH 
-        onPress={()=>props.navigation.navigate('UpdateUser')}>
+        <TouchableOpacity centerH onPress={() => props.navigation.navigate('UpdateUser')}>
           <View row>
-            <Image source={{ uri: currentUser.plainProfileUrl }} style={styles.profileImage} />
-            <View absR >
+            {currentUser.plainProfileUrl === '' ? (
+              <Image source={require('../../assets/icon.png')} style={styles.profileImage} />
+            ) : (
+              <Image source={{ uri: currentUser.plainProfileUrl }} style={styles.profileImage} />
+            )}
+
+            <View absR>
               <Octicons name='pencil' size={rabbit.font_size} />
             </View>
           </View>
