@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { ScrollView } from 'react-native';
-import { useIsFocused, CommonActions } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 import { Card, Text, LoaderScreen, Icon, View, TouchableOpacity } from 'react-native-ui-lib';
 import { WEATHER_API_KEY, WEATHER_URL, AIR_POLLUTION_URL } from '@env';
 import { useUserContext } from '../../utils/UserContext';

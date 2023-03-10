@@ -1,6 +1,6 @@
 import React from 'react';
 import { createGroupChannelListFragment } from '@sendbird/uikit-react-native';
-import { Text, View, Button, LoaderScreen, TouchableOpacity } from 'react-native-ui-lib';
+import { LoaderScreen, TouchableOpacity } from 'react-native-ui-lib';
 import Octicons from '@expo/vector-icons/Octicons';
 
 import { iconStyle } from '../../styles/styles';

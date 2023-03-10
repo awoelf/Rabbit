@@ -1,4 +1,4 @@
-import { ListItem, View, Text } from 'react-native-ui-lib';
+import { View, Text } from 'react-native-ui-lib';
 import Feather from '@expo/vector-icons/Feather';
 
 import { styles, weatherStyle } from '../styles/styles';
