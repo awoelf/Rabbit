@@ -195,7 +195,7 @@ const UpdateUser = (props) => {
                       const uri = `https://avatars.dicebear.com/api/avataaars/${currentUser.nickname}.png?${style.options}=${style.name}`
               
                       return (
-                        <View >
+                        <View key={`${style.options}=${style.name}`}>
                           <Image key={uri} source={{ uri: uri }} style={styles.profileImage} />
                           <RadioButton value={`${style.options}=${style.name}`} label={style.name} onPress={()=>{
                             setTempUrl(`https://avatars.dicebear.com/api/avataaars/${avatarCharacter}.png?${style.options}=${style.name}${eyeValue}${mouthValue}`)}}/>
@@ -221,7 +221,7 @@ const UpdateUser = (props) => {
                       const uri = `https://avatars.dicebear.com/api/avataaars/${currentUser.nickname}.png?${style.options}=${style.name}`
               
                       return (
-                        <View >
+                        <View key={`${style.options}=${style.name}`} >
                           <Image key={uri} source={{ uri: uri }} style={styles.profileImage} />
                           <RadioButton value={`&${style.options}=${style.name}`} label={style.name} onPress={()=>{
                             setTempUrl(`https://avatars.dicebear.com/api/avataaars/${avatarCharacter}.png?${topValue}${mouthValue}&${style.options}=${style.name}`)}}/>
@@ -245,7 +245,7 @@ const UpdateUser = (props) => {
                       const uri = `https://avatars.dicebear.com/api/avataaars/${currentUser.nickname}.png?${style.options}=${style.name}`
               
                       return (
-                        <View >
+                        <View key={`${style.options}=${style.name}`}>
                           <Image key={uri} source={{ uri: uri }} style={styles.profileImage} />
                           <RadioButton value={`&${style.options}=${style.name}`} label={style.name} onPress={()=>{
                             setTempUrl(`https://avatars.dicebear.com/api/avataaars/${avatarCharacter}.png?${topValue}${eyeValue}&${style.options}=${style.name}`)}}/>

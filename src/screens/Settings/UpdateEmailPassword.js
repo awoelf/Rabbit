@@ -20,7 +20,6 @@ import { useSendbirdChat } from '@sendbird/uikit-react-native';
 const UpdateEmailPassword = (props) => {
   const [newCredentials, setNewCredentials] = useState({
     newEmail: null,
-    newId: null,
     newNickname: null,
     newPassword: null,
     currentPassword: null,
@@ -29,11 +28,11 @@ const UpdateEmailPassword = (props) => {
   const [showFail, setShowFail] = useState(false);
   const [updateUser, { error, data }] = useMutation(UPDATE_USER);
 
-  const { updateCurrentUserInfo } = useSendbirdChat();
+  const { updateCurrentUserInfo, currentUser } = useSendbirdChat();
 
   const userContext = useUserContext();
 
-  //const { email, firstName, lastName, _id } = userContext.stateUser.user.data;
+  const { email, firstName, lastName, _id } = userContext.stateUser.user.data;
 
   const handleInputChange = (name, value) => {
     setNewCredentials({ ...newCredentials, [name]: value });
@@ -41,34 +40,28 @@ const UpdateEmailPassword = (props) => {
 
   const submitHandler = async (event) => {
 
-
     try {
-    
+  
       const mutationResponse = await updateUser({
-        variables: { _id: userContext.stateUser.user.data._id, ...newCredentials },
+        variables: { _id: _id,newId:currentUser.userId, ...newCredentials },
       });
 
       const token = mutationResponse.data.updateUser.token;
-      // console.log('token',token)
+     
       if (token) {
 
         auth.logout();
         auth.login(token);
         userContext.dispatch({
           type: 'SET_CURRENT_USER',
-          payload: {
-            user: decode(token),
-          },
+          payload: decode(token),
         });
-
-        const updatedUserWithUrl = await updateCurrentUserInfo(userContext.stateUser.user.data.lastName);
+        //change nickname on sendBird
+        const updatedUser = await updateCurrentUserInfo(newCredentials.newNickname);
+        console.log(updatedUser)
         setShowSuccess(true);
         props.navigation.goBack();
       }
-
-
-
-
 
 
     } catch (err) {
@@ -94,20 +87,20 @@ const UpdateEmailPassword = (props) => {
       </Header>
       <ScrollView>
         <Container>
-          <Text style={styles.text}>User id</Text>
+          {/* <Text style={styles.text}>User id</Text>
           <TextField
             migrate
             style={styles.textField}
-            //placeholder={firstName}
+            placeholder={currentUser.userId}
             name={'id'}
             id={'id'}
             onChangeText={(value) => handleInputChange('newId', value)}
-          />
+          /> */}
           <Text style={styles.text}>Nickname</Text>
           <TextField
             migrate
             style={styles.textField}
-            //placeholder={lastName}
+            placeholder={currentUser.nickname}
             name={'nickname'}
             id={'nickname'}
             onChangeText={(value) => handleInputChange('newNickname', value)}
@@ -116,7 +109,7 @@ const UpdateEmailPassword = (props) => {
           <TextField
             migrate
             style={styles.textField}
-            //placeholder={email}
+            placeholder={""}
             name={'email'}
             keyboardType='email-address'
             id={'email'}
