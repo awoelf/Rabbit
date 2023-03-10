@@ -78,7 +78,7 @@ const Main = () => {
   const { connect } = useConnection();
   const { currentUser } = useSendbirdChat();
   const userContext = useUserContext();
-
+ 
   //need to refactor with reducer and action
   useEffect(() => {
     //Connect sendbird by using logged information

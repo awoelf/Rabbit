@@ -64,7 +64,10 @@ const UserSettings = (props) => {
           </View>
 
           <Text style={styles.text} center>
-            Hello {currentUser.userId}!
+            Hello {currentUser.nickname}!
+          </Text>
+          <Text style={styles.text} center>
+            ID : {currentUser.userId}
           </Text>
         </TouchableOpacity>
 

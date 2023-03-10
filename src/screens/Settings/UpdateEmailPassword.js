@@ -15,10 +15,11 @@ import Header from '../../components/Header';
 import HeaderText from '../../components/HeaderText';
 import Container from '../../components/Container';
 
+import { useSendbirdChat } from '@sendbird/uikit-react-native';
+
 const UpdateEmailPassword = (props) => {
   const [newCredentials, setNewCredentials] = useState({
     newEmail: null,
-    newId: null,
     newNickname: null,
     newPassword: null,
     currentPassword: null,
@@ -27,36 +28,45 @@ const UpdateEmailPassword = (props) => {
   const [showFail, setShowFail] = useState(false);
   const [updateUser, { error, data }] = useMutation(UPDATE_USER);
 
+  const { updateCurrentUserInfo, currentUser } = useSendbirdChat();
+
   const userContext = useUserContext();
-  const { email, firstName, lastName } = userContext.stateUser.user.data;
+
+  const { email, firstName, lastName, _id } = userContext.stateUser.user.data;
 
   const handleInputChange = (name, value) => {
     setNewCredentials({ ...newCredentials, [name]: value });
   };
 
   const submitHandler = async (event) => {
+
     try {
-      const { data } = await updateUser({
-        variables: { ...newCredentials },
+  
+      const mutationResponse = await updateUser({
+        variables: { _id: _id,newId:currentUser.userId, ...newCredentials },
       });
 
-      console.log(data);
+      const token = mutationResponse.data.updateUser.token;
+     
+      if (token) {
 
-      const token = data.updateUser.token;
+        auth.logout();
+        auth.login(token);
+        userContext.dispatch({
+          type: 'SET_CURRENT_USER',
+          payload: decode(token),
+        });
+        //change nickname on sendBird
+        const updatedUser = await updateCurrentUserInfo(newCredentials.newNickname);
+        console.log(updatedUser)
+        setShowSuccess(true);
+        props.navigation.goBack();
+      }
 
-      auth.login(token);
 
-      userContext.dispatch({
-        type: 'SET_CURRENT_USER',
-        payload: {
-          user: decode(token),
-        },
-      });
-
-      setShowSuccess(true);
     } catch (err) {
       setShowFail(true);
-      console.log(err);
+      console.log(err, "fail");
     }
   };
 
@@ -77,20 +87,20 @@ const UpdateEmailPassword = (props) => {
       </Header>
       <ScrollView>
         <Container>
-          <Text style={styles.text}>User id</Text>
+          {/* <Text style={styles.text}>User id</Text>
           <TextField
             migrate
             style={styles.textField}
-            placeholder={firstName}
+            placeholder={currentUser.userId}
             name={'id'}
             id={'id'}
             onChangeText={(value) => handleInputChange('newId', value)}
-          />
+          /> */}
           <Text style={styles.text}>Nickname</Text>
           <TextField
             migrate
             style={styles.textField}
-            placeholder={lastName}
+            placeholder={currentUser.nickname}
             name={'nickname'}
             id={'nickname'}
             onChangeText={(value) => handleInputChange('newNickname', value)}
@@ -99,7 +109,7 @@ const UpdateEmailPassword = (props) => {
           <TextField
             migrate
             style={styles.textField}
-            placeholder={email}
+            placeholder={""}
             name={'email'}
             keyboardType='email-address'
             id={'email'}

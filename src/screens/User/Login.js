@@ -30,9 +30,8 @@ export default function Login(props) {
 
       userContext.dispatch({
         type: 'SET_CURRENT_USER',
-        payload: {
-          user: decode(token),
-        },
+        payload:decode(token),
+        
       });
 
       connect(mutationResponse.data.login.user.firstName, {
@@ -72,6 +71,8 @@ export default function Login(props) {
           id={'pwd'}
           onChangeText={setPassword}
         />
+        
+        </View>
         <View center>
           <Button
             disabled={!email || !password}
@@ -83,7 +84,6 @@ export default function Login(props) {
           >
             <Text style={styles.text}>Log in</Text>
           </Button>
-        </View>
       </View>
 
       <View flex-3 centerH bottom>

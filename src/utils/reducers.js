@@ -4,7 +4,10 @@ import { isEmpty } from './helper';
 export default function (state, action) {
   switch (action.type) {
     case SET_CURRENT_USER:
+      //const =action.payload
+
       return {
+        ...state,
         isAuthenticated: !isEmpty(action.payload),
         user: action.payload,
         // userProfile: action.userProfile
