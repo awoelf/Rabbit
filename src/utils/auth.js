@@ -31,15 +31,11 @@ class AuthService {
   login(idToken) {
     // Saves user token to localStorage
     AsyncStorage.setItem('id_token', idToken);
-
-    // window.location.assign('/');
   }
 
   logout() {
     // Clear user token and profile data from localStorage
     AsyncStorage.removeItem('id_token');
-    // this will reload the page and reset the state of the application
-    // window.location.assign('/');
   }
 }
 

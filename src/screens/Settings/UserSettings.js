@@ -6,17 +6,15 @@ import {
   View,
   Button,
   ListItem,
-  TouchableOpacity,
-  TextField,
+  TouchableOpacity
 } from 'react-native-ui-lib';
 import Octicons from '@expo/vector-icons/Octicons';
-import { styles, cardStyle } from '../../styles/styles';
+import { styles } from '../../styles/styles';
 import { rabbit } from '../../styles/palette';
 import { useConnection, useSendbirdChat } from '@sendbird/uikit-react-native';
 
 // User Context
 import { useUserContext } from '../../utils/UserContext';
-import reducer from '../../utils/reducers';
 import auth from '../../utils/auth';
 
 import Container from '../../components/Container';

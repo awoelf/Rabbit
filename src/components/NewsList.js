@@ -20,16 +20,22 @@ const NewsList = ({ item }) => {
     }
   }, [item.url]);
 
-  const newsHeaderWidth = Dimensions.get('window').width * .7;
+  const newsHeaderWidth = Dimensions.get('window').width * 0.7;
 
   return (
     <Card flex activeOpacity={1} onPress={handlePress} style={cardStyle}>
       <View marginV-s2>
         <View marginB-s2 row centerV spread>
           <View width={newsHeaderWidth}>
-            {item.author ? <Text style={styles.newsHead} numberOfLines={1}>{item.author}</Text> : null}
+            {item.author ? (
+              <Text style={styles.newsHead} numberOfLines={1}>
+                {item.author}
+              </Text>
+            ) : null}
             {item.author !== item.source.name ? (
-              <Text style={styles.newsHead} numberOfLines={1}>{item.source.name}</Text>
+              <Text style={styles.newsHead} numberOfLines={1}>
+                {item.source.name}
+              </Text>
             ) : null}
           </View>
           <View marginH-s4>

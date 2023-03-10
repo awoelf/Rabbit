@@ -1,8 +1,6 @@
 import { Dimensions } from 'react-native';
-import { View, Text, Icon, LoaderScreen } from 'react-native-ui-lib';
 import { BarChart } from 'react-native-chart-kit';
 
-import { weatherStyle } from '../styles/styles';
 import { rabbit } from '../styles/palette';
 
 const AirPollution = ({ data }) => {

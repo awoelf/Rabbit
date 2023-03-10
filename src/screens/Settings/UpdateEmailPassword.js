@@ -9,7 +9,6 @@ import auth from '../../utils/auth';
 import decode from 'jwt-decode';
 
 import { cardStyle, iconStyle, styles } from '../../styles/styles';
-import { rabbit } from '../../styles/palette';
 
 import Header from '../../components/Header';
 import HeaderText from '../../components/HeaderText';
@@ -32,7 +31,7 @@ const UpdateEmailPassword = (props) => {
 
   const userContext = useUserContext();
 
-  const { email, firstName, lastName, _id } = userContext.stateUser.user.data;
+  const { email, _id } = userContext.stateUser.user.data;
 
   const handleInputChange = (name, value) => {
     setNewCredentials({ ...newCredentials, [name]: value });
@@ -85,15 +84,6 @@ const UpdateEmailPassword = (props) => {
           <Text style={styles.text} center>
             All fields are required!
           </Text>
-          {/* <Text style={styles.text}>User id</Text>
-          <TextField
-            migrate
-            style={styles.textField}
-            placeholder={currentUser.userId}
-            name={'id'}
-            id={'id'}
-            onChangeText={(value) => handleInputChange('newId', value)}
-          /> */}
           <Text style={styles.text}>Nickname</Text>
           <TextField
             migrate
@@ -107,7 +97,7 @@ const UpdateEmailPassword = (props) => {
           <TextField
             migrate
             style={styles.textField}
-            placeholder={''}
+            placeholder={email}
             name={'email'}
             keyboardType='email-address'
             id={'email'}
