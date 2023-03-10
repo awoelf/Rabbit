@@ -19,7 +19,7 @@ import {
   TouchableOpacity,
   ExpandableSection,
 } from 'react-native-ui-lib';
-import { NEWS_URL, NEWS_API_KEY, FACTS_URL, NINJA_API_KEY } from '@env';
+import { NEWS_URL, NEWS_API_KEY, NEWS_SEARCH_URL } from '@env';
 import { useUserContext } from '../../utils/UserContext';
 
 // Components
@@ -36,9 +36,9 @@ import { endAsyncEvent } from 'react-native/Libraries/Performance/Systrace';
 import Container from '../../components/Container';
 
 const News = () => {
+
   const [newsData, setNewsData] = useState(null);
   const [searchName, setSearchName] = useState(null);
-  // const [factsData, setFactsData] = useState(null);
   const [show, setShow] = useState(false);
   const userContext = useUserContext();
   const textFieldWidth = Dimensions.get('window').width * .62;
@@ -47,8 +47,7 @@ const News = () => {
     const GetNews = async () => {
       const response = await axios({
         method: 'get',
-        //url: `${NEWS_URL}?country=${countryCode}&apiKey=${NEWS_API_KEY}`,
-        url: `https://newsapi.org/v2/top-headlines?country=us&apiKey=5d33573d86754a639d8a5f2ac1455a70`,
+        url: `${NEWS_URL}&apiKey=${NEWS_API_KEY}`,
         responseType: 'json',
       });
 
@@ -61,8 +60,7 @@ const News = () => {
   const searchHandle = async (event) => {
     const response = await axios({
       method: 'get',
-      //url: `${NEWS_URL}?country=${countryCode}&apiKey=${NEWS_API_KEY}`,
-      url: `https://newsapi.org/v2/everything?q=${searchName}&sortBy=popularity&pageSize=20&apiKey=5d33573d86754a639d8a5f2ac1455a70`,
+      url: `${NEWS_SEARCH_URL}?q=${searchName}&sortBy=popularity&pageSize=20&apiKey=${NEWS_API_KEY}`,
       responseType: 'json',
     });
 
@@ -100,7 +98,7 @@ const News = () => {
                 onPress={searchHandle}
                 size={Button.sizes.xSmall}
               >
-                <Octicons name='search' style={iconStyle.icon}/>
+                <Octicons name='search' style={iconStyle.icon} />
               </Button>
             </View>
           </View>
@@ -116,7 +114,7 @@ const News = () => {
             })}
           </Container>
         ) : (
-          <LoaderScreen loaderColor={rabbit.accent_color}/>
+          <LoaderScreen loaderColor={rabbit.accent_color} />
         )}
       </ScrollView>
 

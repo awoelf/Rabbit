@@ -58,7 +58,6 @@ const UpdateEmailPassword = (props) => {
         });
         //change nickname on sendBird
         const updatedUser = await updateCurrentUserInfo(newCredentials.newNickname);
-        console.log(updatedUser)
         setShowSuccess(true);
         props.navigation.goBack();
       }
