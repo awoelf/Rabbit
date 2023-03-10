@@ -1,7 +1,7 @@
 import React from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { useFonts, Mukta_400Regular, CreteRound_400Regular, Newsreader_500Medium,IBMPlexSansHebrew_100Thin} from '@expo-google-fonts/dev';
+import { useFonts, Mukta_400Regular, CreteRound_400Regular, Newsreader_500Medium, IBMPlexSansHebrew_100Thin } from '@expo-google-fonts/dev';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
@@ -73,13 +73,13 @@ export default function App() {
   }
 
 
+
   return (
 
     <ApolloProvider client={client}>
       <UserProvider>
         <SendbirdUIKitContainer
-          //appId={SENDBIRD_APP_ID}
-          appId={'6CD12A00-3AA4-4F84-A4CB-C202BA86B06A'}
+          appId={SENDBIRD_APP_ID}
           chatOptions={{ localCacheStorage: AsyncStorage }}
           userProfile={{
             onCreateChannel: (channel) => {
@@ -93,10 +93,10 @@ export default function App() {
             notification: NotificationService,
             clipboard: ClipboardService,
           }}
-        styles={{ theme: rabbitMessageTheme }}
+          styles={{ theme: rabbitMessageTheme }}
         >
           <NavigationContainer theme={rabbitTheme}>
-            <StatusBar style='dark'/>
+            <StatusBar style='dark' />
             <Main />
           </NavigationContainer>
         </SendbirdUIKitContainer>
