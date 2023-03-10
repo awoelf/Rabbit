@@ -77,7 +77,7 @@ To use this app, you must have an Android device that can connect to the interne
 &nbsp;
 <img src="./src/snapshots/android_changeavatar.jpg" alt="avatarSetting" width="200" />
 &nbsp;
-<img src="./src/snapshots/android_changeUnits.jpg" alt="changeUnits" width="200" />
+<img src="./src/snapshots/android_changeunits.jpg" alt="changeUnits" width="200" />
 </p>
 
 6. News : Get the recent top 20 stories or search news.
