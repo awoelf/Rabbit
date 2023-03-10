@@ -1,38 +1,49 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Crete+Round&family=Mukta&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css');
+
+/* || Root variables */
+:root {
+  /* == Fonts */
+  --font-header: 'Crete Round', serif;
+  --font: 'Mukta', sans-serif;
+
+  /* == Colors */
+  --color-bg: #ece5d8;
+  --color-font: 'black';
+  --color-accent: #d7b16c;
+  --color-box: #E2DAD0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* || General Styles */
+body {
+  background-color: var(--color-bg);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1,
+h2,
+h3,
+h4,
+p,
+a,
+i,
+input,
+textarea {
+  color: var(--color-font);
+  font-family: var(--font);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* || Header, Footer and main navigation */
+h1 {
+  font-family: var(--font-header);
+  size-adjust: 100px;
 }
 
-.App-link {
-  color: #61dafb;
+.headerBox {
+  background-color: var(--color-box);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* || Images */
+.mascot {
+  height: 100px;
+  width: 100px;
 }
