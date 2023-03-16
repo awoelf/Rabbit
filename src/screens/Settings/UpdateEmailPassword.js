@@ -26,7 +26,7 @@ const UpdateEmailPassword = (props) => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showFail, setShowFail] = useState(false);
   const [updateUser, { error, data }] = useMutation(UPDATE_USER);
-
+4
   const { updateCurrentUserInfo, currentUser } = useSendbirdChat();
 
   const userContext = useUserContext();
