@@ -78,7 +78,7 @@ const Weather = (props) => {
       </Header>
       <ScrollView>
         <Container removeTopMargin={true}>
-          {weatherData ? (
+          {weatherData && airData ? (
             <>
               <View centerH>
                 <View row centerV>

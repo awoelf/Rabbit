@@ -1,5 +1,4 @@
-import React, { useReducer, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import {
   Text,
   Image,
@@ -93,6 +92,15 @@ const UserSettings = (props) => {
               <Octicons name='info' size={rabbit.font_size} />
             </View>
             <Text style={styles.text}>Change Weather Units</Text>
+          </View>
+        </ListItem>
+
+        <ListItem onPress={() => props.navigation.navigate('AboutApp')}>
+          <View flex row centerV>
+            <View marginR-s1>
+              <Octicons name='star' size={rabbit.font_size} />
+            </View>
+            <Text style={styles.text}>About App</Text>
           </View>
         </ListItem>
 

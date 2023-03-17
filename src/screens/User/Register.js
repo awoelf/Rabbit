@@ -9,7 +9,6 @@ import {
   Card,
   Dialog,
   Hint,
-  Span,
 } from 'react-native-ui-lib';
 import { Linking } from 'react-native';
 import { useMutation } from '@apollo/client';
@@ -136,12 +135,9 @@ export default function Register(props) {
               </>
             }
             messageStyle={styles.text}
-            // For some reason, the hint renders properly when onBackgroundPress is included.
-
             onPress={async () => await Linking.openURL(`https://www.termsfeed.com/live/71b1187f-7283-4fc6-97db-61c1edbbd091`)}
           >
             <Button
-              
               style={styles.button}
               disabled={!allowSignUp}
               onPress={() => registerHandler()}

@@ -98,7 +98,7 @@ To use this app, you must have an Android device that can connect to the interne
 
 ## License
 
-Distributed unter the MIT license. See `LICENSE.txt` for more information
+Distributed unter the MIT license. See `LICENSE.txt` for more information.
 
 ## Contact
 
