@@ -73,11 +73,15 @@ To use this app, you must have an Android device that can connect to the interne
 5. User Setting : Change profile avatar, change personal information, change unit setting for weather.
 
 <p align="center">
-<img src="./src/snapshots/userSetting.PNG" alt="userSetting" width="200" />
+<img src="./src/snapshots/android_userSettings.png" alt="userSetting" width="200" />
 &nbsp;
 <img src="./src/snapshots/android_changeavatar.jpg" alt="avatarSetting" width="200" />
 &nbsp;
 <img src="./src/snapshots/android_changeunits.jpg" alt="changeUnits" width="200" />
+&nbsp;
+<img src="./src/snapshots/android_updateUser.png" alt="updateUser" width="200" />
+&nbsp;
+<img src="./src/snapshots/android_aboutapp.png" alt="aboutApp" width="200" />
 </p>
 
 6. News : Get the recent top 20 stories or search news.
