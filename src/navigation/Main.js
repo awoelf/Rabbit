@@ -94,7 +94,6 @@ const Main = () => {
       {!currentUser ? (
         <Stack.Screen name='User' component={UserNavigator} />
       ) : (
-        // <Stack.Screen name='Main' component={MainTabs} />
         <>
           {userContext.stateLocation.data.status !== 'granted' ? (
             <Stack.Screen name='LocationPermission' component={LocationPermission} />

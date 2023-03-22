@@ -9,16 +9,16 @@ import auth from '../../utils/auth';
 import decode from 'jwt-decode';
 
 import { cardStyle, iconStyle, styles } from '../../styles/styles';
-import { rabbit } from '../../styles/palette';
 
 import Header from '../../components/Header';
 import HeaderText from '../../components/HeaderText';
 import Container from '../../components/Container';
 
+import { useSendbirdChat } from '@sendbird/uikit-react-native';
+
 const UpdateEmailPassword = (props) => {
   const [newCredentials, setNewCredentials] = useState({
     newEmail: null,
-    newId: null,
     newNickname: null,
     newPassword: null,
     currentPassword: null,
@@ -26,9 +26,12 @@ const UpdateEmailPassword = (props) => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showFail, setShowFail] = useState(false);
   const [updateUser, { error, data }] = useMutation(UPDATE_USER);
+4
+  const { updateCurrentUserInfo, currentUser } = useSendbirdChat();
 
   const userContext = useUserContext();
-  const { email, firstName, lastName } = userContext.stateUser.user.data;
+
+  const { email, _id } = userContext.stateUser.user.data;
 
   const handleInputChange = (name, value) => {
     setNewCredentials({ ...newCredentials, [name]: value });
@@ -36,27 +39,27 @@ const UpdateEmailPassword = (props) => {
 
   const submitHandler = async (event) => {
     try {
-      const { data } = await updateUser({
-        variables: { ...newCredentials },
+      const mutationResponse = await updateUser({
+        variables: { _id: _id, newId: currentUser.userId, ...newCredentials },
       });
 
-      console.log(data);
+      const token = mutationResponse.data.updateUser.token;
 
-      const token = data.updateUser.token;
-
-      auth.login(token);
-
-      userContext.dispatch({
-        type: 'SET_CURRENT_USER',
-        payload: {
-          user: decode(token),
-        },
-      });
-
-      setShowSuccess(true);
+      if (token) {
+        auth.logout();
+        auth.login(token);
+        userContext.dispatch({
+          type: 'SET_CURRENT_USER',
+          payload: decode(token),
+        });
+        //change nickname on sendBird
+        const updatedUser = await updateCurrentUserInfo(newCredentials.newNickname);
+        setShowSuccess(true);
+        props.navigation.goBack();
+      }
     } catch (err) {
       setShowFail(true);
-      console.log(err);
+      console.log(err, 'fail');
     }
   };
 
@@ -77,20 +80,14 @@ const UpdateEmailPassword = (props) => {
       </Header>
       <ScrollView>
         <Container>
-          <Text style={styles.text}>User id</Text>
-          <TextField
-            migrate
-            style={styles.textField}
-            placeholder={firstName}
-            name={'id'}
-            id={'id'}
-            onChangeText={(value) => handleInputChange('newId', value)}
-          />
+          <Text style={styles.text} center>
+            All fields are required!
+          </Text>
           <Text style={styles.text}>Nickname</Text>
           <TextField
             migrate
             style={styles.textField}
-            placeholder={lastName}
+            placeholder={currentUser.nickname}
             name={'nickname'}
             id={'nickname'}
             onChangeText={(value) => handleInputChange('newNickname', value)}
@@ -128,7 +125,12 @@ const UpdateEmailPassword = (props) => {
 
           <View bottom center>
             <Button
-              disabled={!newCredentials.currentPassword}
+              disabled={
+                !newCredentials.newNickname ||
+                !newCredentials.newEmail ||
+                !newCredentials.newPassword ||
+                !newCredentials.currentPassword
+              }
               disabledBackgroundColor={'gray'}
               style={styles.button}
               onPress={() => submitHandler()}

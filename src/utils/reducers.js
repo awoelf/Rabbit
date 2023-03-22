@@ -5,20 +5,16 @@ export default function (state, action) {
   switch (action.type) {
     case SET_CURRENT_USER:
       return {
+        ...state,
         isAuthenticated: !isEmpty(action.payload),
         user: action.payload,
-        // userProfile: action.userProfile
       };
     case SET_NEW_LOCATION:
       return {
         data: action.payload,
       };
     case TOGGLE_UNITS:
-      return action.payload
-    
-    // case LOG_OUT_USER:
-    //   return {
-    //   };
+      return action.payload;
     default:
       return state;
   }

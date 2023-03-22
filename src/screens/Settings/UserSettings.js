@@ -1,22 +1,19 @@
-import React, { useReducer, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import {
   Text,
   Image,
   View,
   Button,
   ListItem,
-  TouchableOpacity,
-  TextField,
+  TouchableOpacity
 } from 'react-native-ui-lib';
 import Octicons from '@expo/vector-icons/Octicons';
-import { styles, cardStyle } from '../../styles/styles';
+import { styles } from '../../styles/styles';
 import { rabbit } from '../../styles/palette';
 import { useConnection, useSendbirdChat } from '@sendbird/uikit-react-native';
 
 // User Context
 import { useUserContext } from '../../utils/UserContext';
-import reducer from '../../utils/reducers';
 import auth from '../../utils/auth';
 
 import Container from '../../components/Container';
@@ -64,7 +61,10 @@ const UserSettings = (props) => {
           </View>
 
           <Text style={styles.text} center>
-            Hello {currentUser.userId}!
+            Hello {currentUser.nickname}!
+          </Text>
+          <Text style={styles.text} center>
+            ID : {currentUser.userId}
           </Text>
         </TouchableOpacity>
 
@@ -92,6 +92,15 @@ const UserSettings = (props) => {
               <Octicons name='info' size={rabbit.font_size} />
             </View>
             <Text style={styles.text}>Change Weather Units</Text>
+          </View>
+        </ListItem>
+
+        <ListItem onPress={() => props.navigation.navigate('AboutApp')}>
+          <View flex row centerV>
+            <View marginR-s1>
+              <Octicons name='star' size={rabbit.font_size} />
+            </View>
+            <Text style={styles.text}>About App</Text>
           </View>
         </ListItem>
 

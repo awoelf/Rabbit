@@ -1,6 +1,5 @@
 import {
   TouchableOpacity,
-  Switch,
   View,
   Text,
   Image,
@@ -18,7 +17,6 @@ import { rabbit } from '../../styles/palette';
 
 import Header from '../../components/Header';
 import HeaderText from '../../components/HeaderText';
-import Container from '../../components/Container';
 
 import { useSendbirdChat } from '@sendbird/uikit-react-native';
 

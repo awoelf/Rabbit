@@ -2,13 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Dimensions } from 'react-native';
-import {
-  KeyboardAvoidingView,
-  ScrollView,
-  Platform,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from 'react-native';
+import { ScrollView } from 'react-native';
 import {
   Card,
   Text,
@@ -19,7 +13,7 @@ import {
   TouchableOpacity,
   ExpandableSection,
 } from 'react-native-ui-lib';
-import { NEWS_URL, NEWS_API_KEY, FACTS_URL, NINJA_API_KEY } from '@env';
+import { NEWS_URL, NEWS_SEARCH_URL, NEWS_API_KEY } from '@env';
 import { useUserContext } from '../../utils/UserContext';
 
 // Components
@@ -30,25 +24,23 @@ import NewsList from '../../components/NewsList';
 import Octicons from '@expo/vector-icons/Octicons';
 
 // Styles and assets
-import { styles, NewsContainerStyle, iconStyle } from '../../styles/styles';
+import { styles, iconStyle } from '../../styles/styles';
 import { rabbit } from '../../styles/palette';
-import { endAsyncEvent } from 'react-native/Libraries/Performance/Systrace';
 import Container from '../../components/Container';
 
 const News = () => {
+
   const [newsData, setNewsData] = useState(null);
   const [searchName, setSearchName] = useState(null);
-  // const [factsData, setFactsData] = useState(null);
   const [show, setShow] = useState(false);
   const userContext = useUserContext();
-  const textFieldWidth = Dimensions.get('window').width * .62;
+  const textFieldWidth = Dimensions.get('window').width * 0.62;
 
   useEffect(() => {
     const GetNews = async () => {
       const response = await axios({
         method: 'get',
-        //url: `${NEWS_URL}?country=${countryCode}&apiKey=${NEWS_API_KEY}`,
-        url: `https://newsapi.org/v2/top-headlines?country=us&apiKey=5d33573d86754a639d8a5f2ac1455a70`,
+        url: `${NEWS_URL}?country=us&apiKey=${NEWS_API_KEY}`,
         responseType: 'json',
       });
 
@@ -61,8 +53,7 @@ const News = () => {
   const searchHandle = async (event) => {
     const response = await axios({
       method: 'get',
-      //url: `${NEWS_URL}?country=${countryCode}&apiKey=${NEWS_API_KEY}`,
-      url: `https://newsapi.org/v2/everything?q=${searchName}&sortBy=popularity&pageSize=20&apiKey=5d33573d86754a639d8a5f2ac1455a70`,
+      url: `${NEWS_SEARCH_URL}?q=${searchName}&sortBy=popularity&pageSize=20&apiKey=${NEWS_API_KEY}`,
       responseType: 'json',
     });
 
@@ -95,12 +86,8 @@ const News = () => {
               width={textFieldWidth}
             />
             <View>
-              <Button
-                style={iconStyle.button}
-                onPress={searchHandle}
-                size={Button.sizes.xSmall}
-              >
-                <Octicons name='search' style={iconStyle.icon}/>
+              <Button style={iconStyle.button} onPress={searchHandle} size={Button.sizes.xSmall}>
+                <Octicons name='search' style={iconStyle.icon} />
               </Button>
             </View>
           </View>
@@ -108,7 +95,6 @@ const News = () => {
       </ExpandableSection>
 
       <ScrollView>
-        {/* News Here */}
         {newsData ? (
           <Container removeTopMargin={true}>
             {newsData.articles.map((article) => {
@@ -116,15 +102,9 @@ const News = () => {
             })}
           </Container>
         ) : (
-          <LoaderScreen loaderColor={rabbit.accent_color}/>
+          <LoaderScreen loaderColor={rabbit.accent_color} />
         )}
       </ScrollView>
-
-      {/* <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView> */}
     </>
   );
 };

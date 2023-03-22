@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Rabbit",
-    "slug": "Rabbit",
+    "slug": "rabbit-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,14 +25,18 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.rogseo.Rabbit"
     },
     "web": {
       "favicon": "./assets/icon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "42428841-d9df-4aa9-9911-bc6189af6044"
+        "projectId": "fc9f0336-514b-40de-9002-d545ac1bf295"
       }
     },
     "plugins": [
@@ -42,6 +46,7 @@
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
       ]
-    ]
+    ],
+    "owner": "awoelf"
   }
 }
