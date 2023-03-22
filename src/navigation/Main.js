@@ -78,7 +78,7 @@ const Main = () => {
   const { connect } = useConnection();
   const { currentUser } = useSendbirdChat();
   const userContext = useUserContext();
- 
+
   //need to refactor with reducer and action
   useEffect(() => {
     //Connect sendbird by using logged information
@@ -94,7 +94,6 @@ const Main = () => {
       {!currentUser ? (
         <Stack.Screen name='User' component={UserNavigator} />
       ) : (
-        // <Stack.Screen name='Main' component={MainTabs} />
         <>
           {userContext.stateLocation.data.status !== 'granted' ? (
             <Stack.Screen name='LocationPermission' component={LocationPermission} />

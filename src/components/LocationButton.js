@@ -21,9 +21,9 @@ const LocationButton = () => {
       center
     >
       <View paddingR-s1>
-        <Octicons name='location' size={rabbit.font_size}/>
+        <Octicons name='location' size={rabbit.font_size} />
       </View>
-      
+
       <Text style={styles.text}>Enable location</Text>
     </Button>
   );

@@ -9,7 +9,6 @@ import auth from '../../utils/auth';
 import decode from 'jwt-decode';
 
 import { cardStyle, iconStyle, styles } from '../../styles/styles';
-import { rabbit } from '../../styles/palette';
 
 import Header from '../../components/Header';
 import HeaderText from '../../components/HeaderText';
@@ -27,29 +26,26 @@ const UpdateEmailPassword = (props) => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showFail, setShowFail] = useState(false);
   const [updateUser, { error, data }] = useMutation(UPDATE_USER);
-
+4
   const { updateCurrentUserInfo, currentUser } = useSendbirdChat();
 
   const userContext = useUserContext();
 
-  const { email, firstName, lastName, _id } = userContext.stateUser.user.data;
+  const { email, _id } = userContext.stateUser.user.data;
 
   const handleInputChange = (name, value) => {
     setNewCredentials({ ...newCredentials, [name]: value });
   };
 
   const submitHandler = async (event) => {
-
     try {
-  
       const mutationResponse = await updateUser({
-        variables: { _id: _id,newId:currentUser.userId, ...newCredentials },
+        variables: { _id: _id, newId: currentUser.userId, ...newCredentials },
       });
 
       const token = mutationResponse.data.updateUser.token;
-     
-      if (token) {
 
+      if (token) {
         auth.logout();
         auth.login(token);
         userContext.dispatch({
@@ -61,11 +57,9 @@ const UpdateEmailPassword = (props) => {
         setShowSuccess(true);
         props.navigation.goBack();
       }
-
-
     } catch (err) {
       setShowFail(true);
-      console.log(err, "fail");
+      console.log(err, 'fail');
     }
   };
 
@@ -86,15 +80,9 @@ const UpdateEmailPassword = (props) => {
       </Header>
       <ScrollView>
         <Container>
-          {/* <Text style={styles.text}>User id</Text>
-          <TextField
-            migrate
-            style={styles.textField}
-            placeholder={currentUser.userId}
-            name={'id'}
-            id={'id'}
-            onChangeText={(value) => handleInputChange('newId', value)}
-          /> */}
+          <Text style={styles.text} center>
+            All fields are required!
+          </Text>
           <Text style={styles.text}>Nickname</Text>
           <TextField
             migrate
@@ -108,7 +96,7 @@ const UpdateEmailPassword = (props) => {
           <TextField
             migrate
             style={styles.textField}
-            placeholder={""}
+            placeholder={email}
             name={'email'}
             keyboardType='email-address'
             id={'email'}
@@ -137,7 +125,12 @@ const UpdateEmailPassword = (props) => {
 
           <View bottom center>
             <Button
-              disabled={!newCredentials.currentPassword}
+              disabled={
+                !newCredentials.newNickname ||
+                !newCredentials.newEmail ||
+                !newCredentials.newPassword ||
+                !newCredentials.currentPassword
+              }
               disabledBackgroundColor={'gray'}
               style={styles.button}
               onPress={() => submitHandler()}

@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Rabbit/static/css/main.dfb99579.css",
+    "main.js": "/Rabbit/static/js/main.21d57b12.js",
+    "static/js/787.37f6d0e5.chunk.js": "/Rabbit/static/js/787.37f6d0e5.chunk.js",
+    "index.html": "/Rabbit/index.html",
+    "main.dfb99579.css.map": "/Rabbit/static/css/main.dfb99579.css.map",
+    "main.21d57b12.js.map": "/Rabbit/static/js/main.21d57b12.js.map",
+    "787.37f6d0e5.chunk.js.map": "/Rabbit/static/js/787.37f6d0e5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dfb99579.css",
+    "static/js/main.21d57b12.js"
+  ]
+}

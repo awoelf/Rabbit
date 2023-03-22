@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useSendbirdChat, createGroupChannelInviteFragment } from '@sendbird/uikit-react-native';
 import { useGroupChannel } from '@sendbird/uikit-chat-hooks';
 
@@ -8,10 +7,6 @@ const GroupChannelInvite = ({ route, navigation }) => {
   const { sdk } = useSendbirdChat();
   const { channel } = useGroupChannel(sdk, channelUrl);
   if (!channel) return null;
-
-  const navigateToBack = () => {};
-  const navigateToGroupChannel = () => {};
-
   return (
     <GroupChannelInviteFragment
       channel={channel}

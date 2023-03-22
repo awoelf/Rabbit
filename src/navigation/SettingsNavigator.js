@@ -1,13 +1,12 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Text } from 'react-native-ui-lib';
-
 
 // Screens
 import UserSettings from '../screens/Settings/UserSettings';
 import ChangeUnits from '../screens/Settings/ChangeUnits';
 import UpdateEmailPassword from '../screens/Settings/UpdateEmailPassword';
 import UpdateUser from '../screens/Settings/UpdateUser';
+import AboutApp from '../screens/Settings/AboutApp';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +37,13 @@ function MyStack() {
       <Stack.Screen
         name='UpdateUser'
         component={UpdateUser}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name='AboutApp'
+        component={AboutApp}
         options={{
           headerShown: false,
         }}

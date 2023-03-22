@@ -1,35 +1,43 @@
 import React, { useEffect, useState } from 'react';
-import { Button, View, Text, TouchableOpacity, TextField, Icon } from 'react-native-ui-lib';
+import {
+  Button,
+  View,
+  Text,
+  TouchableOpacity,
+  TextField,
+  Icon,
+  Card,
+  Dialog,
+  Hint,
+} from 'react-native-ui-lib';
+import { Linking } from 'react-native';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 import decode from 'jwt-decode';
 
 // Styles and assets
-import { styles } from '../../styles/styles';
+import { styles, cardStyle } from '../../styles/styles';
+import { rabbit } from '../../styles/palette';
+import Octicons from '@expo/vector-icons/Octicons';
 
 import { useConnection } from '@sendbird/uikit-react-native';
 import { useUserContext } from '../../utils/UserContext';
-
-import { useSendbirdChat } from '@sendbird/uikit-react-native';
 
 export default function Register(props) {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
+  const [showFail, setShowFail] = useState(false);
+  const [allowSignUp, setAllowSignUp] = useState(false);
 
   const { connect } = useConnection();
-  const { currentUser, updateCurrentUserInfo } = useSendbirdChat();
   const userContext = useUserContext();
 
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
   const registerHandler = async (event) => {
-    if (email === '' || firstName === '' || lastName === '' || password === '') {
-      setError('Please fill in the form correctly');
-    }
-
     try {
       const mutationResponse = await addUser({
         variables: { email: email, password: password, firstName: firstName, lastName: lastName },
@@ -52,8 +60,21 @@ export default function Register(props) {
       // props.navigation.navigate('Home');
     } catch (e) {
       console.log(e, 'error here');
+      setShowFail(true);
     }
   };
+
+  const checkInput = () => {
+    if (email && password && firstName && lastName) {
+      setAllowSignUp(true);
+    } else {
+      setAllowSignUp(false);
+    }
+  };
+
+  useEffect(() => {
+    checkInput();
+  }, [firstName, lastName, password, email]);
 
   return (
     <View flex-1>
@@ -61,6 +82,7 @@ export default function Register(props) {
         <Text style={styles.header1}>Rabbit</Text>
         <Icon source={require('../../assets/icon.png')} size={35} />
       </View>
+
       <View marginH-30 flex-2>
         <Text style={styles.text} center>
           Create a new Rabbit account
@@ -88,7 +110,7 @@ export default function Register(props) {
           style={styles.textField}
           placeholder={'Email'}
           name={'email'}
-          keyboardType="email-address"
+          keyboardType='email-address'
           id={'email'}
           onChangeText={setEmail}
         />
@@ -102,14 +124,29 @@ export default function Register(props) {
           onChangeText={setPassword}
         />
         <View centerH>
-          <Button
-            style={styles.button}
-            disabled={!email || !password || !firstName || !lastName}
-            onPress={() => registerHandler()}
+          <Hint
+            visible={allowSignUp}
+            color={rabbit.accent_color}
+            message={
+              <>
+                <Text>By clicking 'Sign up', you agree to Rabbit's Privacy Policy.</Text>
+                <Text>  </Text>
+                <Octicons name='link-external' color={rabbit.light_text_color} size={15} />
+              </>
+            }
+            messageStyle={styles.text}
+            onPress={async () => await Linking.openURL(`https://www.termsfeed.com/live/71b1187f-7283-4fc6-97db-61c1edbbd091`)}
           >
-            <Text style={styles.text}>Sign up</Text>
-          </Button>
+            <Button
+              style={styles.button}
+              disabled={!allowSignUp}
+              onPress={() => registerHandler()}
+            >
+              <Text style={styles.text}>Sign up</Text>
+            </Button>
+          </Hint>
         </View>
+
         <View centerH bottom flex-1>
           <Text style={styles.text}>Already have an account?</Text>
           <TouchableOpacity onPress={() => props.navigation.navigate('Login')}>
@@ -117,6 +154,21 @@ export default function Register(props) {
           </TouchableOpacity>
         </View>
       </View>
+
+      <Dialog
+        visible={showFail}
+        onDismiss={() => {
+          setShowFail(false);
+        }}
+      >
+        <Card style={cardStyle}>
+          <View margin-s4>
+            <Text style={styles.text} center>
+              Invalid credentials. Please try again.
+            </Text>
+          </View>
+        </Card>
+      </Dialog>
     </View>
   );
 }

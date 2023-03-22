@@ -1,5 +1,5 @@
 import { View, Text, Icon } from 'react-native-ui-lib';
-
+import { WEATHER_IMAGE_URL } from '@env'
 import { weatherStyle } from '../styles/styles';
 
 const ForecastDay = ({ temp, day, iconCode, hideBorder }) => {
@@ -8,7 +8,7 @@ const ForecastDay = ({ temp, day, iconCode, hideBorder }) => {
       <View centerH>
         <Icon
           source={{
-            uri: `https://openweathermap.org/img/wn/${iconCode}@2x.png`,
+            uri: `${WEATHER_IMAGE_URL}${iconCode}@2x.png`,
           }}
           size={40}
         />
