@@ -100,6 +100,11 @@ To use this app, you must have an Android device that can connect to the interne
 <img src="./src/snapshots/android_weatherimperial2.jpg" alt="changeUnits" width="200" />
 </p>
 
+## Demonstration
+<Div align="center">
+<a href="https://youtu.be/ADOW6h7ZTv8"><img src="./src/snapshots/rabbit-demo.gif" alt="demonstration" /></a></div>
+
+
 ## License
 
 Distributed unter the MIT license. See `LICENSE.txt` for more information.
