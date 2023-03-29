@@ -47,9 +47,7 @@ export default function Register(props) {
 
       userContext.dispatch({
         type: 'SET_CURRENT_USER',
-        payload: {
-          user: decode(token),
-        },
+        payload: decode(token),
       });
       console.log(mutationResponse.data.addUser.user);
       //connect sendbird
