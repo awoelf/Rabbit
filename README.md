@@ -104,6 +104,8 @@ To use this app, you must have an Android device that can connect to the interne
 <Div align="center">
 <a href="https://youtu.be/ADOW6h7ZTv8"><img src="./src/snapshots/rabbit-demo.gif" alt="demonstration" /></a></div>
 
+## Credit
+Avatar : https://www.dicebear.com/styles/avataaars
 
 ## License
 
